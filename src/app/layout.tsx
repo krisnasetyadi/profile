@@ -1,8 +1,11 @@
-import NavbarComponent from '@/components/navbar-component'
+
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Home from '../components/wrapper/client'
+import ContentWrapper from '../components/wrapper/content'
+import NavbarComponent from '@/components/navbar-component'
+import ClientWrapper from '@/components/wrapper/client'
+import RightDrawer from '@/components/right-drawer-component'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,10 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        <NavbarComponent/>
-        <Home>
+        <ClientWrapper>
+          <RightDrawer />
+        </ClientWrapper>
+        <ClientWrapper>
+          <NavbarComponent />
+        </ClientWrapper>
+        <ContentWrapper>
           {children}
-        </Home>
+        </ContentWrapper>
       </body>
     </html>
   )
