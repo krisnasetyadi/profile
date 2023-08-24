@@ -4,7 +4,12 @@ export const Items = [
         id: 1,
         image: 'https://cdn.dribbble.com/userupload/6589648/file/original-277e2ceb1887b28567bc3693a45660fb.png?resize=752x',
         project_name: 'Bursa',
-        project_role: 'Front-End'
+        project_role: 'Front-End',
+        images: [
+            'https://cdn.dribbble.com/userupload/6589648/file/original-277e2ceb1887b28567bc3693a45660fb.png?resize=752x',
+            'https://cdn.dribbble.com/users/240317/screenshots/3350961/spring-dribz.jpg'
+        ],
+        description: "I'm enjoying playing around with different fonts and typography ideas lately. Here's a piece I've worked on using the font: Playfair Display."
     },
     {
         id: 2,
