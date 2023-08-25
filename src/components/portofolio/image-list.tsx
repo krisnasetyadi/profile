@@ -36,7 +36,7 @@ function ImageList ({images}: {images: string[] | undefined}) {
             )
           }
         }) : (
-          <div>
+          <div className="flex h-80 w-80 bg-gray-200 items-center justify-center rounded-lg">
             No Content Available
           </div>
         )}

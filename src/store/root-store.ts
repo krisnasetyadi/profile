@@ -6,6 +6,7 @@ const slice = createSlice({
         isOpenRightDrawer: false,
         isMobileDimension: false,
         currentImageIndex: 0, 
+        activeButtonsDetail: 'image'
     },
     reducers: {
         setIsOpenRightDrawer: (state, action: PayloadAction<boolean>) => {
@@ -16,9 +17,18 @@ const slice = createSlice({
         },
         setCurrentImageIndex: (state, action: PayloadAction<number>) => {
             state.currentImageIndex = action.payload
+        },
+        setActiveButtonsDetail: (state, action: PayloadAction<string>) => {
+            state.activeButtonsDetail = action.payload
         }
     }
 })
 
-export const { setIsOpenRightDrawer, setIsMobileDimension, setCurrentImageIndex } = slice.actions
+export const { 
+    setIsOpenRightDrawer,
+    setIsMobileDimension,
+    setCurrentImageIndex, 
+    setActiveButtonsDetail 
+} = slice.actions
+
 export default slice.reducer

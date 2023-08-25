@@ -1,9 +1,10 @@
-import { Items } from "@/constants/portofolio-constant"
-import Image from "next/image"
 
+import { Items } from "@/constants/portofolio-constant"
 import ImageButton from '../../../components/portofolio/image-button'
 import ImageList from "@/components/portofolio/image-list"
 import ClientWrapper from "@/components/wrapper/client"
+import DetailDescription from "@/components/portofolio/detail-description"
+import ToggleButton from "@/components/portofolio/toggle-button"
 
 interface PageScreenProps {
     id: string
@@ -13,11 +14,13 @@ function  PageScreen ({params}: {params: PageScreenProps}) {
     const data = Items.find(i => i.id === Number(params.id))
 
     return (
-        <div className="flex justify-center items-center h-full">
+        <div className="flex justify-center items-center pt-2 pb-5">
           <div>
             <div className="flex justify-between">
-              <p className="font-semibold">{data?.project_name}</p>
-              <span>image/video</span>
+              <p className="font-semibold">Back</p>
+              <ClientWrapper>
+                <ToggleButton  />
+              </ClientWrapper>
             </div>
             <div>
             <ClientWrapper>
@@ -25,13 +28,9 @@ function  PageScreen ({params}: {params: PageScreenProps}) {
               <ImageButton images={data?.images} />
             </ClientWrapper> 
             </div>
-            <div className="flex justify-center">
-              {/* <b>Desc</b> */}
-              <p className="w-40">
-                Description
-              </p>
+            <div className="flex justify-center pt-2">
+              {data && <DetailDescription data={data} />}
             </div>
-
           </div>
         </div>
     )

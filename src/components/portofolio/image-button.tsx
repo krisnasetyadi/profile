@@ -24,8 +24,8 @@ function ImageScreen({images}: ImagesProps) {
         <div className="flex justify-center gap-5 mt-2">
           {images?.map((i, idx) => {
                 return (
-                 <button key={idx} onClick={() => handleImagePagination(idx)} className={`${currentImageIndex === idx ? 'border-solid border-2 border-blue-600' : ''} ml-[-10px] z-20`}>
-                   <Image src={i} alt="images" width={100} height={100} className={``}/>
+                 <button key={idx} onClick={() => handleImagePagination(idx)} className={`${currentImageIndex === idx ? 'border-solid border-2 border-blue-600 ' : ''} ml-[-10px] z-20 rounded-lg`}>
+                   <Image src={i} alt="images" width={100} height={100} className={`rounded-lg`}/>
                  </button>
                 )
            })}
