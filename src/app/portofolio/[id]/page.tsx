@@ -14,9 +14,9 @@ function  PageScreen ({params}: {params: PageScreenProps}) {
     const data = Items.find(i => i.id === Number(params.id))
 
     return (
-        <div className="flex justify-center items-center pt-2 pb-5">
+        <div className="flex justify-center items-center pt-1 md:pt-2 pb-2 md:pb-5">
           <div>
-            <div className="flex justify-between">
+            <div className="flex justify-between mb-2">
               <p className="font-semibold">Back</p>
               <ClientWrapper>
                 <ToggleButton  />

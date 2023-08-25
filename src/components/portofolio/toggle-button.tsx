@@ -9,6 +9,7 @@ function ToggleButtons() {
   const handleButtonsClick = (type: string) => {
     store.dispatch(setActiveButtonsDetail(type))
   }
+  
   return (
     <div className="bg-[#e3e3e3] border-2 border-solid border-gray-500 rounded-lg">
       <button
