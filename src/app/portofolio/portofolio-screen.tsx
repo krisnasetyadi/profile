@@ -34,7 +34,6 @@ function PortofolioScreen () {
         setOffset(limit + 2)
       
     } else {
- 
         setLimit((currentPage - 1) * ITEMS_PER_PAGE)
         setOffset(limit + ITEMS_PER_PAGE)
         // setData(Items.slice(limit, offset))
@@ -43,8 +42,8 @@ function PortofolioScreen () {
   },[isMobileDimension, limit, offset])
 
     return (
-      <div className="w-full pt-2 ">
-        <div className={`${isMobileDimension ? 'overflow-y' : ''} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1`}>
+      <div className={`${isMobileDimension ? 'h-screen': ''} w-full pt-2`}>
+        <div className={`${isMobileDimension ? 'overflow-y-auto  h-screen' : ''} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1`}>
             {data.map(i => {
                 return (
                   <div className="flex items-center justify-center" key={i.id}>

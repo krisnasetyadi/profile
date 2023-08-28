@@ -4,8 +4,8 @@ import myImage from '../../public/images/me.jpg'
 
 export default function Home() {
   return (
-    <main>
-      <div className="w-full flex justify-center ">
+    <div>
+      <div className="w-full flex justify-center">
         <div className="h-60 w-60 rounded-full my-5">
           <Image src={myImage} alt="my-image" className="rounded-full h-60 w-60"/>
         </div>
@@ -15,6 +15,6 @@ export default function Home() {
         <h1 className='text-5xl font-bold'>A Software Developer</h1>
         <HomeButtonComponent/>
       </div>
-    </main>
+    </div>
   )
 }

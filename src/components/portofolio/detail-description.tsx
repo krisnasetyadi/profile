@@ -12,52 +12,44 @@ interface DetailDescriptionProps {
     description: string | undefined;
 }
 
-const textValue = 'font-medium text-xs md:text-sm px-2'
-const title = 'text-xs md:text-sm text-gray-600 px-1'
+const textValue = 'font-medium text-xs md:text-sm px-2 py-1 text-wrap'
+const title = 'text-xs md:text-sm text-gray-600 px-1 py-1'
+const columns = 'px-1'
 
 function DetailDescription({ data }: {data: DetailDescriptionProps}) {
-   if(data) {
-    
-   }
     return (
-        <div className="w-full">
-          <p className="text-xs md:text-sm text-gray-600 pb-2 tracking-wide">DETAIL INFO</p>
-          <table>
-            <tr>
-              <td className={title}>Project Name</td>
-              <td className={textValue}>{data.project_name}</td>
-            </tr>
-            <tr>
-              <td className={title}>Project Role</td>
-              <td className={textValue}>{data.project_role}</td>
-            </tr>
-            <tr>
-              <td className={title}>Project Name</td>
-              <td className={textValue}> 
+        <div className="mt-10 md:mt-2">
+          <p className="text-xs md:text-sm text-gray-600 pb-2 tracking-wide">PROJECT DETAIL INFO</p>
+          <div className="flex">
+            <div  className={columns}>
+              <div className={title}>Name</div>
+              <div className={title}>Role</div>
+              <div className={title}>Staks</div>
+              <div className={title}>Others</div>
+              <div className={title}>Link</div>
+            </div>
+            <div className={columns}>
+              <div className={textValue}>{data.project_name}</div>
+              <div className={textValue}>{data.project_role}</div>
+              <div className={textValue}> 
                 {data.stacks?.join(', ')}
-              </td>
-            </tr>
-            <tr>
-              <td className={title}>Other</td>
-              <td className={textValue}> 
+              </div>
+              <div className={textValue}> 
                 {data.others?.join(', ')}
-              </td>
-            </tr>
-            <tr>
-            <td className={title}>Publish Link</td>
-            <td className={title}>
-              {data.publish_link ? (
-                <Link href={data.publish_link} target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-500 text-sm">
-                  {data.publish_link}
-                </Link>
-              ) : (
-                <span className="text-white px-2.5 py-1.5 rounded-lg bg-[#c7233e] font-medium text-sm">
+              </div>
+              <div className={textValue}>
+                {data.publish_link ? (
+                 <Link href={data.publish_link} target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-500 text-sm">
+                    {data.publish_link}
+                  </Link>
+                ) : (
+                  <span className="text-white px-2.5 py-1.5 rounded-lg bg-[#c7233e] font-medium text-sm">
                   {data.status}
-                </span>
-              )}
-            </td>
-            </tr>
-          </table>
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
     )
 }
