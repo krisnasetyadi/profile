@@ -17,6 +17,7 @@ function ContentButton({images, videos}: ContentButtonProps) {
         store.dispatch(setCurrentImageIndex(i))
     }
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    
     useEffect(() => {
         store.dispatch(setCurrentImageIndex(0))
     }, [])
@@ -48,7 +49,7 @@ function ContentButton({images, videos}: ContentButtonProps) {
                         ${currentImageIndex === idx ? 'border-solid border-2 border-blue-600 ' : ''} 
                         ml-[-10px] z-20 rounded-lg`}
                     >
-                      <canvas  width={100} height={100}  className={`rounded-lg`}>
+                      <canvas id={`canvas-${idx}`} ref={canvasRef} width={100} height={100}  className={`rounded-lg`}>
                         <video 
                             src={i}
                             width={100} 

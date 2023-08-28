@@ -4,6 +4,8 @@ import circleChevronRight from './circle-chevron-right.svg'
 import circleChevronLeft from './cricle-chevron-left.svg'
 import xMarkIcon from './x-mark-icon.svg'
 import arrowLeftIcon from './arrow-left-icon.svg'
+import whatsAppIcon from './whatsapp-icon.svg'
+import envelopeIcon from './envelope-icon.svg'
 
 export {
     chevronRight,
@@ -11,5 +13,7 @@ export {
     circleChevronRight,
     circleChevronLeft,
     xMarkIcon,
-    arrowLeftIcon
+    arrowLeftIcon,
+    whatsAppIcon,
+    envelopeIcon
 }

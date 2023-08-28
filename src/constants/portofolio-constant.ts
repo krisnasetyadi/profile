@@ -9,9 +9,10 @@ export const Items = [
             'https://cdn.dribbble.com/userupload/6589648/file/original-277e2ceb1887b28567bc3693a45660fb.png?resize=752x',
             'https://cdn.dribbble.com/users/240317/screenshots/3350961/spring-dribz.jpg'
         ],
-        videos: [
-            'https://www.youtube.com/watch?v=6ltNmYjzD-4&list=PL0kqYcuVaf672DJgwlFgOQDfTe3lslWKD&index=34'
-        ],
+        // videos: [
+        //     'https://www.youtube.com/watch?v=Gc4GKUWNPxI',
+        //     'https://www.youtube.com/watch?v=RZC9vTjouuE'
+        // ],
         stacks: ['React JS', 'Mobx', 'React Kendo UI', 'Axios', 'Yup' ],
         others: ['Github', 'Bitbucket'],
         status: 'confidential',

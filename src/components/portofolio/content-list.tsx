@@ -4,7 +4,7 @@ import Image from "next/image"
 import { circleChevronLeft, circleChevronRight } from "../../../public/icons"
 import { useSelector } from "react-redux"
 import { RootStore, store } from "@/store"
-import { setCurrentImageIndex } from "@/store/root-store"
+import { setCurrentImageIndex, setCurrentVideoIndex } from "@/store/root-store"
 
 interface ContentListProps {
   images: string[] | undefined;
@@ -12,15 +12,20 @@ interface ContentListProps {
 }
 
 function ContentList ({images, videos}: ContentListProps) {
-  console.log('videos', videos)
-    const dataLength = images?.length
-    const { currentImageIndex, activeButtonsDetail } =  useSelector((state: RootStore) => state.rootStore)
+    const { currentImageIndex, currentVideoIndex , activeButtonsDetail } =  useSelector((state: RootStore) => state.rootStore)
+    const imageLength = images?.length
+    const videoLength = videos?.length
+
     const handleImagePagination = (i: number) => {
       store.dispatch(setCurrentImageIndex(i))
     }
 
+    const handleVideoPagination = (i: number) => {
+      store.dispatch(setCurrentVideoIndex(i))
+    }
 
     let content 
+
     if(activeButtonsDetail === 'image') {
       content = (
         <>
@@ -35,7 +40,7 @@ function ContentList ({images, videos}: ContentListProps) {
                 )}
               
                 <Image src={`${image}`} alt="image-content" width={520} height={400} />
-                {dataLength && currentImageIndex !== dataLength - 1 && (
+                {imageLength && currentImageIndex !== imageLength - 1 && (
                   <button  className="ml-[-10px] z-20"  onClick={() => handleImagePagination(idx + 1)}>
                     <Image src={circleChevronRight} alt="chevron right" width={20} />
                   </button>
@@ -52,22 +57,23 @@ function ContentList ({images, videos}: ContentListProps) {
       </>
       )
     } 
+
     if(activeButtonsDetail === 'video') {
       content = (
         <>
         {videos?.length ? videos.map((video, idx) => { 
-          if(currentImageIndex === idx) {
+          if(currentVideoIndex === idx) {
             return (
               <div className="flex items-center" key={video}>
-                {currentImageIndex !== 0 && (
-                  <button className="mr-[-10px] z-20" onClick={() => handleImagePagination(idx - 1)}>
+                {currentVideoIndex !== 0 && (
+                  <button className="mr-[-10px] z-20" onClick={() => handleVideoPagination(idx - 1)}>
                   <Image src={circleChevronLeft} alt="chevron left" width={20} />
                 </button>
                 )}
                 <video src={video} controls  width={520} height={400}/>
       
-                {dataLength && currentImageIndex !== dataLength - 1 && (
-                  <button  className="ml-[-10px] z-20"  onClick={() => handleImagePagination(idx + 1)}>
+                {videoLength && currentVideoIndex !== videoLength - 1 && (
+                  <button  className="ml-[-10px] z-20"  onClick={() => handleVideoPagination(idx + 1)}>
                     <Image src={circleChevronRight} alt="chevron right" width={20} />
                   </button>
                 )}
@@ -83,7 +89,6 @@ function ContentList ({images, videos}: ContentListProps) {
       </>
       )
     }
-    console.log('activeButtonsDetail', activeButtonsDetail)
 
     return (
       <>{content}</>

@@ -13,18 +13,18 @@ function ToggleButtons() {
   return (
     <div className="bg-[#e3e3e3] border-2 border-solid border-gray-500 rounded-lg">
       <button
-        className={`px-2 rounded-md ${
+        className={` rounded-md ${
             activeButtonsDetail === 'image'
-            ? 'bg-gray-700 text-gray-200'
-            : 'bg-gray-200'
+            ? 'bg-gray-700 text-gray-200 px-2'
+            : 'bg-gray-200 px-1'
         }`}
         onClick={() => handleButtonsClick('image')}
       >
         image
       </button>
       <button
-        className={`px-2 rounded-md ${
-            activeButtonsDetail === 'video' ? 'bg-gray-700 text-gray-200' : 'bg-gray-200'
+        className={`rounded-md ${
+            activeButtonsDetail === 'video' ? 'bg-gray-700 text-gray-200 px-2' : 'bg-gray-200 px-1'
         }`}
         onClick={() => handleButtonsClick('video')}
       >
