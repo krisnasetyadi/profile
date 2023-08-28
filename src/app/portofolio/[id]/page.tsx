@@ -18,8 +18,8 @@ function  PageScreen ({params}: {params: PageScreenProps}) {
     
     return (
         <div className="flex justify-center items-center pt-1 md:pt-2 pb-2 md:pb-5">
-          <div>
-            <div className="flex justify-between">
+          <div className="mt-1">
+            <div className="flex justify-between md:py-1.5 px-2">
               <Link href={'/portofolio'}  className="flex items-center">
                 <Image src={arrowLeftIcon} alt='back button' />
                 <p className="font-semibold ml-2 text-xs md:text-md">Back</p>
