@@ -82,7 +82,7 @@ function ContentList ({images, videos}: ContentListProps) {
             )
           }
         }) : (
-          <div className="flex h-[400px] w-[520px] bg-gray-200 items-center justify-center rounded-lg">
+          <div className="flex h-80 w-80 md:h-[400px] md:w-[520px] bg-gray-200 items-center justify-center rounded-lg">
             No Content Available
           </div>
         )}
