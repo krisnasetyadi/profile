@@ -1,6 +1,6 @@
 import HomeButtonComponent from "@/components/home-button-component";
 import Image from "next/image";
-import myImage from '../../public/images/me-2.jpg'
+import myImage from '../../public/images/me2.jpg'
 import ClientWrapper from "@/components/wrapper/client";
 
 export default function Home() {
