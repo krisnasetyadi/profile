@@ -1,12 +1,18 @@
 import { Pool, QueryResult } from 'pg'
 
-const pool = new Pool({
-    user: 'postgres',
-    password: 'qwerty123',
-    port: 5433,
-    host: 'localhost',
-    database: 'personal_profile',
-})
+const defConfig = {
+    user: process.env.NEXT_PUBLIC_USER,
+    password: process.env.NEXT_PUBLIC_PASSWORD,
+    port: Number(process.env.NEXT_PUBLIC_PORT),
+    host: process.env.NEXT_PUBLIC_HOST,
+    database: process.env.NEXT_PUBLIC_ENVIRONMENT,
+}
+
+const prodConfig = {
+  connectionString: process.env.POSTGRES_URL
+}
+
+const pool =  new Pool(process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? defConfig : prodConfig)
 
 export const query = async (text: string, params?: any[]): Promise<QueryResult> => {
     const client = await pool.connect()
