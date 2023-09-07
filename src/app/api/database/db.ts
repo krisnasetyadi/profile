@@ -9,7 +9,7 @@ const defConfig = {
 }
 
 const prodConfig = {
-  connectionString: process.env.POSTGRES_URL
+  connectionString: process.env.POSTGRES_URL + '?sslmode=require'
 }
 
 const pool =  new Pool(process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? defConfig : prodConfig)
