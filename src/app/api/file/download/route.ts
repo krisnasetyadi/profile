@@ -19,5 +19,6 @@ export async function GET(req: Request) {
     
         } catch (error) {
             console.log('error', error)
+            return new Response('Error: Internal Server Error', { status: 500 });
         }
 }
