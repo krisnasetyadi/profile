@@ -9,7 +9,11 @@ const defConfig = {
 }
 
 const prodConfig = {
-  connectionString: process.env.POSTGRES_URL + '?sslmode=require'
+  connectionString: process.env.POSTGRES_URL + '?sslmode=require',
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  host: process.env.POSTGRES_HOST,
+  database: process.env.POSTGRES_DATABASE,
 }
 
 const pool =  new Pool(process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? defConfig : prodConfig)
