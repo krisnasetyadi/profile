@@ -9,7 +9,8 @@ const defConfig = {
 }
 
 const prodConfig = {
-  user: process.env.POSTGRES_USER_RAILWAY,
+//   connectionString: process.env.DATABASE_URL + '?sslmode=require',
+  user: process.env.PGUSER_RAILWAY,
   password: process.env.PGPASSWORD,
   host: process.env.PGHOST,
   database: process.env.PGDATABASE,
