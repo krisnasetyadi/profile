@@ -6,9 +6,9 @@ export async function GET(req: Request) {
             const queryString = 'SELECT name, content, type FROM files WHERE id = $1';
             const value = [6]
             const result = await query(queryString, value)
-            if(result.rows[0].length === 0 ) {
+            if(result.rows && result.rows[0].length === 0 ) {
               return new Response('Error data not available', { status: 400 })
-            } else {
+            } else if (result.rows) {
             const { name, content, type } = result.rows[0]
             console.log('name', name)
             const headers = new Headers()
