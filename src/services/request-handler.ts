@@ -29,4 +29,23 @@ export default class RequestHandler {
             }
         })
     }
+    upload(params?: any, url = this.url ) {
+        return new Promise(async(resolve, reject) => {
+            try {
+            const formData = new FormData;
+            formData.append('file', params);
+            const response = await fetch(`${api}/api/file/upload`, {
+                method: 'POST',
+                body: formData
+            });
+            if(response.ok) {   
+               resolve(response)
+            } else {
+                reject(response)
+            }
+            } catch (error) {
+                reject(error)
+            }
+        })
+    }
 }

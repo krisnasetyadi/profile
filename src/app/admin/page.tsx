@@ -1,19 +1,35 @@
 'use client'
 
+import { FileApi } from "@/services"
+import Swal from "sweetalert2"
+
 function AdminScreen() {
     const handleUpload = async (e: any) => {
-      const file =  e.target.files[0]
-      const formData = new FormData;
-      formData.append('file', file);
-      const response = await fetch('http://localhost:3005/api/file/upload', {
-          method: 'POST',
-          body: formData
-      });
-      console.log('response', response)
+      try {
+        const file =  e.target.files[0]
+        await FileApi.upload(file)
+        Swal.fire({ 
+            toast: true, 
+            text: 'File uploaded.', 
+            icon: 'success', 
+            position: 'top', 
+            timer: 3000,
+            showConfirmButton: false
+          })
+      } catch (error) {
+          Swal.fire({ 
+            toast: true, 
+            text: 'Oops! Something went wrong', 
+            icon: 'success', 
+            position: 'top', 
+            timer: 3000,
+            showConfirmButton: false
+          })
+      }
+
     }
     return (
         <div>
-            <p>asd</p>
             <input onChange={handleUpload} type="file" />
         </div>
     )
