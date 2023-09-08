@@ -12,7 +12,7 @@ function AboutScreen() {
                   Krisna Dwi Setyaadi
                 </span> a Software Developer at{' '}
                 <Link href="https://moonlay.com/" target="blank" className="text-blue-500">
-                     Moonlay Technologiess
+                     Moonlay Technologies
                 </Link> and
                   a final year student at{' '}
                 <Link href={'https://www.ithb.ac.id/'} target="blank" className="text-blue-500">

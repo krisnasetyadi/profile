@@ -17,7 +17,6 @@ export default function Home() {
         <ClientWrapper>
           <HomeButtonComponent/>
         </ClientWrapper>
-
       </div>
     </div>
   )
