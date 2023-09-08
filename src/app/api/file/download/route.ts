@@ -13,8 +13,8 @@ export async function GET(req: Request) {
             const { name, content, type } = result.rows[0]
             console.log('name', name)
             const headers = new Headers()
-            headers.append('Content-type', type)
-            headers.append('Content-Disposition', `attachment; filename="${name}"`)
+            headers?.append('Content-type', type)
+            headers?.append('Content-Disposition', `attachment; filename="${name}"`)
             return new Response(content, { headers, status: 200 })
             }
     
