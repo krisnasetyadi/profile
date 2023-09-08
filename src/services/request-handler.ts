@@ -10,23 +10,23 @@ export default class RequestHandler {
 
     download(params?: any, url = this.url) {
         return new Promise(async (resolve, reject) => {
-            // try {
-            //     const response = await fetch(`${api}/api/${url}/download`, {
-            //         method: 'GET'
-            //       })
-            //       console.log('response', response)
-            //       if(response.ok) {
-            //         const link = document.createElement('a')
-            //         link.href = `/api/${url}/download`
-            //         link.setAttribute('download', '')
-            //         link.click()
-            //         resolve(response)    
-            //       } else {
-            //         reject(response)    
-            //       }
-            // } catch (error) {
-            //     reject(error)
-            // }
+            try {
+                const response = await fetch(`${api}/api/${url}/download`, {
+                    method: 'GET'
+                  })
+                  console.log('response', response)
+                  if(response.ok) {
+                    const link = document.createElement('a')
+                    link.href = `/api/${url}/download`
+                    link.setAttribute('download', '')
+                    link.click()
+                    resolve(response)    
+                  } else {
+                    reject(response)    
+                  }
+            } catch (error) {
+                reject(error)
+            }
         })
     }
 }
