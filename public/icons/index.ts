@@ -6,6 +6,7 @@ import xMarkIcon from './x-mark-icon.svg'
 import arrowLeftIcon from './arrow-left-icon.svg'
 import whatsAppIcon from './whatsapp-icon.svg'
 import envelopeIcon from './envelope-icon.svg'
+import spinnerIcon from './spinner-icon.svg';
 
 export {
     chevronRight,
@@ -15,5 +16,6 @@ export {
     xMarkIcon,
     arrowLeftIcon,
     whatsAppIcon,
-    envelopeIcon
+    envelopeIcon,
+    spinnerIcon
 }
