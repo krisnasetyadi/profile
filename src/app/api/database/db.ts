@@ -5,21 +5,11 @@ const defConfig = {
     password: process.env.NEXT_PUBLIC_PASSWORD,
     port: Number(process.env.NEXT_PUBLIC_PORT),
     host: process.env.NEXT_PUBLIC_HOST,
-    database: process.env.NEXT_PUBLIC_ENVIRONMENT,
+    database: process.env.NEXT_PUBLIC_DATABASE,
 }
 
 const prodConfig = {
   connectionString: process.env.DATABASE_URL + '?sslmode=require',
-//   user: process.env.PGUSER_RAILWAY,
-//   password: process.env.PGPASSWORD,
-//   host: process.env.PGHOST,
-//   database: process.env.PGDATABASE,
-//   port: Number(process.env.PGPORT)
-    // user: process.env.POSTGRES_USER,
-    // password: process.env.POSTGRES_PASSWORD,
-    // host: process.env.POSTGRES_HOST,
-    // database: process.env.POSTGRES_DATABASE,
-    // port: Number(process.env.PGPORT)
 }
 
 const pool =  new Pool(process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? defConfig : prodConfig)

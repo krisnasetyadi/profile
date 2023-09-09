@@ -20,7 +20,7 @@ function AdminScreen() {
           Swal.fire({ 
             toast: true, 
             text: 'Oops! Something went wrong', 
-            icon: 'success', 
+            icon: 'error', 
             position: 'top', 
             timer: 3000,
             showConfirmButton: false
