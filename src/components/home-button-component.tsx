@@ -31,7 +31,15 @@ function HomeButtonComponent() {
         setIsLoading(false)
         
       } catch (error) {
-        console.log('error', error)
+        console.log('errorbuttoncomponent', error)
+        swal.fire({ 
+          toast: true, 
+          text: 'Oops! Something went wrong', 
+          icon: 'error', 
+          position: 'top', 
+          timer: 3000,
+          showConfirmButton: false
+        })
         // if(error) handleError(error)
         setIsLoading(false)
       }
