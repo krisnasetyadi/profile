@@ -34,7 +34,7 @@ export default class RequestHandler {
             try {
             const formData = new FormData;
             formData.append('file', params);
-            const response = await fetch(`${api}/api/file/upload`, {
+            const response = await fetch(`${api}/api/${url}/upload`, {
                 method: 'POST',
                 body: formData
             });
