@@ -40,9 +40,7 @@ export default class RequestHandler {
             });
             if(response.ok) {   
                resolve(response)
-            } else {
-                reject(response)
-            }
+            } 
             } catch (error) {
                 reject(error)
             }
