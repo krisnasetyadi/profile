@@ -18,7 +18,7 @@ const railwayConfig = {
     database: process.env.PGDATABASERAILWAY,
     host: process.env.PGHOSTRAILWAY,
     password: process.env.PGPASSWORDRAILWAY,
-    port: process.env.PGPORTRAILWAY,
+    port: Number(process.env.PGPORTRAILWAY),
 
 }
 
