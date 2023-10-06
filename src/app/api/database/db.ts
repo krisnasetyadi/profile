@@ -8,12 +8,18 @@ const defConfig = {
     database: process.env.NEXT_PUBLIC_DATABASE,
 }
 
-const prodConfig = {
-  connectionString: process.env.DATABASE_URL + '?sslmode=require',
-}
+// const prodConfig = {
+//   connectionString: process.env.DATABASE_URL + '?sslmode=require',
+// }
 
 const railwayConfig = {
-    connectionString: process.env.DATABASE_RAILWAY_URL
+    // connectionString: process.env.DATABASE_URL_RAILWAY,
+    user: process.env.PGUSERRAILWAY,
+    database: process.env.PGDATABASERAILWAY,
+    host: process.env.PGHOSTRAILWAY,
+    password: process.env.PGPASSWORDRAILWAY,
+    port: process.env.PGPORTRAILWAY,
+
 }
 
 const pool =  new Pool(process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? defConfig : railwayConfig)
