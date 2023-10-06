@@ -7,8 +7,10 @@ function AdminScreen() {
     const handleUpload = async (e: any) => {
       try {
         const file =  e.target.files[0]
-        await FileApi.upload(file)
-        Swal.fire({ 
+        const response = await FileApi.upload(file)
+        console.log('handleUploadresponse', response)
+        if (response) {
+          Swal.fire({ 
             toast: true, 
             text: 'File uploaded.', 
             icon: 'success', 
@@ -16,6 +18,8 @@ function AdminScreen() {
             timer: 3000,
             showConfirmButton: false
           })
+        }
+
       } catch (error) {
           Swal.fire({ 
             toast: true, 

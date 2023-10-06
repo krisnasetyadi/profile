@@ -43,7 +43,6 @@ export default class RequestHandler {
             } else {
                 reject(response)
             }
-            console.log('response upload', response)
             } catch (error) {
                 reject(error)
             }
