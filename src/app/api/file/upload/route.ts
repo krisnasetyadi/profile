@@ -16,10 +16,14 @@ export async function POST(req: Request) {
         const queryString = 'INSERT INTO files (name, type, content, created_at) VALUES ($1, $2, $3, $4)';
         const values = [file.name , file.type, contentBuffer, new Date()]
         const response = await query(queryString, values)
-        console.log('api upload', response)
-        return new Response('OK', { status: 200 })
+        if (response.rowCount > 0) {
+            console.log('File inserted successfully');
+            return new Response('OK', { status: 200 });
+          } else {
+            console.log('File insertion failed');
+            return new Response('Error: File insertion failed', { status: 500 }); 
+          }
     } catch (error) {
-        console.log('errorPOST', error)
         return new Response('ERROR', { status: 400 })
     }   
 }

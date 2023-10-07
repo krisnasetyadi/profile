@@ -3,8 +3,9 @@ import { query } from '../../database/db'
 
 export async function GET(req: Request) {
         try {
-            const queryString = 'SELECT name, content, type FROM files WHERE id = $1';
-            const value = [6]
+            const filename = 'CV Krisna Dwi Setyaadi'
+            const queryString = process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? 'SELECT name, content, type FROM files WHERE id = $1' :  'SELECT name, content, type FROM files WHERE name = $1' ;
+            const value =  process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? [6] : [filename]
             const result = await query(queryString, value)
             if(result.rows && result.rows[0].length === 0 ) {
               return new Response('Error data not available', { status: 400 })
