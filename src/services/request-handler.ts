@@ -38,6 +38,7 @@ export default class RequestHandler {
                 method: 'POST',
                 body: formData
             });
+            console.log('request handler', response)
             if(response.ok) {   
                resolve(response)
             } else {

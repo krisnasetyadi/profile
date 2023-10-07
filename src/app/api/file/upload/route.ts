@@ -15,7 +15,8 @@ export async function POST(req: Request) {
         console.log('file', [file.name, file.type, contentBuffer])
         const queryString = 'INSERT INTO files (name, type, content, created_at) VALUES ($1, $2, $3, $4)';
         const values = [file.name , file.type, contentBuffer, new Date()]
-        query(queryString, values)
+        const response = await query(queryString, values)
+        console.log('api upload', response)
         return new Response('OK', { status: 200 })
     } catch (error) {
         console.log('errorPOST', error)
