@@ -8,12 +8,7 @@ const defConfig = {
     database: process.env.NEXT_PUBLIC_DATABASE,
 }
 
-// const prodConfig = {
-//   connectionString: process.env.DATABASE_URL + '?sslmode=require',
-// }
-
 const railwayConfig = {
-    // connectionString: process.env.DATABASE_URL_RAILWAY,
     user: process.env.PGUSERRAILWAY,
     database: process.env.PGDATABASERAILWAY,
     host: process.env.PGHOSTRAILWAY,

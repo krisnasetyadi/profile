@@ -1,3 +1,5 @@
 export const ENDPOINT = {
-    FILE: 'file'
+    FILE: 'file',
+    IMAGES: 'images',
+    PORTOFOLIOS: 'portofolios'
 }

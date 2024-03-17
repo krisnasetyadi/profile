@@ -6,6 +6,8 @@ import { Items } from "@/constants/portofolio-constant"
 import { useSelector } from 'react-redux'
 import { RootStore } from '@/store'
 import Link from 'next/link'
+import { FirebaseApp } from '@/config/firebase-database'
+import { getStorage, list, listAll, ref } from 'firebase/storage'
 
 interface ItemType { 
   id: number; 
@@ -21,12 +23,38 @@ function PortofolioScreen () {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(1)
   const [offset, setOffset] = useState(1)
+  const [prefixesGroup, setPrefixesGroup] = useState<string[]>([])
   const { isMobileDimension } = useSelector((state: RootStore) => state.rootStore)
 
   const [data, setData] = useState<ItemType[]>([])
- 
+  console.log('prefixesGroup', prefixesGroup)
   useEffect(() => {
     setData(Items)
+    const storage = getStorage(FirebaseApp, 'personal-web-profile-e01d4.appspot.com')
+    const storageRef = ref(storage, `portofolio-images/`)
+    const bucketRef = listAll(storageRef)
+    if(bucketRef) {
+    
+      bucketRef.then(result => {
+        const prefixes: string[] = []
+        prefixes.push(...result.prefixes.map(i => i.name))
+
+        prefixes.length > 0 && prefixes.map(item => {
+          const storageItemRef = ref(storage, `portofolio-images/${item}`)
+          const ItemList = listAll(storageItemRef)
+          ItemList.then(result => {
+            console.log('storageItemRef', result)
+          })
+          
+        })
+
+      })
+
+      // 
+    }
+ 
+  
+
     setTotalPages(Math.ceil(totalItem / ITEMS_PER_PAGE))  
     if(isMobileDimension) {
         // setTotalPages(Math.ceil(totalItem / 2))
