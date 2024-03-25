@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { setOpenModal } from '@/store/root-store'
 import { spinnerIcon } from '../../public/icons'
 import Image from 'next/image'
-import { FileApi } from '@/services'
+import { CVApi } from '@/services'
 import swal from 'sweetalert2'
 // import { ErrorProps, handleError } from '@/utils/helper'
 
@@ -19,7 +19,7 @@ function HomeButtonComponent() {
       setIsLoading(true)
       try {
        
-        await FileApi.download()
+        await CVApi.download()
         swal.fire({ 
           toast: true, 
           text: 'Sucessfuly download.', 
@@ -51,7 +51,7 @@ function HomeButtonComponent() {
     }
 
     return (
-        <div>
+        <div className='flex items-center justify-center'>
           {openModal && <Modal/>}
           <button className='px-5 py-1.5 border-2 border-solid border-blue-600 rounded-full mt-10 hover:bg-blue-100  text-blue-600'
             onClick={handleDownloadCV}

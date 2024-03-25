@@ -7,6 +7,10 @@ import arrowLeftIcon from './arrow-left-icon.svg'
 import whatsAppIcon from './whatsapp-icon.svg'
 import envelopeIcon from './envelope-icon.svg'
 import spinnerIcon from './spinner-icon.svg';
+import pdfIcon from './pdf-icon.svg'
+import trashIcon from './trash-icon.svg'
+import editIcon from './edit-icon.svg'
+import addIcon from './add-icon.svg'
 
 export {
     chevronRight,
@@ -17,5 +21,9 @@ export {
     arrowLeftIcon,
     whatsAppIcon,
     envelopeIcon,
-    spinnerIcon
+    spinnerIcon,
+    pdfIcon,
+    trashIcon,
+    editIcon,
+    addIcon
 }

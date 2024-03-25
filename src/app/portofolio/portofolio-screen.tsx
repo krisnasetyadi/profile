@@ -8,13 +8,14 @@ import { RootStore } from '@/store'
 import Link from 'next/link'
 import { FirebaseApp } from '@/config/firebase-database'
 import { getStorage, list, listAll, ref } from 'firebase/storage'
+import { PortofolioApi } from '@/services'
 
-interface ItemType { 
-  id: number; 
-  image: string; 
-  project_name: string; 
-  project_role: string; 
-}
+// interface ItemType { 
+//   id: number; 
+//   image: string; 
+//   project_name: string; 
+//   project_role: string; 
+// }
 const ITEMS_PER_PAGE = 6
 
 function PortofolioScreen () {
@@ -26,37 +27,26 @@ function PortofolioScreen () {
   const [prefixesGroup, setPrefixesGroup] = useState<string[]>([])
   const { isMobileDimension } = useSelector((state: RootStore) => state.rootStore)
 
-  const [data, setData] = useState<ItemType[]>([])
+  const [data, setData] = useState<any[]>([])
   console.log('prefixesGroup', prefixesGroup)
+
   useEffect(() => {
-    setData(Items)
-    const storage = getStorage(FirebaseApp, 'personal-web-profile-e01d4.appspot.com')
-    const storageRef = ref(storage, `portofolio-images/`)
-    const bucketRef = listAll(storageRef)
-    if(bucketRef) {
-    
-      bucketRef.then(result => {
-        const prefixes: string[] = []
-        prefixes.push(...result.prefixes.map(i => i.name))
+    PortofolioApi.get({ limit: 1 })
+    .then(({ Data }: any) => {
+      setData(Data)
+      console.log('Data_PortofolioApi', Data)
+    })
+    .catch(error => console.log('error_portofolio', error))
 
-        prefixes.length > 0 && prefixes.map(item => {
-          const storageItemRef = ref(storage, `portofolio-images/${item}`)
-          const ItemList = listAll(storageItemRef)
-          ItemList.then(result => {
-            console.log('storageItemRef', result)
-          })
-          
-        })
-
-      })
-
-      // 
-    }
+  }, [])
+  useEffect(() => {
  
+   
   
 
     setTotalPages(Math.ceil(totalItem / ITEMS_PER_PAGE))  
     if(isMobileDimension) {
+      
         // setTotalPages(Math.ceil(totalItem / 2))
         setLimit((currentPage - 1) * 2)
         setOffset(limit + 2)
@@ -72,15 +62,15 @@ function PortofolioScreen () {
     return (
       <div className={`${isMobileDimension ? 'h-screen': ''} w-full pt-2`}>
         <div className={`${isMobileDimension ? 'overflow-y-auto  h-screen' : ''} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1`}>
-            {data.map(i => {
+            {data?.map(i => {
                 return (
-                  <div className="flex items-center justify-center" key={i.id}>
+                  <div className="flex items-center justify-center p-2" key={i.id}>
                    <Link href={`portofolio/${i.id}`} >
                     <CardComponent 
                       id={i.id}
-                      image={i.image}
+                      image={i.image_urls[0]}
                       project_name={i.project_name}
-                      project_role={i.project_role}
+                      project_role={i.roles[0]}
                     />
                    </Link>
                   </div>

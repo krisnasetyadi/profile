@@ -1,4 +1,5 @@
-import FileApi from './resouces/file'
+import CVApi from './resouces/cv'
 import ImageApi from './resouces/images'
+import PortofolioApi from './resouces/portofolios'
 
-export { FileApi, ImageApi }
+export { CVApi, ImageApi , PortofolioApi}

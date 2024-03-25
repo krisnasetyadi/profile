@@ -4,7 +4,8 @@ import { RootStore, store } from "@/store";
 import { setActiveButtonsDetail } from "@/store/root-store";
 import { useSelector } from "react-redux";
 
-function ToggleButtons() {
+function ToggleButtons(props: any) {
+  const { videos } = props
   const { activeButtonsDetail } = useSelector((state: RootStore) => state.rootStore)
   const handleButtonsClick = (type: string) => {
     store.dispatch(setActiveButtonsDetail(type))
@@ -22,14 +23,17 @@ function ToggleButtons() {
       >
         image
       </button>
-      <button
-        className={`rounded-md ${
-            activeButtonsDetail === 'video' ? 'bg-gray-700 text-gray-200 px-2' : 'bg-gray-200 px-1'
-        }`}
-        onClick={() => handleButtonsClick('video')}
-      >
-        video
-      </button>
+      {videos && (
+        <button
+         className={`rounded-md ${
+              activeButtonsDetail === 'video' ? 'bg-gray-700 text-gray-200 px-2' : 'bg-gray-200 px-1'
+          }`}
+          onClick={() => handleButtonsClick('video')}
+        >
+          video
+        </button>
+      )}
+      
     </div>
   );
 }

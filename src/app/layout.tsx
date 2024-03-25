@@ -12,6 +12,20 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Krisna Profile',
   description: 'krisna dwi setyaadi personal profile',
+  authors: { name: 'Krisna Dwi Setyaadi' },
+  creator: 'Krisna Dwi Setyaadi',
+  applicationName: 'Krisna Personal Profile',
+  keywords: ['krisna', 'krisna setyaadi', 'krisna dwi setyaadi', 'dwi', 'krisna setyadi'],
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true
+    }
+  }
 }
 
 export default function RootLayout({

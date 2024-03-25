@@ -5,7 +5,7 @@ import TextAreaComponent from '@/components/text-area-component'
 import SelectComponent from '@/components/select-component'
 import classes from './admin.module.css'
 import UploadComponent from '@/components/upload-component'
-import { otherStackOptions, roleOptions, stackOptions } from '../constant'
+import { otherStackOptions, roleOptions, stackOptions } from '../../constant'
 import PortofoliosApi from '@/services/resouces/portofolios'
 
 interface FormData {
@@ -19,7 +19,7 @@ function StoreImagesScreen () {
         project_name: '',
         description: '',
         stacks: '',
-        other_stacks: '',
+        others: '',
         roles: '',
         links: '',
         is_confidential: '',
@@ -142,8 +142,8 @@ function StoreImagesScreen () {
                     errorMessage={errors}
                     />
                 <SelectComponent 
-                    label='Other Stacks' 
-                    name='other_stacks' 
+                    label='Others' 
+                    name='others' 
                     isMulti
                     options={otherStackOptions} 
                     onChange={handleSelectChange} 

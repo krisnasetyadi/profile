@@ -1,18 +1,45 @@
-const api = process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? `http://localhost:${process.env.NEXT_PUBLIC_PORT}` : 'https://krisnadwisetyaadi.vercel.app/'
+const baseUrl = process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? `http://localhost:${process.env.NEXT_PUBLIC_PORT}` : 'https://krisnadwisetyaadi.vercel.app/'
 
 export default class RequestHandler {
     public url: string;
-    public api: string
+    public baseUrl: string
     constructor(url: string) {
         this.url = url
-        this.api = api
+        this.baseUrl = baseUrl
     } 
 
+    get<T extends Record<string, any>>(params?: NonNullable<T>, url = this.url) {
+        return new Promise(async(resolve, reject) => {
+            let fullUrl = `${baseUrl}/${url}`
+            if(params) {
+                const queryString = Object.keys(params)
+                .map((key: string) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+                .join('&')
+                console.log('queryString', queryString)
+                fullUrl += `?${queryString}`
+            }
+            
+            try {
+                const response = await fetch(fullUrl,{
+                    
+                    method: 'GET',
+                    
+                })
+                if(response.ok) {
+                    resolve(response.json())
+                } else {
+                    reject(response)
+                }
+            } catch (error) {
+                reject(error)
+            }
+        })
+    }
   
-    find(params: string | number, url = this.url) {
+    find<T extends Record<string, any>>(params:T | string | number | undefined, url = this.url) {
         return new Promise(async(resolve, reject) => {
             try {
-                const response = await fetch(`${api}/${url}/${params}`, {
+                const response = await fetch(`${baseUrl}/${url}/${params}`, {
                     method: 'GET',
                     headers:{
                         'Content-Type': 'application/json', 
@@ -30,11 +57,9 @@ export default class RequestHandler {
     }
 
     store(body?:any, url = this.url) {
-        console.log('bodystore', body)
-        console.log('apiiii', api)
         return new Promise(async(resolve, reject) => {
             try {
-                const response = await fetch(`${api}/${url}`, {
+                const response = await fetch(`${baseUrl}/${url}`, {
                     method: 'POST',
                     body:  JSON.stringify(body),
                     headers: {
@@ -53,16 +78,34 @@ export default class RequestHandler {
         })
     }
 
+    delete(id?: number | string, url = this.url) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await fetch(`${baseUrl}/${url}/${id}`, {
+                    method: 'DELETE'
+                })
+                if(response.ok) {
+                    resolve(response.json())
+                } else {
+                    reject(response)
+                }
+
+            } catch (error) {
+                resolve(error)
+            }
+        })
+    }
+
     download(params?: any, url = this.url) {
         return new Promise(async (resolve, reject) => {
             try {
-                const response = await fetch(`${api}/${url}/download`, {
+                const response = await fetch(`${baseUrl}/${url}/download`, {
                     method: 'GET'
                   })
 
                   if(response.ok) {
                     const link = document.createElement('a')
-                    link.href = `/${url}/download`
+                    link.href = response.url
                     link.setAttribute('download', '')
                     link.click()
                     resolve(response)    
@@ -80,7 +123,7 @@ export default class RequestHandler {
             try {
             const formData = new FormData;
             formData.append('file', params);
-            const response = await fetch(`${api}/${url}/upload`, {
+            const response = await fetch(`${baseUrl}/${url}/upload`, {
                 method: 'POST',
                 body: formData
             });

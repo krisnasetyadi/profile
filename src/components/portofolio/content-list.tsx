@@ -11,11 +11,11 @@ interface ContentListProps {
   videos: string[] | undefined
 }
 
-function ContentList ({images, videos}: ContentListProps) {
+function ContentList ({ images, videos }: ContentListProps) {
     const { currentImageIndex, currentVideoIndex , activeButtonsDetail } =  useSelector((state: RootStore) => state.rootStore)
     const imageLength = images?.length
     const videoLength = videos?.length
-
+   
     const handleImagePagination = (i: number) => {
       store.dispatch(setCurrentImageIndex(i))
     }
@@ -32,7 +32,7 @@ function ContentList ({images, videos}: ContentListProps) {
         {images?.length ? images.map((image, idx) => { 
           if(currentImageIndex === idx) {
             return (
-              <div className="flex items-center" key={image}>
+              <div className="flex items-center justify-center" key={image}>
                 {currentImageIndex !== 0 && (
                   <button className="mr-[-10px] z-20" onClick={() => handleImagePagination(idx - 1)}>
                   <Image src={circleChevronLeft} alt="chevron left" width={20} />

@@ -16,11 +16,11 @@ const CardComponent: FC<CardComponentProps> = (props) => {
           <div >
             <Image src={image} alt='image' width={280} height={80}/>
           </div>
-          <div className="flex justify-between px-2 py-1">
-            <div>
+          <div className="flex justify-between gap-1 px-2 py-1">
+            <div className='text-sm font-semibold'>
               {project_name}
             </div>
-            <div>
+            <div className='text-sm '>
               {project_role}
             </div>
           </div>

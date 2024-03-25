@@ -9,7 +9,7 @@ class Portofolios extends RequestHandler {
     storePortofolios(body?:any) {
        return new Promise(async(resolve, reject) => {
             try {
-                const response = await fetch(`${this.api}/${ENDPOINT.PORTOFOLIOS}`, {
+                const response = await fetch(`${this.baseUrl}/${ENDPOINT.PORTOFOLIOS}`, {
                     method: 'POST',
                     body: body,
                     // When sending a form with fetch in the frontend, 

@@ -29,7 +29,7 @@ interface SelectComponentProps {
         value: string;
     }[]
     onChange?: (newValue: MultiValue<string | { label: string; value: string }> | SingleValue<string | { label: string; value: string }>, actionMeta: ActionMeta<string | { label: string; value: string }>) => void | undefined;
-    errorMessage: {
+    errorMessage?: {
         [key: string]: string;
     }
 }

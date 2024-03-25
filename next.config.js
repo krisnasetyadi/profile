@@ -2,7 +2,8 @@
 const nextConfig = {
     images: {
         domains: [
-            'cdn.dribbble.com'      
+            'cdn.dribbble.com',
+            'firebasestorage.googleapis.com'    
         ]
       },
 }
