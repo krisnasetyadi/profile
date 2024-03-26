@@ -1,4 +1,4 @@
-const baseUrl = process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? `http://localhost:${process.env.NEXT_PUBLIC_PORT}` : 'https://krisnadwisetyaadi.vercel.app/'
+const baseUrl = process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? `http://localhost:${process.env.NEXT_PUBLIC_PORT}` : `${process.env.SERVICE_PROFILE_URL}`
 
 export default class RequestHandler {
     public url: string;

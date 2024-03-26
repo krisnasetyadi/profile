@@ -63,9 +63,11 @@ function CVComponent () {
                 setCvData(Data)
                 setIsLoading(false)
                 setIsModalOpen(false)
+                Swal.fire({ toast: true, text: 'Data save successfully', icon: 'success' })
             })
             .catch((error) => {
                 console.log('errror', error)
+                Swal.fire({ toast: true, text: error?.message || 'something went wrong', icon: 'error' })
                 setIsLoading(false)
             })
 
