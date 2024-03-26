@@ -4,12 +4,12 @@ import React, { FC } from 'react'
 interface CardComponentProps {
     id?: number;
     image: string;
-    project_name: string;
+    name: string;
     project_role: string;
 }
 
 const CardComponent: FC<CardComponentProps> = (props) => {
-    const { id, image, project_name, project_role } = props
+    const { id, image, name, project_role } = props
     
     return (
         <div className="mb-2 hover:opacity-50">
@@ -18,7 +18,7 @@ const CardComponent: FC<CardComponentProps> = (props) => {
           </div>
           <div className="flex justify-between gap-1 px-2 py-1">
             <div className='text-sm font-semibold'>
-              {project_name}
+              {name}
             </div>
             <div className='text-sm '>
               {project_role}

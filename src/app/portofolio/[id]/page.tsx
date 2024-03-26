@@ -51,7 +51,7 @@ export default function  PageScreen () {
                 columns={[
                   {
                     title: 'Name',
-                    key: 'project_name',
+                    key: 'name',
                   },
                   {
                     title: 'Role',
@@ -71,7 +71,7 @@ export default function  PageScreen () {
                   },
                   {
                     title: 'Description',
-                    key: 'project_description'
+                    key: 'description'
                   }
                 ]}
               />

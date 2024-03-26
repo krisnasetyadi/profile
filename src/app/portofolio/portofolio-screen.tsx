@@ -13,7 +13,7 @@ import { PortofolioApi } from '@/services'
 // interface ItemType { 
 //   id: number; 
 //   image: string; 
-//   project_name: string; 
+//   name: string; 
 //   project_role: string; 
 // }
 const ITEMS_PER_PAGE = 6
@@ -69,7 +69,7 @@ function PortofolioScreen () {
                     <CardComponent 
                       id={i.id}
                       image={i.image_urls[0]}
-                      project_name={i.project_name}
+                      name={i.name}
                       project_role={i.roles[0]}
                     />
                    </Link>

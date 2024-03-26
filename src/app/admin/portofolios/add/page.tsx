@@ -19,7 +19,7 @@ function StoreImagesScreen () {
     const [uploadFiles, setUploadFiles] = useState<File[]>([])
     const [errors, setErrors] = useState({})
     const [formData, setFormData]=useState<FormData>({
-        project_name: '',
+        name: '',
         description: '',
         stacks: '',
         others: '',
@@ -125,7 +125,7 @@ function StoreImagesScreen () {
             <div className={classes.projectForm}>
                 <InputComponent 
                     label='Project Name' 
-                    name='project_name' 
+                    name='name' 
                     onChange={handleInputChange} 
                     errorMessage={errors} 
                 />
