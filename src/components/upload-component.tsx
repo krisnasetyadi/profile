@@ -37,7 +37,7 @@ function UploadComponent (props: UploadComponentProps) {
             <div className='grid grid-cols-3'> 
                 {files.map((file: File, idx) => (
                 <div key={idx} className='mr-2' > 
-                    <div className='bg-yellow-600 w-100 h-100'>
+                    <div className='w-100 h-100'>
                         <button 
                             className='rounded-full h-5 w-5 absolute bg-white flex justify-center items-center' 
                             onClick={() => handleDelete(file)}

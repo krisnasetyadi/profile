@@ -1,5 +1,7 @@
 'use client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Swal from 'sweetalert2'
 import InputComponent from '@/components/input-component'
 import TextAreaComponent from '@/components/text-area-component'
 import SelectComponent from '@/components/select-component'
@@ -13,6 +15,7 @@ interface FormData {
 }
 
 function StoreImagesScreen () {
+    const router = useRouter()
     const [uploadFiles, setUploadFiles] = useState<File[]>([])
     const [errors, setErrors] = useState({})
     const [formData, setFormData]=useState<FormData>({
@@ -95,10 +98,11 @@ function StoreImagesScreen () {
 
             PortofoliosApi.storePortofolios(formDataBody)
                 .then(response => {
-                    console.log('response_client', response)
+                    Swal.fire({ toast: true, text: 'Data saved successfully', icon: 'success'})
+                    router.push('/admin/portofolios')
                 })
                 .catch(error => {
-                    console.log('error', error)
+                    Swal.fire({ toast: true, text: error?.message, icon: 'error'})
                 })
         }
         
@@ -192,7 +196,7 @@ function StoreImagesScreen () {
                 />
             </div>
             <div className={classes.sumbitButton}>
-                <button className='px-2 bg-blue-400 rounded rounded-sm my-2' style={{float: 'right'}} type='submit'>
+                <button className='px-3 py-1 bg-gray-200 border border-gray-800 rounded rounded-md my-2 text-gray-800 font-semibold' style={{float: 'right'}} type='submit'>
                     Submit
                 </button>
             </div>
