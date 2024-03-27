@@ -12,8 +12,6 @@ import Swal from 'sweetalert2'
 function PortofolioScreen () {
   const { isMobileDimension } = useSelector((state: RootStore) => state.rootStore)
 
-
-
   const [data, setData] = useState<any[]>([])
   const [totalPages, setTotalPages] =  useState(1)
   const [currentPage, setCurrentPage] = useState(1);
