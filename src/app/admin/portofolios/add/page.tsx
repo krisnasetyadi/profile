@@ -98,11 +98,39 @@ function StoreImagesScreen () {
 
             PortofoliosApi.storePortofolios(formDataBody)
                 .then(response => {
-                    Swal.fire({ toast: true, text: 'Data saved successfully', icon: 'success'})
+                    Swal.fire({ 
+                        toast: true, 
+                        text: 'Data saved successfully', 
+                        icon: 'success', 
+                        position: 'top', 
+                        timer: 3000,
+                        showConfirmButton: false
+                      })
                     router.push('/admin/portofolios')
                 })
-                .catch(error => {
-                    Swal.fire({ toast: true, text: error?.message, icon: 'error'})
+                .catch(async error => {
+                    try {
+                        const errorResponse = JSON.parse(await error.text())?.error
+                        Swal.fire({ 
+                            toast: true, 
+                            text: errorResponse || 'Something went wrong', 
+                            icon: 'error', 
+                            position: 'top', 
+                            timer: 3000,
+                            showConfirmButton: false
+                        })
+                    } catch (err: any) {
+                        Swal.fire({ 
+                            toast: true, 
+                            text: err?.message  || 'Something went wrong', 
+                            icon: 'error', 
+                            position: 'top', 
+                            timer: 3000,
+                            showConfirmButton: false
+                        })
+                    }
+
+                  
                 })
         }
         
@@ -119,6 +147,13 @@ function StoreImagesScreen () {
                 [actionMeta.name]: newValue.map((m: any) => m.label).join(',')
             }))
         }
+
+    const handleNoMultiSelectChange = (newValue: any, actionMeta: any) => {
+        setFormData(prev => ({
+            ...prev,
+            [actionMeta.name]: newValue.label
+        }))
+    }
 
     return (
         <form onSubmit={handleSubmit} className='grid justify-center'>
@@ -157,7 +192,6 @@ function StoreImagesScreen () {
                 <SelectComponent 
                     label='CONFIDENTIAL' 
                     name='is_confidential' 
-                    isMulti
                     options={[
                         {
                             label: 'Y',
@@ -168,7 +202,7 @@ function StoreImagesScreen () {
                             value: 'n'
                         }
                     ]} 
-                    onChange={handleSelectChange} 
+                    onChange={handleNoMultiSelectChange} 
                     errorMessage={errors}
                 />
                 <div/>
