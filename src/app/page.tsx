@@ -5,7 +5,7 @@ import ClientWrapper from "@/components/wrapper/client";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="h-full mt-10">
       <div className="w-full flex justify-center">
         <div className="h-60 w-60 rounded-full my-5">
           <Image src={myImage} alt="my-image" className="rounded-full h-60 w-60"/>

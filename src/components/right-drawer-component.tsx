@@ -11,6 +11,7 @@ import Link from "next/link";
 function RightDrawer() {
     const { isOpenRightDrawer } = useSelector((state: RootStore) => state.rootStore)
     const onClickRightDrawer = () => store.dispatch(setIsOpenRightDrawer(!isOpenRightDrawer))
+    
     return (
           <div className={`${isOpenRightDrawer ? 'w-full' : 'w-0'} absolute duration-300 h-screen bg-white opacity-95 z-50`}>
             {isOpenRightDrawer && (
@@ -26,10 +27,28 @@ function RightDrawer() {
                     Home
                   </Link>
                  {navRoute.map(route => {
+                  const isPortofolio = route.route === '/portofolio'
                    return (
-                     <Link key={route.route} href={`${route.route}`} onClick={onClickRightDrawer} className="p-2 font-semibold">
+                    <div key={route.route} className="relative group" >
+                      <div>
+                     <Link 
+                        href={isPortofolio ? '' : `${route.route}`} 
+                        {...(!isPortofolio && {onClick: onClickRightDrawer})}
+                        className={`p-2 font-semibold ${isPortofolio ? 'text-gray-500' : ''}`}
+                      >
                        {route.name}
                      </Link>
+                     </div>
+                     {isPortofolio && 
+                        <div 
+                          className="tooltip absolute invisible group-hover:visible 
+                          top-4 right-1/4 mt-1 px-2 py-1 bg-gray-700
+                          text-white rounded-md shadow-sm font-medium text-[9px]"
+                        >
+                            This page is currently under development
+                      </div>
+                    }
+                    </div>
                    )
                   })}
                 </div>

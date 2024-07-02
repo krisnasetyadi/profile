@@ -8,40 +8,47 @@ import BarsIcon from '../../public/icons/bars-icon.svg'
 import LinkedIn from '../../public/icons/linkedin-icon.svg'
 import SunIcon from '../../public/icons/sun-icon.svg'
 import { RootStore, store } from "@/store";
-import { setIsOpenRightDrawer, setIsMobileDimension } from "@/store/root-store";
+import { setIsOpenRightDrawer } from "@/store/root-store";
 import { useSelector } from "react-redux";
 
 function NavbarComponent() {
-  const { isOpenRightDrawer, isMobileDimension } = useSelector((state: RootStore) => state.rootStore)
+  const { isOpenRightDrawer } = useSelector((state: RootStore) => state.rootStore)
   const onClickRightDrawer = () => store.dispatch(setIsOpenRightDrawer(!isOpenRightDrawer))
   const [currentRoute, setCurrentRoute] = useState('')
 
-  useEffect(() => {
-    const handleResize = () => {
-      store.dispatch(setIsMobileDimension(window.innerWidth < 768)); 
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
     return (
-      <div className={`absolute w-full ${isMobileDimension ? 'px-1': 'px-20'}`}>
-        <nav className={`${isMobileDimension ? 'h-10' : 'h-12'} bg-white flex justify-between items-center px-5 border-b-solid border-2 border-gray-300 rounded-lg`}>
+      <div className={`absolute w-full min-[320px]:px-1 px-20`}>
+        <nav className={`min-[320px]:h-10 h-12 bg-white flex justify-between items-center px-5 border-b-solid border-2 border-gray-300 rounded-lg`}>
           <Link href={`/`} onClick={() => setCurrentRoute('')} className="font-bold text-lg">
             <div className="flex"><p>krsn</p><span className="h-2.5 w-2.5 bg-blue-400 rounded-full my-auto ml-0.5"/></div>
-            
           </Link>
-          {!isMobileDimension ? (
-            <div className="flex p-10">
+     
+            <div className="hidden md:flex p-10">
               {navRoute.map(route => {
+                  const isPortofolio = route.route === '/portofolio'
                    return (
-                     <Link key={route.route} href={`${route.route}`} onClick={() => setCurrentRoute(route.route)} className={`${currentRoute === route.route ? 'text-blue-600' : ''} p-2 font-semibold text-sm`}>
-                       {route.name}
-                     </Link>
+                    <div key={route.route} className="relative group" >
+                      <div>
+                   
+                      <Link  
+                          href={isPortofolio ? `` : `${route.route}`} 
+                          onClick={() => setCurrentRoute(route.route)} 
+                          className={`${currentRoute === route.route && !isPortofolio ? 'text-blue-600' : isPortofolio ? 'text-gray-500' : ''} p-2 font-semibold text-sm`}
+                          aria-disabled={isPortofolio}
+                        >
+                        {route.name}
+                      </Link>
+                     </div>
+                     {isPortofolio && 
+                      <div 
+                        className="tooltip absolute invisible group-hover:visible 
+                        top-0 left-full mt-1 px-2 py-1 bg-gray-700
+                         text-white rounded-md shadow-sm font-medium text-[8px]"
+                      >
+                          This page is currently under development
+                    </div>}
+                    </div>
+                    
                    )
                })}
                <button className="mb-1">
@@ -52,11 +59,11 @@ function NavbarComponent() {
                </Link>
              
             </div>
-          ) : (
-            <button type="button" onClick={onClickRightDrawer}>
+    
+            <button type="button" className="min-[765px]:hidden" onClick={onClickRightDrawer}>
               <Image src={BarsIcon} alt="bars-icon" />
             </button>
-          )}
+
         </nav>
       </div>
     )

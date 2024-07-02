@@ -1,0 +1,66 @@
+
+[
+    {
+        "type": "programming-languages",
+        "skills": [
+            {
+                "name": "JavaScript",
+                "icon": "https://techstack-generator.vercel.app/js-icon.svg"
+            },
+            {
+                "name": "TypeScript",
+                "icon": "https://techstack-generator.vercel.app/ts-icon.svg"
+            },
+            {
+                "name": "Python",
+                "icon": "https://techstack-generator.vercel.app/python-icon.svg"
+            },
+            
+            {
+                "name": "C#",
+                "icon": "https://techstack-generator.vercel.app/csharp-icon.svg"
+            }
+            
+        ]
+    },
+    {
+        "type": "frameworks",
+        "skills": [
+            {
+                "name": "Angular",
+                "icon": ""
+            },
+            {
+                "name": "Next JS",
+                "icon": "https://skillicons.dev/icons?i=nextjs&theme=light"
+            },
+            {
+                "name": "Express JS",
+                "icon": ""
+            }
+        ]
+    },
+    {
+        "type": "libraries",
+        "skills": [
+            {
+                "name": "React",
+                "icon": ""
+            }
+           
+        ]
+    },
+    {
+        "type": "databases",
+        "skills": [
+            {
+                "name": "PostgreSQL",
+                "icon": ""
+            },
+            {
+                "name": "SQL Server",
+                "icon": ""
+            }
+        ]
+    }
+]
