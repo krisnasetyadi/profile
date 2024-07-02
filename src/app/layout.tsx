@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   authors: { name: 'Krisna Dwi Setyaadi' },
   creator: 'Krisna Dwi Setyaadi',
   applicationName: 'Krisna Personal Profile',
-  keywords: ['krisna', 'krisna setyaadi', 'krisna dwi setyaadi', 'dwi', 'krisna setyadi', 'software developer', 'profile'],
+  keywords: ['krisna', 'krisna setyaadi', 'krisna setyadi', 'krisna dwi setyaadi', 'dwi', 'krisna setyadi', 'software developer', 'profile', 'home', 'portfolio', 'front-end developer'],
   robots: {
     index: true,
     follow: true,
@@ -37,7 +37,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="description" content="Personal profile of Krisna Dwi Setyaadi" />
-        <meta name="keywords" content="krisna, krisna setyaadi, krisna dwi setyaadi, dwi, krisna setyadi, software developer, profile" />
+        <meta name="keywords" content="krisna, krisna setyaadi, krisna setyadi, krisna dwi setyaadi, dwi, krisna setyadi, software developer, profile, home, portofolio, front-end developer" />
         <meta name="author" content="Krisna Dwi Setyaadi" />
       </head>
       <body className={`${inter.className} bg-[#edf1f5]`}>
