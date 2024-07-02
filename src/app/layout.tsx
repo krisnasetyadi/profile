@@ -1,4 +1,4 @@
-
+import { Analytics } from "@vercel/analytics/react"
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -11,21 +11,21 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Krisna Profile',
-  description: 'krisna dwi setyaadi personal profile',
+  description: 'Personal profile of Krisna Dwi Setyaadi',
   authors: { name: 'Krisna Dwi Setyaadi' },
   creator: 'Krisna Dwi Setyaadi',
   applicationName: 'Krisna Personal Profile',
-  keywords: ['krisna', 'krisna setyaadi', 'krisna dwi setyaadi', 'dwi', 'krisna setyadi'],
+  keywords: ['krisna', 'krisna setyaadi', 'krisna dwi setyaadi', 'dwi', 'krisna setyadi', 'software developer', 'profile'],
   robots: {
-    index: false,
+    index: true,
     follow: true,
-    nocache: true,
+    nocache: false,
     googleBot: {
       index: true,
-      follow: false,
-      noimageindex: true
+      follow: true,
+      noimageindex: false
     }
-  }
+  },
 }
 
 export default function RootLayout({
@@ -35,6 +35,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="description" content="Personal profile of Krisna Dwi Setyaadi" />
+        <meta name="keywords" content="krisna, krisna setyaadi, krisna dwi setyaadi, dwi, krisna setyadi, software developer, profile" />
+        <meta name="author" content="Krisna Dwi Setyaadi" />
+      </head>
       <body className={`${inter.className} bg-[#edf1f5]`}>
         <ClientWrapper>
           <RightDrawer />
@@ -44,6 +49,7 @@ export default function RootLayout({
         </ClientWrapper>
         <ContentWrapper>
           {children}
+          <Analytics/>
         </ContentWrapper>
       </body>
     </html>
