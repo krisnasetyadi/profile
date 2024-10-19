@@ -1,40 +1,31 @@
 'use client'
 
+import { useSelector } from "react-redux";
 import { RootStore, store } from "@/store";
 import { setActiveButtonsDetail } from "@/store/root-store";
-import { useSelector } from "react-redux";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-function ToggleButtons(props: any) {
-  const { videos } = props
-  const { activeButtonsDetail } = useSelector((state: RootStore) => state.rootStore)
-  const handleButtonsClick = (type: string) => {
-    store.dispatch(setActiveButtonsDetail(type))
+interface ToggleButtonsProps {
+  videos?: string[];
+}
+
+function ToggleButtons({ videos }: ToggleButtonsProps) {
+  const { activeButtonsDetail } = useSelector((state: RootStore) => state.rootStore);
+
+  const handleButtonsClick = (value: string) => {
+    if (value) {
+      store.dispatch(setActiveButtonsDetail(value));
+    }
   }
-  
+
   return (
-    <div className="bg-[#e3e3e3] border-2 border-solid border-gray-500 rounded-lg">
-      <button
-        className={` rounded-md ${
-            activeButtonsDetail === 'image'
-            ? 'bg-gray-700 text-gray-200 px-2'
-            : 'bg-gray-200 px-1'
-        }`}
-        onClick={() => handleButtonsClick('image')}
-      >
-        image
-      </button>
-      {videos && (
-        <button
-         className={`rounded-md ${
-              activeButtonsDetail === 'video' ? 'bg-gray-700 text-gray-200 px-2' : 'bg-gray-200 px-1'
-          }`}
-          onClick={() => handleButtonsClick('video')}
-        >
-          video
-        </button>
-      )}
-      
-    </div>
+    <Tabs value={activeButtonsDetail} onValueChange={handleButtonsClick}>
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger defaultValue={'image'} value="image">Image</TabsTrigger>
+        <TabsTrigger disabled={videos && videos.length === 0 } value="video">Video</TabsTrigger>
+      </TabsList>
+    </Tabs>
+   
   );
 }
 

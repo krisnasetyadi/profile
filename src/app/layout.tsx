@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 import ContentWrapper from '../components/wrapper/content'
 import NavbarComponent from '@/components/navbar-component'
 import ClientWrapper from '@/components/wrapper/client'
-import RightDrawer from '@/components/right-drawer-component'
+import { ThemeProvider } from "@/components/ui/next-theme-provider"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,16 +41,20 @@ export default function RootLayout({
         <meta name="author" content="Krisna Dwi Setyaadi" />
       </head>
       <body className={`${inter.className} bg-[#edf1f5]`}>
-        <ClientWrapper>
-          <RightDrawer />
-        </ClientWrapper>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <Analytics/> 
         <ClientWrapper>
           <NavbarComponent />
         </ClientWrapper>
         <ContentWrapper>
           {children}
-          <Analytics/>
-        </ContentWrapper>
+        </ContentWrapper> 
+        </ThemeProvider>
       </body>
     </html>
   )

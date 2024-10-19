@@ -1,97 +1,73 @@
 'use client'
 
 import Image from "next/image"
-import { circleChevronLeft, circleChevronRight } from "../../../public/icons"
 import { useSelector } from "react-redux"
 import { RootStore, store } from "@/store"
-import { setCurrentImageIndex, setCurrentVideoIndex } from "@/store/root-store"
+// import { setCurrentImageIndex, setCurrentVideoIndex } from "@/store/root-store"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { Card, CardContent } from "@/components/ui/card"
 
 interface ContentListProps {
   images: string[] | undefined;
   videos: string[] | undefined
+  onSlideChange?: (index: number) => void;
 }
 
-function ContentList ({ images, videos }: ContentListProps) {
-    const { currentImageIndex, currentVideoIndex , activeButtonsDetail } =  useSelector((state: RootStore) => state.rootStore)
-    const imageLength = images?.length
-    const videoLength = videos?.length
-   
-    const handleImagePagination = (i: number) => {
-      store.dispatch(setCurrentImageIndex(i))
-    }
+function ContentList({ images, videos }: ContentListProps) {
+    const { activeButtonsDetail } = useSelector((state: RootStore) => state.rootStore)
 
-    const handleVideoPagination = (i: number) => {
-      store.dispatch(setCurrentVideoIndex(i))
-    }
-
-    let content 
-
-    if(activeButtonsDetail === 'image') {
-      content = (
-        <>
-        {images?.length ? images.map((image, idx) => { 
-          if(currentImageIndex === idx) {
-            return (
-              <div className="flex items-center justify-center" key={image}>
-                {currentImageIndex !== 0 && (
-                  <button className="mr-[-10px] z-20" onClick={() => handleImagePagination(idx - 1)}>
-                  <Image src={circleChevronLeft} alt="chevron left" width={20} />
-                </button>
-                )}
-              
-                <Image src={`${image}`} alt="image-content" width={520} height={400} />
-                {imageLength && currentImageIndex !== imageLength - 1 && (
-                  <button  className="ml-[-10px] z-20"  onClick={() => handleImagePagination(idx + 1)}>
-                    <Image src={circleChevronRight} alt="chevron right" width={20} />
-                  </button>
-                )}
-
-              </div>
-            )
-          }
-        }) : (
-          <div className="flex h-80 w-80 md:h-[400px] md:w-[520px] bg-gray-200 items-center justify-center rounded-lg">
-            No Content Available
-          </div>
-        )}
-      </>
-      )
-    } 
-
-    if(activeButtonsDetail === 'video') {
-      content = (
-        <>
-        {videos?.length ? videos.map((video, idx) => { 
-          if(currentVideoIndex === idx) {
-            return (
-              <div className="flex items-center" key={video}>
-                {currentVideoIndex !== 0 && (
-                  <button className="mr-[-10px] z-20" onClick={() => handleVideoPagination(idx - 1)}>
-                  <Image src={circleChevronLeft} alt="chevron left" width={20} />
-                </button>
-                )}
-                <video src={video} controls  width={520} height={400}/>
-      
-                {videoLength && currentVideoIndex !== videoLength - 1 && (
-                  <button  className="ml-[-10px] z-20"  onClick={() => handleVideoPagination(idx + 1)}>
-                    <Image src={circleChevronRight} alt="chevron right" width={20} />
-                  </button>
-                )}
-
-              </div>
-            )
-          }
-        }) : (
-          <div className="flex h-80 w-80 md:h-[400px] md:w-[520px] bg-gray-200 items-center justify-center rounded-lg">
-            No Content Available
-          </div>
-        )}
-      </>
-      )
-    }
+    const content = activeButtonsDetail === 'image' ? images : videos
+    
+    // const handleSlideChange = (index: number):void => {
+    //   if (activeButtonsDetail === 'image') {
+    //     store.dispatch(setCurrentImageIndex(index))
+    //   } else {
+    //     store.dispatch(setCurrentVideoIndex(index))
+    //   }
+    // }
 
     return (
-      <>{content}</>
+      <Carousel 
+        className="w-full max-w-xs sm:max-w-sm md:max-w-md xl:max-w-xl"
+      >
+        <CarouselContent>
+          {content && content.length > 0 ? (
+            content.map((item, index) => (
+              <CarouselItem key={index}>
+                <div className="p-1">
+                  <Card>
+                    <CardContent className="flex aspect-square items-center justify-center p-6">
+                      {activeButtonsDetail === 'image' ? (
+                        <Image src={item} alt={`image-${index}`} width={520} height={400} className="object-cover" />
+                      ) : (
+                        <video src={item} controls width={520} height={400} className="object-cover" />
+                      )}
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))
+          ) : (
+            <CarouselItem>
+              <div className="p-1">
+                <Card>
+                  <CardContent className="flex aspect-square items-center justify-center p-6">
+                    <p>No Content Available</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          )}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
     )
 }
 

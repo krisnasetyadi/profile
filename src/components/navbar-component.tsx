@@ -1,72 +1,110 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
-import { navRoute } from "@/constants/navbar-constants"
-import Link from "next/link"
+import React, { useState } from "react";
+import { navRoute } from "@/constants/navbar-constants";
+import Link from "next/link";
 import Image from "next/image";
-import BarsIcon from '../../public/icons/bars-icon.svg'
-import LinkedIn from '../../public/icons/linkedin-icon.svg'
-import SunIcon from '../../public/icons/sun-icon.svg'
-import { RootStore, store } from "@/store";
-import { setIsOpenRightDrawer } from "@/store/root-store";
-import { useSelector } from "react-redux";
+import LinkedIn from "../../public/icons/linkedin-icon.svg";
+import { useTheme } from "next-themes";
+import { MoonIcon, SunIcon, ListBulletIcon } from "@radix-ui/react-icons";
+import { SwitchComponent } from "./ui/switch";
+import { MenubarComponent } from "./ui/menubar";
 
 function NavbarComponent() {
-  const { isOpenRightDrawer } = useSelector((state: RootStore) => state.rootStore)
-  const onClickRightDrawer = () => store.dispatch(setIsOpenRightDrawer(!isOpenRightDrawer))
-  const [currentRoute, setCurrentRoute] = useState('')
+  const [currentRoute, setCurrentRoute] = useState("");
+  const { setTheme, theme } = useTheme();
 
+  const darkModeToggleButton = () => {
     return (
-      <div className={`absolute w-full min-[320px]:px-1 px-20`}>
-        <nav className={`min-[320px]:h-10 h-12 bg-white flex justify-between items-center px-5 border-b-solid border-2 border-gray-300 rounded-lg`}>
-          <Link href={`/`} onClick={() => setCurrentRoute('')} className="font-bold text-lg">
-            <div className="flex"><p>krsn</p><span className="h-2.5 w-2.5 bg-blue-400 rounded-full my-auto ml-0.5"/></div>
-          </Link>
-     
-            <div className="hidden md:flex p-10">
-              {navRoute.map(route => {
-                  const isPortofolio = route.route === '/portofolio'
-                   return (
-                    <div key={route.route} className="relative group" >
-                      <div>
-                   
-                      <Link  
-                          href={isPortofolio ? `` : `${route.route}`} 
-                          onClick={() => setCurrentRoute(route.route)} 
-                          className={`${currentRoute === route.route && !isPortofolio ? 'text-blue-600' : isPortofolio ? 'text-gray-500' : ''} p-2 font-semibold text-sm`}
-                          aria-disabled={isPortofolio}
-                        >
-                        {route.name}
-                      </Link>
-                     </div>
-                     {isPortofolio && 
-                      <div 
-                        className="tooltip absolute invisible group-hover:visible 
-                        top-0 left-full mt-1 px-2 py-1 bg-gray-700
-                         text-white rounded-md shadow-sm font-medium text-[8px]"
-                      >
-                          This page is currently under development
-                    </div>}
-                    </div>
-                    
-                   )
-               })}
-               <button className="mb-1">
-                <Image src={SunIcon} alt="sun-icon" className="p-2" width={30} height={30}/>
-               </button>
-               <Link href={'https://www.linkedin.com/in/krisnadwisetyaadi'}>
-                <Image src={LinkedIn} alt="linkedin-icon" className="p-2"  width={30} height={30}/>
-               </Link>
-             
-            </div>
-    
-            <button type="button" className="min-[765px]:hidden" onClick={onClickRightDrawer}>
-              <Image src={BarsIcon} alt="bars-icon" />
-            </button>
-
-        </nav>
-      </div>
+      <button className="flex items-center">
+        <SwitchComponent
+          isChecked={theme === 'dark'}
+          handleChange={(e) => {
+            const appliedTheme = e ? "dark" : "light";
+            setTheme(appliedTheme);
+          }}
+        />
+        {theme === "dark" ? (
+          <MoonIcon className="ml-2 text-gray-500 dark:text-gray-200" />
+        ) : (
+          <SunIcon className="ml-2 text-yellow-500" />
+        )}
+      </button>
     )
+  }
+
+  return (
+    <div className="w-full px-5 md:px-20 fixed top-0 left-0 z-10">
+      <nav className="h-16 bg-white dark:bg-gray-900 flex justify-between items-center border-b border-gray-300 dark:border-gray-700 shadow-md rounded-lg px-5">
+
+        <Link href={`/`} onClick={() => setCurrentRoute("")} className="font-bold text-lg">
+          <div className="flex items-center">
+            <p className="text-gray-800 dark:text-white">krsn</p>
+            <span className="h-2.5 w-2.5 bg-blue-400 rounded-full ml-1"></span>
+          </div>
+        </Link>
+
+        <div className="hidden md:flex space-x-5">
+          {navRoute.map((route) => {
+            const isPortfolio = route.route === "/portfolio";
+            return (
+              <div key={route.route} className="relative group">
+                <Link
+                  href={isPortfolio ? "#" : route.route}
+                  onClick={() => setCurrentRoute(route.route)}
+                  className={`${
+                    currentRoute === route.route && !isPortfolio
+                      ? "text-blue-600 dark:text-blue-400"
+                      : isPortfolio
+                      ? "text-gray-500 dark:text-gray-400"
+                      : "text-gray-700 dark:text-gray-300"
+                  } p-2 font-semibold text-sm`}
+                  aria-disabled={isPortfolio}
+                >
+                  {route.name}
+                </Link>
+
+                {isPortfolio && (
+                  <div className="absolute invisible group-hover:visible top-0 left-full mt-1 px-2 py-1 bg-gray-700 text-white rounded-md shadow-sm text-xs">
+                    This page is under development
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+          {darkModeToggleButton()}
+
+          <Link href="https://www.linkedin.com/in/krisnadwisetyaadi">
+            <Image src={LinkedIn} alt="linkedin-icon" className="ml-3" width={30} height={30} />
+          </Link>
+        </div>
+
+       
+        <MenubarComponent 
+          className="md:hidden"
+          icon={<ListBulletIcon />}
+          contents={
+            [
+              {
+                item: 'About',
+                shortcut: '⌘T',
+                redirectUrl: '/about'
+              },
+              {
+                item: 'Portofolio',
+                shortcut: '⌘T',
+                redirectUrl: '/portofolio'
+              },
+              {
+                item:  darkModeToggleButton()
+              }
+            ]
+          }
+          />
+      </nav>
+    </div>
+  );
 }
 
-export default NavbarComponent
+export default NavbarComponent;

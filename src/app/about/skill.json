@@ -35,6 +35,10 @@
                 "icon": "https://skillicons.dev/icons?i=nextjs&theme=light"
             },
             {
+                "name": ".Net",
+                "icon": ""
+            },
+            {
                 "name": "Express JS",
                 "icon": ""
             }

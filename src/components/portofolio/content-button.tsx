@@ -1,10 +1,12 @@
 'use client'
 
-import { RootStore, store } from "@/store"
-import { setCurrentImageIndex } from "@/store/root-store"
-import Image from "next/image"
 import { useEffect, useRef } from "react"
 import { useSelector } from "react-redux"
+import Image from "next/image"
+import { RootStore, store } from "@/store"
+import { setCurrentImageIndex } from "@/store/root-store"
+import { Button } from "@/components/ui/button"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 interface ContentButtonProps {
     images: string[] | undefined
@@ -12,70 +14,56 @@ interface ContentButtonProps {
 }
 
 function ContentButton({images, videos}: ContentButtonProps) {
-    const { currentImageIndex, activeButtonsDetail } =  useSelector((state: RootStore) => state.rootStore) 
-    const handleImagePagination = (i: number) => {
-        store.dispatch(setCurrentImageIndex(i))
-    }
+    const { currentImageIndex, activeButtonsDetail } = useSelector((state: RootStore) => state.rootStore) 
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     
+    console.log('currentImageIndex', currentImageIndex)
     useEffect(() => {
         store.dispatch(setCurrentImageIndex(0))
     }, [])
 
-    let content
-    if(activeButtonsDetail === 'image') {
-        content = (
-            <>
-              {images?.map((i, idx) => {
-                return (
-                 <button key={idx} onClick={() => handleImagePagination(idx)} className={`${currentImageIndex === idx ? 'border-solid border-2 border-blue-600 ' : ''} ml-[-10px] z-20 rounded-lg`}>
-                   <Image src={i} alt="images" width={100} height={100} className={`rounded-lg`}/>
-                 </button>
-                )
-              })}
-            </>
-        )
+    const handleImagePagination = (i: number) => {
+        store.dispatch(setCurrentImageIndex(i))
     }
-    
-    if(activeButtonsDetail === 'video') {
-        content = (
-            <>
-              {videos?.map((i, idx) => {
-                return (
-                 <button 
-                    key={idx} 
-                    onClick={() => handleImagePagination(idx)} 
-                    className={`
-                        ${currentImageIndex === idx ? 'border-solid border-2 border-blue-600 ' : ''} 
-                        ml-[-10px] z-20 rounded-lg`}
-                    >
-                      <canvas id={`canvas-${idx}`} ref={canvasRef} width={100} height={100}  className={`rounded-lg`}>
-                        <video 
-                            src={i}
-                            width={100} 
-                            height={100} 
-                            preload="metadata"
-                            onLoadedMetadata={(e) => {
-                                const video = e.currentTarget
-                                const canvas = document.getElementById(`canvas-${idx}`) as HTMLCanvasElement;
-                                if (canvas) {
-                                  canvas.getContext('2d')?.drawImage(video, 0, 0, canvas.width, canvas.height);
-                                }
-                            }}
-                        />
-                      </canvas>
-                 </button>
-                )
-              })}
-            </>
-        )
-    }
-    
 
-    return( 
-        <div className="flex justify-center gap-5 mt-2">
-            {content}
-         </div>
+    const renderThumbnail = (src: string, idx: number) => (
+        <Button
+            key={idx}
+            variant="outline"
+            className={`p-0 m-1 w-24 h-24 ${currentImageIndex === idx ? 'ring-2 ring-primary' : ''}`}
+            onClick={() => handleImagePagination(idx)}
+        >
+            {activeButtonsDetail === 'image' ? (
+                <Image src={src} alt={`thumbnail-${idx}`} width={100} height={100} className="object-cover rounded-sm" />
+            ) : (
+                <canvas id={`canvas-${idx}`} ref={canvasRef} width={100} height={100} className="rounded-sm">
+                    <video 
+                        src={src}
+                        width={100} 
+                        height={100} 
+                        preload="metadata"
+                        onLoadedMetadata={(e) => {
+                            const video = e.currentTarget
+                            const canvas = document.getElementById(`canvas-${idx}`) as HTMLCanvasElement;
+                            if (canvas) {
+                                canvas.getContext('2d')?.drawImage(video, 0, 0, canvas.width, canvas.height);
+                            }
+                        }}
+                    />
+                </canvas>
+            )}
+        </Button>
+    )
+
+    const content = activeButtonsDetail === 'image' ? images : videos
+
+    return (
+        <ScrollArea className="w-full max-w-2xl mx-auto mt-4">
+            <div className="flex">
+                {content?.map((src, idx) => renderThumbnail(src, idx))}
+            </div>
+            <ScrollBar orientation="horizontal" />
+        </ScrollArea>
     )
 }
 
