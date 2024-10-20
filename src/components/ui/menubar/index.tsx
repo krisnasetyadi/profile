@@ -55,8 +55,8 @@ interface ContentType {
                                 <MenubarSubTrigger>{content.item}</MenubarSubTrigger>
                                 {content.subItem && (
                                     <MenubarSubContent>
-                                        {content.subItem.map(({item}: SubItemType) =>  (
-                                                <MenubarItem>
+                                        {content.subItem.map(({item}: SubItemType, index) =>  (
+                                                <MenubarItem key={index}>
                                                     <Link href={content.redirectUrl || "#"}>
                                                         {item}
                                                     </Link>

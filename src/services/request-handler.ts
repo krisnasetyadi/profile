@@ -145,7 +145,6 @@ export default class RequestHandler {
   }
 
   update(body: any, id: number, url = this.url) {
-    console.log("url_update", url);
     return new Promise(async (resolve, reject) => {
       try {
         const response = await fetch(`${this.baseUrl}/${url}/${id}`, {

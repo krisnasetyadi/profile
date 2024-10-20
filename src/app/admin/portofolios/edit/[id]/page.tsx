@@ -23,39 +23,41 @@ type SelectOption = {
 
 type FormData = {
     name: string;
+    roles: SelectOption[];
     stacks: SelectOption[];
     others: SelectOption[];
-    roles: SelectOption[];
     description: string;
     links: string;
-    is_confidential?: boolean;
-    images: FileList
+    // is_confidential?: boolean;
+    // images: FileList;
   };
 
   const schema = yup.object().shape({
     name: yup.string().required(),
     roles: yup.array().of(
-        yup.object().shape({
-            value: yup.string(),
-            label: yup.string()
-        }).required()
-    ),
+      yup.object().shape({
+        value: yup.string().required(),
+        label: yup.string().required()
+      })
+    ).required(),
     stacks: yup.array().of(
-        yup.object().shape({
-            value: yup.string(),
-            label: yup.string()
-        }).required()
-    ),
+      yup.object().shape({
+        value: yup.string().required(),
+        label: yup.string().required()
+      })
+    ).required(),
     others: yup.array().of(
-        yup.object().shape({
-            value: yup.string(),
-            label: yup.string()
-        })
-    ),
-    description: yup.string(),
-    links: yup.string(),
-    images: yup.mixed(),
+      yup.object().shape({
+        value: yup.string().required(),
+        label: yup.string().required()
+      })
+    ).required(),
+    description: yup.string().required(),
+    links: yup.string().required(),
+    // is_confidential: yup.boolean(),
+    // images: yup.mixed()
   });
+  
 function EditScreen({params}: any) {
     console.log('params', params)
     const {
@@ -66,9 +68,12 @@ function EditScreen({params}: any) {
         setValue,
     } = useForm<FormData>({
         resolver: yupResolver(schema),
+        
+        
     });
     const router = useRouter()
     const [uploadFiles, setUploadFiles] = useState<File[]>([])
+    const [errorsField, setErrors] = useState({})
     const [data, setData] = useState({})
     const [checked, setChecked] = useState<boolean>(false)
 
@@ -88,7 +93,7 @@ function EditScreen({params}: any) {
                 setValue('others', mapObjectToLabelValueShape(Data.others))
                 setValue('description', Data.description)
                 setValue('links', Data.links.join(','))
-                setValue('images', Data.images)
+                // setValue('images', Data.images)
                 setData(Data)
             })
             .catch(error => {
@@ -98,18 +103,20 @@ function EditScreen({params}: any) {
 
     useEffect(() => {
         fetchDataById()
-    }, [])
+    }, [params])
    
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFiles = e.target.files;
-        if (selectedFiles) {
-            const validFiles = Array.from(selectedFiles).filter(validateUpload);
-            setUploadFiles(validFiles);
-            setValue('images', selectedFiles);
-        }
+    const handleFileChange = (e: any) => {
+        const selectedFiles: FileList = e.target.files
+        const fieldName = e.target.name
+        if (selectedFiles.length > 0) {
+            const validFile = Array.from(selectedFiles).filter((file) => validateUpload(file, fieldName))
+            setUploadFiles((prev) => [...prev, ...validFile])
+            e.target.value = null;
+            setErrors((prev: any) => (prev[fieldName] && delete prev[fieldName], { ...prev }))
+        }  
     };
 
-    const validateUpload = (file: File): boolean => {
+    const validateUpload = (file: File, fieldName: any): boolean => {
         const isDuplicate = uploadFiles.some(existingFile => existingFile.name === file.name);
         if (isDuplicate) {
             Swal.fire({
@@ -130,7 +137,8 @@ function EditScreen({params}: any) {
             ...formData,
             roles: formData.roles.map(m => m.label).join(','),
             stacks: formData.stacks.map(m => m.label).join(','),
-            others: formData.others.map(m => m.label).join(',')
+            others: formData.others.map(m => m.label).join(','),
+            images: uploadFiles
         }
 
         const formDataBody = new FormData();
@@ -189,7 +197,7 @@ function EditScreen({params}: any) {
                     isMulti={true} 
                     errorMessage={errors.roles?.message} 
                 />
-                <SelectComponent 
+               <SelectComponent 
                     name="stacks"
                     label="Stacks"
                     options={stackOptions}
@@ -197,7 +205,7 @@ function EditScreen({params}: any) {
                     isMulti={true} 
                     errorMessage={errors.stacks?.message} 
                 />
-                <SelectComponent 
+               <SelectComponent 
                     name="others"
                     label="Others"
                     options={otherStackOptions}
@@ -223,9 +231,9 @@ function EditScreen({params}: any) {
 
                 <InputFile
                     name="images"
-                    control={control}
                     label="Upload Image"
-                    errorMessage={errors.images?.message}
+                    onChange={handleFileChange}
+                    // errorMessage={errorsField?.images?.message}
                 />
 
                 <div>
@@ -234,9 +242,9 @@ function EditScreen({params}: any) {
                         handleChange={(e)=> setChecked(!checked)}
                         label='Is Confidential'
                     />
-                    <span>{errors.is_confidential?.message}</span>
+                    {/* <span>{errors.is_confidential?.message}</span> */}
                 </div>
-              
+               
             </div>
             <div className="mt-6">
                 <Button type='submit' className='w-full bg-gray-200 text-gray-800 hover:bg-gray-300'>

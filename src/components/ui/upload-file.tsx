@@ -4,17 +4,13 @@ import { useController, Control } from "react-hook-form";
 
 interface InputFileProps {
   name: string;
-  control: Control<any>;
   label?: string;
   errorMessage?: string;
+  onChange:(e: any)=> void;
 }
 
-export function InputFile({ name, control, label = "File", errorMessage }: InputFileProps) {
-  const { field } = useController({
-    name,
-    control,
-    defaultValue: "",
-  });
+export function InputFile({ name, label = "File", errorMessage, onChange }: InputFileProps) {
+ 
 
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -22,9 +18,9 @@ export function InputFile({ name, control, label = "File", errorMessage }: Input
       <Input
         id={name}
         type="file"
-        onChange={(e) => field.onChange(e.target.files)} // Pass the selected file(s) to the form
-        onBlur={field.onBlur}
-        ref={field.ref}
+        onChange={(e) => onChange(e)} 
+        // onBlur={field.onBlur}
+        // ref={field.ref}
       />
       {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
     </div>
