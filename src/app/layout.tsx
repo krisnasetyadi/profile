@@ -1,21 +1,33 @@
-import { Analytics } from "@vercel/analytics/react"
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import ContentWrapper from '../components/wrapper/content'
-import NavbarComponent from '@/components/navbar-component'
-import ClientWrapper from '@/components/wrapper/client'
-import { ThemeProvider } from "@/components/ui/next-theme-provider"
+import { Analytics } from "@vercel/analytics/react";
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import ContentWrapper from "../components/wrapper/content";
+import NavbarComponent from "@/components/navbar-component";
+import ClientWrapper from "@/components/wrapper/client";
+import { ThemeProvider } from "@/components/ui/next-theme-provider";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Krisna Profile',
-  description: 'Personal profile of Krisna Dwi Setyaadi',
-  authors: { name: 'Krisna Dwi Setyaadi' },
-  creator: 'Krisna Dwi Setyaadi',
-  applicationName: 'Krisna Personal Profile',
-  keywords: ['krisna', 'krisna setyaadi', 'krisna setyadi', 'krisna dwi setyaadi', 'dwi', 'krisna setyadi', 'software developer', 'profile', 'home', 'portfolio', 'front-end developer'],
+  title: "Krisna Profile",
+  description: "Personal profile of Krisna Dwi Setyaadi",
+  authors: { name: "Krisna Dwi Setyaadi" },
+  creator: "Krisna Dwi Setyaadi",
+  applicationName: "Krisna Personal Profile",
+  keywords: [
+    "krisna",
+    "krisna setyaadi",
+    "krisna setyadi",
+    "krisna dwi setyaadi",
+    "dwi",
+    "krisna setyadi",
+    "software developer",
+    "profile",
+    "home",
+    "portfolio",
+    "front-end developer",
+  ],
   robots: {
     index: true,
     follow: true,
@@ -23,39 +35,45 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: false
-    }
+      noimageindex: false,
+    },
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <head>
-        <meta name="description" content="Personal profile of Krisna Dwi Setyaadi" />
-        <meta name="keywords" content="krisna, krisna setyaadi, krisna setyadi, krisna dwi setyaadi, dwi, krisna setyadi, software developer, profile, home, portofolio, front-end developer" />
+        <meta
+          name="description"
+          content="Personal profile of Krisna Dwi Setyaadi"
+        />
+        <meta
+          name="keywords"
+          content="krisna, krisna setyaadi, krisna setyadi, krisna dwi setyaadi, dwi, krisna setyadi, software developer, profile, home, portofolio, front-end developer"
+        />
         <meta name="author" content="Krisna Dwi Setyaadi" />
       </head>
       <body className={`${inter.className} bg-[#edf1f5]`}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <Analytics/> 
-        <ClientWrapper>
-          <NavbarComponent />
-        </ClientWrapper>
-        <ContentWrapper>
-          {children}
-        </ContentWrapper> 
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen bg-background">
+            <Analytics />
+            <ClientWrapper>
+              <NavbarComponent />
+            </ClientWrapper>
+            <ContentWrapper>{children}</ContentWrapper>
+          </div>
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
