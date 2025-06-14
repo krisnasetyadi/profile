@@ -6,6 +6,9 @@ import ContentWrapper from "../components/wrapper/content";
 import NavbarComponent from "@/components/navbar-component";
 import ClientWrapper from "@/components/wrapper/client";
 import { ThemeProvider } from "@/components/ui/next-theme-provider";
+import { Button } from "@/components/ui/button";
+import { Footer } from "@/components/footer";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -65,13 +68,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="min-h-screen bg-background">
+          <div className="bg-background">
             <Analytics />
             <ClientWrapper>
               <NavbarComponent />
             </ClientWrapper>
             <ContentWrapper>{children}</ContentWrapper>
+            <ClientWrapper>
+              <Footer />
+            </ClientWrapper>
           </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

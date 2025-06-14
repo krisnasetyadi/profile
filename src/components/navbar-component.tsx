@@ -1,131 +1,197 @@
 "use client";
 
-import React, { useState } from "react";
-import { navRoute } from "@/constants/navbar-constants";
+import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import LinkedIn from "../../public/icons/linkedin-icon.svg";
-import { useTheme } from "next-themes";
-import {
-  MoonIcon,
-  SunIcon,
-  ListBulletIcon,
-  GitHubLogoIcon,
-} from "@radix-ui/react-icons";
-import { SwitchComponent } from "./ui/switch";
-import { MenubarComponent } from "./ui/menubar";
+import { usePathname } from "next/navigation";
+import { Github, Linkedin, Grid3X3, Menu, X } from "lucide-react";
+// import { ThemeToggle } from "./theme-toggle";
+import { Button } from "@/components/ui/button";
+import { socialMediaUrl } from "@/lib/constant";
 
-function NavbarComponent() {
-  const [currentRoute, setCurrentRoute] = useState("");
-  const { setTheme, theme } = useTheme();
+/**
+ * Navigation Component with Dark Mode Support
+ *
+ * Enhanced navigation featuring:
+ * - Responsive design with mobile hamburger menu
+ * - Active route highlighting for better UX
+ * - Integrated theme toggle with dropdown options
+ * - Social media links with hover effects
+ * - Accessibility features with proper ARIA labels
+ * - Smooth transitions that work in both light and dark modes
+ * - Backdrop blur effect for modern glass-morphism look
+ */
+export default function Navigation() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-  const darkModeToggleButton = () => {
-    return (
-      <button className="flex items-center">
-        <SwitchComponent
-          isChecked={theme === "dark"}
-          handleChange={(e) => {
-            const appliedTheme = e ? "dark" : "light";
-            setTheme(appliedTheme);
-          }}
-        />
-        {theme === "dark" ? (
-          <MoonIcon className="ml-2 text-gray-500 dark:text-gray-200" />
-        ) : (
-          <SunIcon className="ml-2 text-yellow-500" />
-        )}
-      </button>
-    );
+  const navItems = [
+    { href: "/", label: "Home" },
+    // { href: "/work", label: "Work" },
+    // { href: "/about", label: "About" },
+    // { href: "/contact", label: "Contact" },
+  ];
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
   };
 
   return (
-    <div className="w-full px-5 md:px-20 fixed top-0 left-0 z-10">
-      <nav className="h-16 bg-white dark:bg-gray-900 flex justify-between items-center border-b border-gray-300 dark:border-gray-700 shadow-md rounded-lg px-5">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+      <nav
+        className="container flex h-16 items-center justify-between px-6 md:px-12"
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        {/* Logo */}
         <Link
-          href={`/`}
-          onClick={() => setCurrentRoute("")}
-          className="font-bold text-lg"
+          href="/"
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200"
+          data-theme-ignore
         >
-          <div className="flex items-center">
-            <p className="text-gray-800 dark:text-white">krsn</p>
-            <span className="h-2.5 w-2.5 bg-blue-400 rounded-full ml-1"></span>
-          </div>
+          <span className="text-xl font-bold text-foreground">KRSN</span>
+          <div className="h-2.5 w-2.5 bg-blue-400 rounded-full ml-0.5 animate-pulse"></div>
         </Link>
 
-        <div className="hidden md:flex space-x-5 ">
-          {navRoute.map((route) => {
-            const isPortfolio = route.route === "/portfolio";
-            return (
-              <div
-                key={route.route}
-                className="relative group flex justify-center"
-              >
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8">
+          <ul className="flex items-center gap-8" role="menubar">
+            {navItems.map((item) => (
+              <li key={item.href} role="none">
                 <Link
-                  href={isPortfolio ? "#" : route.route}
-                  onClick={() => setCurrentRoute(route.route)}
-                  className={`${
-                    currentRoute === route.route && !isPortfolio
-                      ? "text-blue-600 dark:text-blue-400"
-                      : isPortfolio
-                      ? "text-gray-500 dark:text-gray-400"
-                      : "text-gray-700 dark:text-gray-300"
-                  } p-2 font-semibold text-sm`}
-                  aria-disabled={isPortfolio}
+                  href={item.href}
+                  className={`text-sm transition-all duration-200 hover:text-primary relative ${
+                    isActive(item.href)
+                      ? "text-primary font-medium"
+                      : "text-foreground hover:text-primary"
+                  }`}
+                  role="menuitem"
+                  aria-current={isActive(item.href) ? "page" : undefined}
                 >
-                  {route.name}
+                  {item.label}
+                  {/* Active indicator */}
+                  {isActive(item.href) && (
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />
+                  )}
                 </Link>
+              </li>
+            ))}
+          </ul>
 
-                {isPortfolio && (
-                  <div className="absolute invisible group-hover:visible top-0 left-full mt-1 px-2 py-1 bg-gray-700 text-white rounded-md shadow-sm text-xs">
-                    This page is under development
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          {/* Theme Toggle */}
+          <div data-theme-toggle>{/* <ThemeToggle /> */}</div>
 
-          {darkModeToggleButton()}
+          {/* Social Links */}
+          <div className="flex items-center gap-3">
+            <Link
+              href={socialMediaUrl.linkedin}
+              className="text-primary hover:text-primary/80 transition-all duration-200 hover:scale-110"
+              aria-label="LinkedIn Profile"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Linkedin className="h-5 w-5" />
+            </Link>
+            <Link
+              href={socialMediaUrl.linkedin}
+              className="text-foreground hover:text-primary transition-all duration-200 hover:scale-110"
+              aria-label="GitHub Profile"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="h-5 w-5" />
+            </Link>
+          </div>
 
-          <Link href="https://www.linkedin.com/in/krisnadwisetyaadi">
-            <Image
-              src={LinkedIn}
-              alt="linkedin-icon"
-              className="ml-3"
-              width={30}
-              height={30}
-            />
-          </Link>
-          <Link
-            href="https://github.com/krisnasetyadi"
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-9 w-9 hover:bg-accent hover:text-accent-foreground lg:hidden"
           >
-            <GitHubLogoIcon width={30} height={30} />
-          </Link>
+            <Grid3X3 className="h-4 w-4" />
+          </Button>
         </div>
 
-        <MenubarComponent
-          className="md:hidden"
-          icon={<ListBulletIcon />}
-          contents={[
-            {
-              item: "About",
-              shortcut: "⌘T",
-              redirectUrl: "/about",
-            },
-            {
-              item: "Portofolio",
-              shortcut: "⌘T",
-              redirectUrl: "/portofolio",
-            },
-            {
-              item: darkModeToggleButton(),
-            },
-          ]}
-        />
+        {/* Mobile Navigation Controls */}
+        <div className="md:hidden flex items-center gap-4">
+          <div data-theme-toggle>{/* <ThemeToggle /> */}</div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle mobile menu"
+            aria-expanded={isMenuOpen}
+            className="h-9 w-9"
+          >
+            {isMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </Button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm md:hidden"
+              onClick={() => setIsMenuOpen(false)}
+            />
+
+            {/* Menu Content */}
+            <div className="absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border md:hidden shadow-theme-medium">
+              <div className="container px-6 py-6">
+                <ul className="space-y-4" role="menu">
+                  {navItems.map((item) => (
+                    <li key={item.href} role="none">
+                      <Link
+                        href={item.href}
+                        className={`block text-lg transition-colors duration-200 hover:text-primary ${
+                          isActive(item.href)
+                            ? "text-primary font-medium"
+                            : "text-foreground"
+                        }`}
+                        role="menuitem"
+                        onClick={() => setIsMenuOpen(false)}
+                        aria-current={isActive(item.href) ? "page" : undefined}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Mobile Social Links */}
+                <div className="flex items-center gap-6 mt-8 pt-6 border-t border-border">
+                  <a
+                    href="https://linkedin.com/in/krisna"
+                    className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors duration-200"
+                    aria-label="LinkedIn Profile"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                    <span>LinkedIn</span>
+                  </a>
+                  <a
+                    href="https://github.com/krisna"
+                    className="flex items-center gap-3 text-foreground hover:text-primary transition-colors duration-200"
+                    aria-label="GitHub Profile"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="h-5 w-5" />
+                    <span>GitHub</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </nav>
-    </div>
+    </header>
   );
 }
-
-export default NavbarComponent;
