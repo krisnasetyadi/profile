@@ -3,7 +3,7 @@
 import { Github, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { socialMediaUrl } from "@/lib/constant";
+import { contact, socialMediaUrl } from "@/lib/constant";
 
 /**
  * Footer Component
@@ -52,7 +52,7 @@ export function Footer() {
   return (
     <section className="relative z-0 bg-black text-white px-6 md:px-12 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-start justify-between mb-16">
+        <div className="flex items-start flex-col md:justify-between mb-4 md:mb-16">
           <div className="space-y-4">
             <p className="text-2xl md:text-3xl leading-relaxed max-w-2xl">
               Got an idea in mind?{" "}
@@ -81,9 +81,12 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mb-16">
-          <Button className="bg-white text-black hover:bg-gray-100 px-8 py-3">
+          <Link
+            href={contact.whatsapp}
+            className="bg-white text-black hover:bg-gray-100 px-8 py-3"
+          >
             Get in Touch
-          </Button>
+          </Link>
 
           <div className="flex items-center gap-3">
             <div className="w-3 h-3 bg-green-500 rounded-full"></div>
@@ -93,8 +96,8 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pt-8 border-t border-gray-800">
           <div className="space-y-2 text-sm">
-            <p>(+62) 813-132-183-50</p>
-            <p>krisnadwisetyadi@gmail.com</p>
+            <p>(+62) 813-1321-8350</p>
+            <p>{contact.email}</p>
           </div>
 
           <div className="space-y-2 text-sm">
@@ -102,7 +105,7 @@ export function Footer() {
             <p>by Krisna</p>
           </div>
 
-          <div className="text-sm text-right">
+          <div className="text-sm text-left md:text-right">
             <p>All rights reserved,</p>
             <p>KRSN ©2024</p>
           </div>

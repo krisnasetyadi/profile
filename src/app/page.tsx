@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import myImage from "../../public/images/me2.jpg";
 import cartoonImage from "../../public/images/krisna-cartoon.png";
 import AngularGridImage from "../../public/images/angular-grid.png";
@@ -8,13 +9,12 @@ import LawFirmImage from "../../public/images/law-firm.png";
 
 import { Button } from "@/components/ui/button";
 import { ArrowDownToLine, CircleCheck, Copy } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CVApi } from "@/services";
 import { toast } from "sonner";
 import { CheckedIcon, FailedIcon } from "@/components/check-icon";
 import { CoverImageContainer } from "@/components/image-container";
-
-const emailAddress = "krisnadwisetyaadi@gmail.com";
+import { contact } from "@/lib/constant";
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -24,7 +24,7 @@ export default function Home() {
   });
 
   const copyEmail = async () => {
-    await navigator.clipboard.writeText(emailAddress);
+    await navigator.clipboard.writeText(contact.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -77,7 +77,7 @@ export default function Home() {
             </h1>
             <div className="flex items-center gap-14">
               <div className="flex items-center gap-3 text-sm">
-                <span>{emailAddress}</span>
+                <span>{contact.email}</span>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -94,9 +94,10 @@ export default function Home() {
                 size="icon"
                 onClick={handleDownloadCV}
                 className="h-6 w-6 flex items-center gap-3 text-sm"
+                disabled={isDownload.loading}
               >
                 <span className="hover:underline hover:underline-offset-4">
-                  download cv
+                  {isDownload.loading ? "downloading..." : "download cv"}
                 </span>
                 <ArrowDownToLine className="h-3 w-3" />
               </Button>
@@ -188,7 +189,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="flex justify-around">
+          <div className="flex flex-col gap-8 md:flex-row md:justify-around">
             <Image
               src={cartoonImage}
               alt="Professional workspace"
@@ -206,6 +207,42 @@ export default function Home() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experice Section */}
+      <section id="experience" className="px-6 md:px-12  md:py-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold">experience.</h2>
+          </div>
+
+          <div className="flex flex-col gap-4 border-b-2 border-input">
+            <div className="flex flex-col items-start md:flex-row md:items-end md:justify-between">
+              <div className="flex flex-col items-start justify-center gap-2">
+                <span className="text-muted-foreground flex gap-x-2">
+                  <p>FEB,2022 - CURRENT</p>—<p>+3 Years</p>
+                </span>
+                <h3 className="text-2xl md:text-3xl underline decoration-1 underline-offset-8 decoration-input">
+                  Software Engineer, Moonlay Technologies
+                </h3>
+              </div>
+              <Button className="text-sm bg-secondary text-primary hover:bg-primary hover:text-secondary transition-colors">
+                Show More
+              </Button>
+            </div>
+
+            <p className="text-md md:text-lg leading-relaxed mb-8">
+              As a Software Developer, I specialize in building dynamic web
+              applications using React.js, Next.js, and Node.js. My workflow
+              involves writing clean, maintainable JavaScript code, creating
+              reusable UI components, and ensuring code quality through best
+              practices and code reviews. I collaborate closely with backend
+              teams for seamless API integration, author comprehensive
+              documentation, and work alongside product owners to design
+              applications that align with user needs and business goals.
+            </p>
           </div>
         </div>
       </section>
