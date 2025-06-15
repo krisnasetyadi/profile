@@ -75,7 +75,7 @@ export default function Home() {
               <br />
               SETYAADI
             </h1>
-            <div className="flex items-center gap-14">
+            <div className="flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-14">
               <div className="flex items-center gap-3 text-sm">
                 <span>{contact.email}</span>
                 <Button
@@ -88,20 +88,20 @@ export default function Home() {
                 </Button>
                 {copied && <CheckedIcon />}
               </div>
-
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleDownloadCV}
-                className="h-6 w-6 flex items-center gap-3 text-sm"
-                disabled={isDownload.loading}
-              >
-                <span className="hover:underline hover:underline-offset-4">
-                  {isDownload.loading ? "downloading..." : "download cv"}
-                </span>
-                <ArrowDownToLine className="h-3 w-3" />
-              </Button>
-              {isDownload.error && <FailedIcon />}
+              <div className="flex items-center  gap-4 text-sm ">
+                <Button
+                  variant="ghost"
+                  onClick={handleDownloadCV}
+                  className="flex justify-start md:justify-normal items-center gap-2 text-sm p-0 hover:bg-background"
+                  disabled={isDownload.loading}
+                >
+                  <span className="hover:underline hover:underline-offset-4">
+                    {isDownload.loading ? "downloading..." : "download cv"}
+                  </span>
+                  <ArrowDownToLine className="h-3 w-3" />
+                </Button>
+                {isDownload.error && <FailedIcon />}
+              </div>
             </div>
           </div>
 

@@ -50,7 +50,7 @@ export function Footer() {
   ];
 
   return (
-    <section className="relative z-0 bg-black text-white px-6 md:px-12 py-16 md:py-24">
+    <section className="relative z-0 bg-black dark:bg-background text-white px-6 md:px-12 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-start flex-col md:justify-between mb-4 md:mb-16">
           <div className="space-y-4">

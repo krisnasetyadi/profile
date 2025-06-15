@@ -3,10 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Github, Linkedin, Grid3X3, Menu, X } from "lucide-react";
+import { Github, Linkedin, Grid3X3, Menu, X, Sun, Moon } from "lucide-react";
 // import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
 import { socialMediaUrl } from "@/lib/constant";
+import { useTheme } from "next-themes";
 
 /**
  * Navigation Component with Dark Mode Support
@@ -23,6 +24,7 @@ import { socialMediaUrl } from "@/lib/constant";
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { setTheme, theme } = useTheme();
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -79,7 +81,17 @@ export default function Navigation() {
           </ul>
 
           {/* Theme Toggle */}
-          <div data-theme-toggle>{/* <ThemeToggle /> */}</div>
+          <div data-theme-toggle>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="h-9 w-9"
+            >
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            </Button>
+          </div>
 
           {/* Social Links */}
           <div className="flex items-center gap-3">
@@ -115,7 +127,18 @@ export default function Navigation() {
 
         {/* Mobile Navigation Controls */}
         <div className="md:hidden flex items-center gap-4">
-          <div data-theme-toggle>{/* <ThemeToggle /> */}</div>
+          <div data-theme-toggle>
+            {" "}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="h-9 w-9"
+            >
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            </Button>
+          </div>
           <Button
             variant="ghost"
             size="icon"
