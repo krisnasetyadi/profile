@@ -190,7 +190,7 @@ export default function Navigation() {
                 {/* Mobile Social Links */}
                 <div className="flex items-center gap-6 mt-8 pt-6 border-t border-border">
                   <a
-                    href="https://linkedin.com/in/krisna"
+                    href={socialMediaUrl.linkedin}
                     className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors duration-200"
                     aria-label="LinkedIn Profile"
                     target="_blank"
@@ -200,7 +200,7 @@ export default function Navigation() {
                     <span>LinkedIn</span>
                   </a>
                   <a
-                    href="https://github.com/krisna"
+                    href={socialMediaUrl.github}
                     className="flex items-center gap-3 text-foreground hover:text-primary transition-colors duration-200"
                     aria-label="GitHub Profile"
                     target="_blank"
