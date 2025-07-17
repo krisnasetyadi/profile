@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 export interface CoverImageContainerProps {
@@ -38,6 +39,7 @@ export interface CoverImageContainerProps {
   rounded?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   shadow?: "none" | "sm" | "md" | "lg" | "xl" | "2xl";
   children?: ReactNode;
+  url: string;
 }
 
 const aspectRatioClasses = {
@@ -130,6 +132,7 @@ export function CoverImageContainer({
   rounded = "lg",
   shadow = "md",
   children,
+  url = "",
   ...props
 }: CoverImageContainerProps) {
   const containerClasses = cn(
@@ -147,47 +150,49 @@ export function CoverImageContainer({
       : {};
 
   return (
-    <div className={containerClasses} style={customStyle} {...props}>
-      <Image
-        src={src || "/placeholder.svg"}
-        alt={alt}
-        fill={fill}
-        priority={priority}
-        quality={quality}
-        sizes={sizes}
-        className={cn(
-          "object-cover transition-transform duration-300 hover:scale-105",
-          imageClassName
-        )}
-      />
-
-      {(title || subtitle || children) && (
-        <div
+    <Link href={url}>
+      <div className={containerClasses} style={customStyle} {...props}>
+        <Image
+          src={src || "/placeholder.svg"}
+          alt={alt}
+          fill={fill}
+          priority={priority}
+          quality={quality}
+          sizes={sizes}
           className={cn(
-            "absolute z-20",
-            textPositionClasses[textPosition],
-            textColorClasses[textColor],
-            textClassName
+            "object-cover transition-transform duration-300 hover:scale-105",
+            imageClassName
           )}
-        >
-          {title && (
-            <h2 className={cn("font-bold mb-2", titleSizeClasses[titleSize])}>
-              {title}
-            </h2>
-          )}
-          {subtitle && (
-            <p
-              className={cn(
-                "font-medium text-muted-foreground",
-                subtitleSizeClasses[subtitleSize]
-              )}
-            >
-              {subtitle}
-            </p>
-          )}
-          {children}
-        </div>
-      )}
-    </div>
+        />
+
+        {(title || subtitle || children) && (
+          <div
+            className={cn(
+              "absolute z-20",
+              textPositionClasses[textPosition],
+              textColorClasses[textColor],
+              textClassName
+            )}
+          >
+            {title && (
+              <h2 className={cn("font-bold mb-2", titleSizeClasses[titleSize])}>
+                {title}
+              </h2>
+            )}
+            {subtitle && (
+              <p
+                className={cn(
+                  "font-medium text-muted-foreground",
+                  subtitleSizeClasses[subtitleSize]
+                )}
+              >
+                {subtitle}
+              </p>
+            )}
+            {children}
+          </div>
+        )}
+      </div>
+    </Link>
   );
 }

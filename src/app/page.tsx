@@ -133,9 +133,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-4xl md:text-5xl font-bold">work.</h2>
-            <Button className="text-sm bg-secondary text-primary hover:bg-primary hover:text-secondary transition-colors">
+            {/* <Button className="text-sm bg-secondary text-primary hover:bg-primary hover:text-secondary transition-colors">
               Show More
-            </Button>
+            </Button> */}
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -151,6 +151,7 @@ export default function Home() {
                 titleSize="5xl"
                 subtitleSize="xl"
                 className="w-full max-w-6xl mx-auto h-full"
+                url="https://angular-grid-ivory.vercel.app/"
               />
             </div>
             <div className="aspect-[4/3] bg-gradient-to-br from-purple-100 to-pink-200 dark:from-purple-900 dark:to-pink-900 rounded-lg overflow-hidden">
@@ -165,6 +166,7 @@ export default function Home() {
                 titleSize="5xl"
                 subtitleSize="xl"
                 className="w-full max-w-6xl mx-auto h-full"
+                url="https://law-firm-olive-iota.vercel.app/"
               />
             </div>
           </div>
@@ -176,9 +178,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-4xl md:text-5xl font-bold">about.</h2>
-            <Button className="text-sm bg-secondary text-primary hover:bg-primary hover:text-secondary transition-colors">
+            {/* <Button className="text-sm bg-secondary text-primary hover:bg-primary hover:text-secondary transition-colors">
               Show More
-            </Button>
+            </Button> */}
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -225,12 +227,12 @@ export default function Home() {
                   <p>FEB,2022 - CURRENT</p>—<p>+3 Years</p>
                 </span>
                 <h3 className="text-2xl md:text-3xl underline decoration-1 underline-offset-8 decoration-input">
-                  Software Engineer, Moonlay Technologies
+                  Software Developer, Moonlay Technologies
                 </h3>
               </div>
-              <Button className="text-sm bg-secondary text-primary hover:bg-primary hover:text-secondary transition-colors">
+              {/* <Button className="text-sm bg-secondary text-primary hover:bg-primary hover:text-secondary transition-colors">
                 Show More
-              </Button>
+              </Button> */}
             </div>
 
             <p className="text-md md:text-lg leading-relaxed mb-8">
