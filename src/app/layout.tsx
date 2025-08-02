@@ -24,7 +24,6 @@ export const metadata: Metadata = {
     "krisna setyadi",
     "krisna dwi setyaadi",
     "dwi",
-    "krisna setyadi",
     "software developer",
     "profile",
     "home",

@@ -11,20 +11,20 @@ import { Metadata } from "next";
 import { ButtonCvDownload } from "@/components/button-cv-download";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Krisna Setyaadi - Software Developer";
+  const title = "Krisna Dwi Setyaadi - Software Developer";
 
   const description =
-    "Krisna Setyaadi is a software developer based in Jakarta, specializing in modern web technologies. With a focus on building practical, user-centered solutions, Krisna has collaborated on various projects to deliver intuitive and scalable applications.";
+    "Krisna Dwi Setyaadi is a software developer based in Jakarta, specializing in modern web technologies. With a focus on building practical, user-centered solutions, Krisna has collaborated on various projects to deliver intuitive and scalable applications.";
   const url = siteUrl;
 
   const enhancedDescription =
-    "Krisna Setyaadi is a software developer based in Jakarta, specializing in modern web technologies. With a focus on building practical, user-centered solutions, Krisna has collaborated on various projects to deliver intuitive and scalable applications. Explore Krisna's work and insights into the world of software development.";
+    "Krisna Dwi Setyaadi is a software developer based in Jakarta, specializing in modern web technologies. With a focus on building practical, user-centered solutions, Krisna has collaborated on various projects to deliver intuitive and scalable applications. Explore Krisna's work and insights into the world of software development.";
 
   return {
     title,
     description: enhancedDescription,
     keywords: [
-      "Krisna Setyaadi",
+      "Krisna Dwi Setyaadi",
       "Software Developer",
       "Web Development",
       "JavaScript",
@@ -47,34 +47,34 @@ export async function generateMetadata(): Promise<Metadata> {
       "Software Projects",
       "Tech Blog",
       "Developer Portfolio",
-      "Krisna Setyaadi Portfolio",
-      "Krisna Setyaadi CV",
-      "Krisna Setyaadi Resume",
-      "Krisna Setyaadi Contact",
-      "Krisna Setyaadi Email",
-      "Krisna Setyaadi WhatsApp",
-      "Krisna Setyaadi GitHub",
-      "Krisna Setyaadi LinkedIn",
-      "Krisna Setyaadi Jakarta",
-      "Krisna Setyaadi Indonesia",
-      "Krisna Setyaadi Software Developer",
-      "Krisna Setyaadi Web Developer",
-      "Krisna Setyaadi Frontend Developer",
-      "Krisna Setyaadi Backend Developer",
-      "Krisna Setyaadi Full Stack Developer",
+      "Krisna Dwi Setyaadi Portfolio",
+      "Krisna Dwi Setyaadi CV",
+      "Krisna Dwi Setyaadi Resume",
+      "Krisna Dwi Setyaadi Contact",
+      "Krisna Dwi Setyaadi Email",
+      "Krisna Dwi Setyaadi WhatsApp",
+      "Krisna Dwi Setyaadi GitHub",
+      "Krisna Dwi Setyaadi LinkedIn",
+      "Krisna Dwi Setyaadi Jakarta",
+      "Krisna Dwi Setyaadi Indonesia",
+      "Krisna Dwi Setyaadi Software Developer",
+      "Krisna Dwi Setyaadi Web Developer",
+      "Krisna Dwi Setyaadi Frontend Developer",
+      "Krisna Dwi Setyaadi Backend Developer",
+      "Krisna Dwi Setyaadi Full Stack Developer",
     ].join(", "),
     openGraph: {
       title,
       description,
       url,
       type: "website",
-      siteName: "Krisna Setyaadi - Software Developer",
+      siteName: "Krisna Dwi Setyaadi - Software Developer",
       images: [
         {
           url: `${siteUrl}/images/og-image.png`,
           width: 1200,
           height: 630,
-          alt: "Krisna Setyaadi - Software Developer",
+          alt: "Krisna Dwi Setyaadi - Software Developer",
         },
       ],
     },
@@ -92,7 +92,7 @@ export async function generateMetadata(): Promise<Metadata> {
     robots: "index, follow",
     other: {
       "article:section": "Software Development, Web Development",
-      "article:tag": ["Krisna Setyaadi", "Software Developer"],
+      "article:tag": ["Krisna Dwi Setyaadi", "Software Developer"],
     },
   };
 }
