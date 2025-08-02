@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 
 import myImage from "../../public/images/me2.jpg";
@@ -7,64 +5,99 @@ import cartoonImage from "../../public/images/krisna-cartoon.png";
 import AngularGridImage from "../../public/images/angular-grid.png";
 import LawFirmImage from "../../public/images/law-firm.png";
 
-import { Button } from "@/components/ui/button";
-import { ArrowDownToLine, CircleCheck, Copy } from "lucide-react";
-import { useEffect, useState } from "react";
-import { CVApi } from "@/services";
-import { toast } from "sonner";
-import { CheckedIcon, FailedIcon } from "@/components/check-icon";
 import { CoverImageContainer } from "@/components/image-container";
-import { contact } from "@/lib/constant";
+import { siteUrl } from "@/lib/constant";
+import { Metadata } from "next";
+import { ButtonCvDownload } from "@/components/button-cv-download";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const title = "Krisna Setyaadi - Software Developer";
+
+  const description =
+    "Krisna Setyaadi is a software developer based in Jakarta, specializing in modern web technologies. With a focus on building practical, user-centered solutions, Krisna has collaborated on various projects to deliver intuitive and scalable applications.";
+  const url = siteUrl;
+
+  const enhancedDescription =
+    "Krisna Setyaadi is a software developer based in Jakarta, specializing in modern web technologies. With a focus on building practical, user-centered solutions, Krisna has collaborated on various projects to deliver intuitive and scalable applications. Explore Krisna's work and insights into the world of software development.";
+
+  return {
+    title,
+    description: enhancedDescription,
+    keywords: [
+      "Krisna Setyaadi",
+      "Software Developer",
+      "Web Development",
+      "JavaScript",
+      "React",
+      "Next.js",
+      "Node.js",
+      "Jakarta Developer",
+      "Frontend Developer",
+      "Backend Developer",
+      "Full Stack Developer",
+      "Modern Web Technologies",
+      "User-Centered Solutions",
+      "Intuitive Applications",
+      "Scalable Applications",
+      "Software Engineering",
+      "Web Applications",
+      "Programming",
+      "Tech Enthusiast",
+      "Open Source Contributor",
+      "Software Projects",
+      "Tech Blog",
+      "Developer Portfolio",
+      "Krisna Setyaadi Portfolio",
+      "Krisna Setyaadi CV",
+      "Krisna Setyaadi Resume",
+      "Krisna Setyaadi Contact",
+      "Krisna Setyaadi Email",
+      "Krisna Setyaadi WhatsApp",
+      "Krisna Setyaadi GitHub",
+      "Krisna Setyaadi LinkedIn",
+      "Krisna Setyaadi Jakarta",
+      "Krisna Setyaadi Indonesia",
+      "Krisna Setyaadi Software Developer",
+      "Krisna Setyaadi Web Developer",
+      "Krisna Setyaadi Frontend Developer",
+      "Krisna Setyaadi Backend Developer",
+      "Krisna Setyaadi Full Stack Developer",
+    ].join(", "),
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+      siteName: "Krisna Setyaadi - Software Developer",
+      images: [
+        {
+          url: `${siteUrl}/images/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: "Krisna Setyaadi - Software Developer",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      site: "@krisnasetyaadi",
+      creator: "@krisnasetyaadi",
+      images: [`${siteUrl}/images/og-image.png`],
+    },
+    alternates: {
+      canonical: url,
+    },
+    robots: "index, follow",
+    other: {
+      "article:section": "Software Development, Web Development",
+      "article:tag": ["Krisna Setyaadi", "Software Developer"],
+    },
+  };
+}
 
 export default function Home() {
-  const [copied, setCopied] = useState(false);
-  const [isDownload, setIsDownload] = useState({
-    loading: false,
-    error: false,
-  });
-
-  const copyEmail = async () => {
-    await navigator.clipboard.writeText(contact.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  ("use client");
-
-  const handleDownloadCV = async () => {
-    setIsDownload({
-      loading: true,
-      error: false,
-    });
-    await CVApi.download()
-      .then(() => {
-        toast.success("Download successful", {
-          description: "The file has been downloaded successfully.",
-        });
-        setIsDownload({
-          loading: false,
-          error: false,
-        });
-      })
-      .catch((error) => {
-        toast.error("Download Failed", {
-          description:
-            error?.originalMessage ||
-            "Something went wrong during the download.",
-        });
-        setIsDownload({
-          loading: false,
-          error: true,
-        });
-
-        setTimeout(() => {
-          setIsDownload({
-            loading: false,
-            error: false,
-          });
-        }, 3000);
-      });
-  };
-
   return (
     <>
       <section className="px-6 md:px-12 py-12 md:py-20 relative">
@@ -75,34 +108,7 @@ export default function Home() {
               <br />
               SETYAADI
             </h1>
-            <div className="flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-14">
-              <div className="flex items-center gap-3 text-sm">
-                <span>{contact.email}</span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={copyEmail}
-                  className="h-6 w-6"
-                >
-                  <Copy className="h-3 w-3" />
-                </Button>
-                {copied && <CheckedIcon />}
-              </div>
-              <div className="flex items-center  gap-4 text-sm ">
-                <Button
-                  variant="ghost"
-                  onClick={handleDownloadCV}
-                  className="flex justify-start md:justify-normal items-center gap-2 text-sm p-0 hover:bg-background"
-                  disabled={isDownload.loading}
-                >
-                  <span className="hover:underline hover:underline-offset-4">
-                    {isDownload.loading ? "downloading..." : "download cv"}
-                  </span>
-                  <ArrowDownToLine className="h-3 w-3" />
-                </Button>
-                {isDownload.error && <FailedIcon />}
-              </div>
-            </div>
+            <ButtonCvDownload />
           </div>
 
           <div className="flex justify-center lg:justify-end">
