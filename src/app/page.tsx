@@ -7,62 +7,41 @@ import LawFirmImage from "../../public/images/law-firm.png";
 
 import { CoverImageContainer } from "@/components/image-container";
 import { siteUrl } from "@/lib/constant";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { ButtonCvDownload } from "@/components/button-cv-download";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Krisna Dwi Setyaadi - Software Developer";
+  const title =
+    "Krisna Dwi Setyaadi - Software Developer | React.js & Next.js Expert";
 
   const description =
-    "Krisna Dwi Setyaadi is a software developer based in Jakarta, specializing in modern web technologies. With a focus on building practical, user-centered solutions, Krisna has collaborated on various projects to deliver intuitive and scalable applications.";
+    "Experienced software developer based in Jakarta, Indonesia. Specializing in React.js, Next.js, TypeScript, and modern web technologies. 3+ years at Moonlay Technologies building scalable, user-centered applications.";
   const url = siteUrl;
-
-  const enhancedDescription =
-    "Krisna Dwi Setyaadi is a software developer based in Jakarta, specializing in modern web technologies. With a focus on building practical, user-centered solutions, Krisna has collaborated on various projects to deliver intuitive and scalable applications. Explore Krisna's work and insights into the world of software development.";
 
   return {
     title,
-    description: enhancedDescription,
+    description: description,
     keywords: [
       "Krisna Dwi Setyaadi",
-      "Software Developer",
-      "Web Development",
-      "JavaScript",
-      "React",
-      "Next.js",
-      "Node.js",
-      "Jakarta Developer",
+      "Software Developer Jakarta",
+      "React Developer Indonesia",
+      "Next.js Expert",
       "Frontend Developer",
-      "Backend Developer",
       "Full Stack Developer",
+      "JavaScript Developer",
+      "TypeScript Developer",
+      "Web Developer Jakarta",
+      "Moonlay Technologies Developer",
       "Modern Web Technologies",
-      "User-Centered Solutions",
-      "Intuitive Applications",
       "Scalable Applications",
-      "Software Engineering",
-      "Web Applications",
-      "Programming",
-      "Tech Enthusiast",
-      "Open Source Contributor",
-      "Software Projects",
-      "Tech Blog",
-      "Developer Portfolio",
-      "Krisna Dwi Setyaadi Portfolio",
-      "Krisna Dwi Setyaadi CV",
-      "Krisna Dwi Setyaadi Resume",
-      "Krisna Dwi Setyaadi Contact",
-      "Krisna Dwi Setyaadi Email",
-      "Krisna Dwi Setyaadi WhatsApp",
-      "Krisna Dwi Setyaadi GitHub",
-      "Krisna Dwi Setyaadi LinkedIn",
-      "Krisna Dwi Setyaadi Jakarta",
-      "Krisna Dwi Setyaadi Indonesia",
-      "Krisna Dwi Setyaadi Software Developer",
-      "Krisna Dwi Setyaadi Web Developer",
-      "Krisna Dwi Setyaadi Frontend Developer",
-      "Krisna Dwi Setyaadi Backend Developer",
-      "Krisna Dwi Setyaadi Full Stack Developer",
-    ].join(", "),
+      "User-Centered Design",
+      "Software Engineering Jakarta",
+      "React.js Specialist",
+      "Node.js Developer",
+      "Portfolio Website",
+      "Indonesian Developer",
+      "Jakarta Tech Professional",
+    ],
     openGraph: {
       title,
       description,
@@ -74,9 +53,10 @@ export async function generateMetadata(): Promise<Metadata> {
           url: `${siteUrl}/images/og-image.png`,
           width: 1200,
           height: 630,
-          alt: "Krisna Dwi Setyaadi - Software Developer",
+          alt: "Krisna Dwi Setyaadi - Software Developer Portfolio",
         },
       ],
+      locale: "en_US",
     },
     twitter: {
       card: "summary_large_image",
@@ -89,10 +69,23 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: url,
     },
-    robots: "index, follow",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     other: {
-      "article:section": "Software Development, Web Development",
-      "article:tag": ["Krisna Dwi Setyaadi", "Software Developer"],
+      "article:section": "Software Development",
+      "article:tag": "Software Developer, React.js, Next.js, Jakarta",
+      "profile:first_name": "Krisna",
+      "profile:last_name": "Setyaadi",
+      "profile:username": "krisnasetyaadi",
     },
   };
 }
@@ -100,7 +93,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Home() {
   return (
     <>
-      <section className="px-6 md:px-12 py-12 md:py-20 relative">
+      <section
+        className="px-6 md:px-12 py-12 md:py-20 relative"
+        itemScope
+        itemType="https://schema.org/Person"
+      >
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
           <div className="space-y-8">
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-none tracking-tight">
@@ -108,17 +105,28 @@ export default function Home() {
               <br />
               SETYAADI
             </h1>
+            <p
+              className="sr-only"
+              itemProp="address"
+              itemScope
+              itemType="https://schema.org/PostalAddress"
+            >
+              <span itemProp="addressLocality">Jakarta</span>,
+              <span itemProp="addressCountry">Indonesia</span>
+            </p>
             <ButtonCvDownload />
           </div>
 
           <div className="flex justify-center lg:justify-end">
             <div className="relative">
               <Image
-                src={myImage}
-                alt="Krisna - Software Developer"
+                src={myImage || "/placeholder.svg"}
+                alt="Krisna Dwi Setyaadi - Professional Software Developer headshot"
                 width={300}
                 height={300}
                 className="rounded-full object-cover"
+                itemProp="image"
+                priority
               />
             </div>
           </div>
@@ -135,7 +143,11 @@ export default function Home() {
       </section>
 
       {/* Work Section */}
-      <section id="work" className="px-6 md:px-12 py-16 md:py-24">
+      <section
+        id="work"
+        className="px-6 md:px-12 py-16 md:py-24"
+        aria-labelledby="work-heading"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-4xl md:text-5xl font-bold">work.</h2>
@@ -144,7 +156,11 @@ export default function Home() {
             </Button> */}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div
+            className="grid md:grid-cols-2 gap-8"
+            itemScope
+            itemType="https://schema.org/CreativeWork"
+          >
             <div className="aspect-[4/3] bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900 dark:to-orange-800 rounded-lg overflow-hidden">
               <CoverImageContainer
                 src={AngularGridImage}
@@ -180,7 +196,11 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="px-6 md:px-12 py-16 md:py-24">
+      <section
+        id="about"
+        className="px-6 md:px-12 py-16 md:py-24"
+        aria-labelledby="about-heading"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-4xl md:text-5xl font-bold">about.</h2>
@@ -199,8 +219,8 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-8 md:flex-row md:justify-around">
             <Image
-              src={cartoonImage}
-              alt="Professional workspace"
+              src={cartoonImage || "/placeholder.svg"}
+              alt="Krisna Dwi Setyaadi cartoon illustration representing creative problem-solving approach"
               width={400}
               height={400}
               className="rounded-lg object-cover"
@@ -220,61 +240,104 @@ export default function Home() {
       </section>
 
       {/* Experice Section */}
-      <section id="experience" className="px-6 md:px-12  md:py-24">
+      <section
+        id="experience"
+        className="px-6 md:px-12  md:py-24"
+        itemScope
+        itemType="https://schema.org/WorkHistory"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-4xl md:text-5xl font-bold">experience.</h2>
           </div>
 
-          <div className="flex flex-col gap-4 border-b-2 border-input">
+          <article
+            className="flex flex-col gap-4 border-b-2 border-input"
+            itemScope
+            itemType="https://schema.org/OrganizationRole"
+          >
             <div className="flex flex-col items-start md:flex-row md:items-end md:justify-between">
               <div className="flex flex-col items-start justify-center gap-2">
-                <span className="text-muted-foreground flex gap-x-2">
-                  <p>FEB,2022 - CURRENT</p>—<p>+3 Years</p>
-                </span>
+                <time
+                  className="text-muted-foreground flex gap-x-2"
+                  dateTime="2022-02"
+                >
+                  <span itemProp="startDate">FEB 2022</span> —{" "}
+                  <span>CURRENT</span> • <span>3+ Years</span>
+                </time>
                 <h3 className="text-2xl md:text-3xl underline decoration-1 underline-offset-8 decoration-input">
-                  Software Developer, Moonlay Technologies
+                  <span itemProp="roleName">Software Developer</span>,
+                  <span
+                    itemProp="worksFor"
+                    itemScope
+                    itemType="https://schema.org/Organization"
+                  >
+                    <span itemProp="name"> Moonlay Technologies</span>
+                  </span>
                 </h3>
               </div>
               {/* <Button className="text-sm bg-secondary text-primary hover:bg-primary hover:text-secondary transition-colors">
                 Show More
               </Button> */}
             </div>
-
-            <p className="text-md md:text-lg leading-relaxed mb-8">
-              As a Software Developer, I specialize in building dynamic web
-              applications using React.js, Next.js, and Node.js. My workflow
-              involves writing clean, maintainable JavaScript code, creating
-              reusable UI components, and ensuring code quality through best
-              practices and code reviews. I collaborate closely with backend
-              teams for seamless API integration, author comprehensive
-              documentation, and work alongside product owners to design
-              applications that align with user needs and business goals.
-            </p>
-          </div>
+            <div itemProp="description">
+              <p className="text-md md:text-lg leading-relaxed mb-8">
+                As a Software Developer, I specialize in building dynamic web
+                applications using React.js, Next.js, and Node.js. My workflow
+                involves writing clean, maintainable JavaScript code, creating
+                reusable UI components, and ensuring code quality through best
+                practices and code reviews. I collaborate closely with backend
+                teams for seamless API integration, author comprehensive
+                documentation, and work alongside product owners to design
+                applications that align with user needs and business goals.
+              </p>
+            </div>
+          </article>
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            mainEntity: {
+              "@type": "Person",
+              name: "Krisna Dwi Setyaadi",
+              jobTitle: "Software Developer",
+              description:
+                "Experienced software developer specializing in React.js, Next.js, and modern web technologies",
+              url: "https://krisnasetyaadi.dev",
+              image: "https://krisnasetyaadi.dev/images/me2.jpg",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Jakarta",
+                addressCountry: "Indonesia",
+              },
+              worksFor: {
+                "@type": "Organization",
+                name: "Moonlay Technologies",
+              },
+              hasOccupation: {
+                "@type": "Occupation",
+                name: "Software Developer",
+                occupationLocation: {
+                  "@type": "City",
+                  name: "Jakarta",
+                },
+                skills: [
+                  "React.js",
+                  "Next.js",
+                  "JavaScript",
+                  "TypeScript",
+                  "Node.js",
+                  "Web Development",
+                ],
+              },
+            },
+          }),
+        }}
+      />
     </>
   );
 }
-
-// <div className="h-full flex flex-col items-center pt-10 space-y-8">
-//   <div className="flex justify-center">
-//     <div className="h-60 w-60 rounded-full overflow-hidden shadow-lg">
-//       <Image src={myImage} alt="my-image" className="rounded-full" />
-//     </div>
-//   </div>
-
-//   <div className="text-center font-semibold lg:h-60 space-y-4">
-//     <h3 className={cn("text-2xl font-medium text-muted-foreground")}>
-//       Hi, I&apos;m Krisna!
-//     </h3>
-//     <h1 className={cn("text-5xl font-bold leading-tight text-primary")}>
-//       A Software Developer
-//     </h1>
-
-//     <ClientWrapper>
-//       <HomeButtonComponent />
-//     </ClientWrapper>
-//   </div>
-// </div>
