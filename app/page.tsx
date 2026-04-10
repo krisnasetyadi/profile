@@ -2,7 +2,6 @@ import { OverviewIntroduction } from "@/components/sections/overview-introductio
 import { WorkSection } from "@/components/sections/work";
 import { AboutSection } from "@/components/sections/about";
 import { ExperienceSection } from "@/components/sections/experience";
-import Me2 from "@/public/images/me2.jpg";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -42,8 +41,10 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: "Krisna Dwi Setyaadi",
       images: [
         {
-          url: "/images/me2.jpg",
-          alt: "Krisna Dwi Setyaadi",
+          url: "/images/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "Krisna Dwi Setyaadi - Software Developer",
         },
       ],
     },
@@ -53,19 +54,20 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       site: "@krisnasetyaadi",
       creator: "@krisnasetyaadi",
-      images: Me2
-        ? [
-            {
-              url: "/images/me2.jpg",
-              alt: "Krisna Dwi Setyaadi",
-            },
-          ]
-        : [`${url}/me2.jpg`],
+      images: [
+        {
+          url: "/images/og-image.png",
+          alt: "Krisna Dwi Setyaadi - Software Developer",
+        },
+      ],
     },
     alternates: {
       canonical: url,
     },
-    robots: "index, follow",
+    robots: {
+      index: true,
+      follow: true,
+    },
     other: {
       "profile:section": "Personal Profile, Portfolio, Projects",
       "profile:tag":

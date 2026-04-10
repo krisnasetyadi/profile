@@ -1,7 +1,6 @@
 import "./globals.css";
 import type React from "react";
 import { Analytics } from "@vercel/analytics/react";
-import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ContentWrapper from "../components/wrapper/content";
@@ -13,9 +12,23 @@ import { Toaster } from "sonner";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://krisnadwisetyaadi.vercel.app"),
   title: "Krisna Dwi Setyaadi - Software Developer",
   description:
     "Krisna Dwi Setyaadi is an experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies. Building scalable, user-centered applications since 2022.",
+  verification: {
+    google: "lF3UvljuTHZt_rzUOz5qw4KoCui6NOR5KvPONJzyOaE",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 const inter = Inter({ subsets: ["latin"] });
 
