@@ -2,7 +2,7 @@ import { CoverImageContainer } from "../image-container";
 import AngularGridImage from "../../public/images/angular-grid.png";
 import LawFirmImage from "../../public/images/law-firm.png";
 import Cashnomy from "../../public/images/cashnomy.png";
-import Vovelia from "../../public/images/vovelia.png";
+import Vovelia from "../../public/images/vovelia-preview.png";
 
 export function WorkSection() {
   return (
@@ -24,65 +24,103 @@ export function WorkSection() {
           itemScope
           itemType="https://schema.org/CreativeWork"
         >
-          <div className="aspect-[4/3] bg-gradient-to-br from-purple-100 to-pink-200 dark:from-purple-900 dark:to-pink-900 rounded-lg overflow-hidden">
-            <CoverImageContainer
-              src={Vovelia}
-              alt="Vovelia - Digital Wedding Invitation Platform"
-              title="Vovelia"
-              subtitle="Digital wedding invitation platform with RSVP, guest management & personalized pages"
-              aspectRatio="wide"
-              overlay="gradient"
-              textPosition="bottom-left"
-              titleSize="5xl"
-              subtitleSize="xl"
-              className="w-full max-w-6xl mx-auto h-full"
-              url="https://vovelia.vercel.app/"
-            />
+          <div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <CoverImageContainer
+                src={Vovelia}
+                alt="Vovelia - Digital Wedding Invitation Platform"
+                aspectRatio="custom"
+                customAspectRatio="4/3"
+                overlay="none"
+                textPosition="below"
+                titleSize="2xl"
+                subtitleSize="sm"
+                className="w-full h-full"
+                rounded="none"
+                shadow="none"
+                url="https://vovelia.vercel.app/"
+              />
+            </div>
+            <div className="pt-3">
+              <h3 className="font-semibold text-lg md:text-xl">Vovelia</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Digital wedding invitation platform with RSVP, guest management
+                & personalized pages
+              </p>
+            </div>
           </div>
-          <div className="aspect-[4/3] bg-gradient-to-br from-emerald-100 to-teal-200 dark:from-emerald-900 dark:to-teal-900 rounded-lg overflow-hidden">
-            <CoverImageContainer
-              src={Cashnomy}
-              alt="Cashnomy - Personal Finance Dashboard"
-              title="Cashnomy"
-              subtitle="Personal finance tracker with budgeting, expense analytics & savings goals"
-              aspectRatio="wide"
-              overlay="gradient"
-              textPosition="bottom-left"
-              titleSize="5xl"
-              subtitleSize="xl"
-              className="w-full max-w-6xl mx-auto h-full"
-              url="https://cashnomy.vercel.app"
-            />
+          <div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <CoverImageContainer
+                src={Cashnomy}
+                alt="Cashnomy - Personal Finance Dashboard"
+                aspectRatio="custom"
+                customAspectRatio="4/3"
+                overlay="none"
+                textPosition="below"
+                titleSize="2xl"
+                subtitleSize="sm"
+                className="w-full h-full"
+                rounded="none"
+                shadow="none"
+                url="https://cashnomy.vercel.app"
+              />
+            </div>
+            <div className="pt-3">
+              <h3 className="font-semibold text-lg md:text-xl">Cashnomy</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Personal finance tracker with budgeting, expense analytics &
+                savings goals
+              </p>
+            </div>
           </div>
-          <div className="aspect-[4/3] bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900 dark:to-orange-800 rounded-lg overflow-hidden">
-            <CoverImageContainer
-              src={AngularGridImage}
-              alt="Angular Grid - Artistic sculpture with floating geometric elements"
-              title="Angular Grid"
-              subtitle="Exploring some spread sheet functionality with Angular"
-              aspectRatio="wide"
-              overlay="gradient"
-              textPosition="bottom-left"
-              titleSize="5xl"
-              subtitleSize="xl"
-              className="w-full max-w-6xl mx-auto h-full"
-              url="https://angular-grid-ivory.vercel.app/"
-            />
+          <div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <CoverImageContainer
+                src={AngularGridImage}
+                alt="Angular Grid - Spreadsheet app built with Angular"
+                aspectRatio="custom"
+                customAspectRatio="4/3"
+                overlay="none"
+                textPosition="below"
+                titleSize="2xl"
+                subtitleSize="sm"
+                className="w-full h-full"
+                rounded="none"
+                shadow="none"
+                url="https://angular-grid-ivory.vercel.app/"
+              />
+            </div>
+            <div className="pt-3">
+              <h3 className="font-semibold text-lg md:text-xl">Angular Grid</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Exploring spreadsheet functionality with Angular
+              </p>
+            </div>
           </div>
-          <div className="aspect-[4/3] bg-gradient-to-br from-purple-100 to-pink-200 dark:from-purple-900 dark:to-pink-900 rounded-lg overflow-hidden">
-            <CoverImageContainer
-              src={LawFirmImage}
-              alt="Law Firm - Artistic sculpture with floating geometric elements"
-              title="Law Firm"
-              subtitle="Develop a law firm website with Next.js and Tailwind CSS"
-              aspectRatio="wide"
-              overlay="gradient"
-              textPosition="bottom-left"
-              titleSize="5xl"
-              subtitleSize="xl"
-              className="w-full max-w-6xl mx-auto h-full"
-              url="https://paulusshpartners.com/"
-            />
+          <div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <CoverImageContainer
+                src={LawFirmImage}
+                alt="Law Firm website built with Next.js"
+                aspectRatio="custom"
+                customAspectRatio="4/3"
+                overlay="none"
+                textPosition="below"
+                titleSize="2xl"
+                subtitleSize="sm"
+                className="w-full h-full"
+                rounded="none"
+                shadow="none"
+                url="https://paulusshpartners.com/"
+              />
+            </div>
+            <div className="pt-3">
+              <h3 className="font-semibold text-lg md:text-xl">Law Firm</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Law firm website built with Next.js and Tailwind CSS
+              </p>
+            </div>
           </div>
         </div>
       </div>

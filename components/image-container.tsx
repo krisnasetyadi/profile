@@ -25,7 +25,8 @@ export interface CoverImageContainerProps {
     | "center"
     | "top-left"
     | "top-right"
-    | "bottom-center";
+    | "bottom-center"
+    | "below";
   textColor?: "white" | "black" | "inherit";
   subtitleSize?: "sm" | "base" | "lg" | "xl" | "2xl";
   titleSize?: "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl";
@@ -56,7 +57,7 @@ const overlayClasses = {
   light: "before:absolute before:inset-0 before:bg-white/20 before:z-10",
   dark: "before:absolute before:inset-0 before:bg-black/40 before:z-10",
   gradient:
-    "before:absolute before:inset-0 before:bg-gradient-to-t before:from-black/60 before:via-transparent before:to-transparent before:z-10",
+    "before:absolute before:inset-0 before:bg-gradient-to-t before:from-black/85 before:via-black/30 before:to-transparent before:z-10",
 };
 
 const textPositionClasses = {
@@ -75,20 +76,20 @@ const textColorClasses = {
 };
 
 const subtitleSizeClasses = {
-  sm: "text-sm",
-  base: "text-base",
-  lg: "text-lg",
-  xl: "text-xl",
-  "2xl": "text-2xl",
+  sm: "text-xs md:text-sm",
+  base: "text-sm md:text-base",
+  lg: "text-sm md:text-lg",
+  xl: "text-sm md:text-xl",
+  "2xl": "text-base md:text-2xl",
 };
 
 const titleSizeClasses = {
-  lg: "text-lg",
-  xl: "text-xl",
-  "2xl": "text-2xl",
-  "3xl": "text-3xl",
-  "4xl": "text-4xl",
-  "5xl": "text-5xl",
+  lg: "text-base md:text-lg",
+  xl: "text-lg md:text-xl",
+  "2xl": "text-xl md:text-2xl",
+  "3xl": "text-xl md:text-3xl",
+  "4xl": "text-2xl md:text-4xl",
+  "5xl": "text-2xl md:text-5xl",
 };
 
 const roundedClasses = {
@@ -141,7 +142,7 @@ export function CoverImageContainer({
     overlayClasses[overlay],
     roundedClasses[rounded],
     shadowClasses[shadow],
-    className
+    className,
   );
 
   const customStyle =
@@ -151,39 +152,75 @@ export function CoverImageContainer({
 
   return (
     <Link href={url}>
-      <div className={containerClasses} style={customStyle} {...props}>
-        <Image
-          src={src || "/placeholder.svg"}
-          alt={alt}
-          fill={fill}
-          priority={priority}
-          quality={quality}
-          sizes={sizes}
-          className={cn(
-            "object-cover transition-transform duration-300 hover:scale-105",
-            imageClassName
-          )}
-        />
-
-        {(title || subtitle || children) && (
-          <div
+      <div className={textPosition === "below" ? "group" : ""}>
+        <div className={containerClasses} style={customStyle} {...props}>
+          <Image
+            src={src || "/placeholder.svg"}
+            alt={alt}
+            fill={fill}
+            priority={priority}
+            quality={quality}
+            sizes={sizes}
             className={cn(
-              "absolute z-20",
-              textPositionClasses[textPosition],
-              textColorClasses[textColor],
-              textClassName
+              "object-cover transition-transform duration-300 hover:scale-105",
+              imageClassName,
             )}
-          >
+          />
+
+          {(title || subtitle || children) && textPosition !== "below" && (
+            <div
+              className={cn(
+                "absolute z-20",
+                textPositionClasses[
+                  textPosition as keyof typeof textPositionClasses
+                ],
+                textColorClasses[textColor],
+                textClassName,
+              )}
+            >
+              {title && (
+                <h2
+                  className={cn("font-bold mb-2", titleSizeClasses[titleSize])}
+                  style={{
+                    textShadow:
+                      "0 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)",
+                  }}
+                >
+                  {title}
+                </h2>
+              )}
+              {subtitle && (
+                <p
+                  className={cn(
+                    "font-medium text-muted-foreground",
+                    subtitleSizeClasses[subtitleSize],
+                  )}
+                  style={{
+                    textShadow:
+                      "0 1px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7)",
+                  }}
+                >
+                  {subtitle}
+                </p>
+              )}
+              {children}
+            </div>
+          )}
+        </div>
+
+        {/* Text below the image frame */}
+        {textPosition === "below" && (title || subtitle || children) && (
+          <div className={cn("pt-3", textClassName)}>
             {title && (
-              <h2 className={cn("font-bold mb-2", titleSizeClasses[titleSize])}>
+              <h2 className={cn("font-semibold", titleSizeClasses[titleSize])}>
                 {title}
               </h2>
             )}
             {subtitle && (
               <p
                 className={cn(
-                  "font-medium text-muted-foreground",
-                  subtitleSizeClasses[subtitleSize]
+                  "text-muted-foreground mt-1",
+                  subtitleSizeClasses[subtitleSize],
                 )}
               >
                 {subtitle}
