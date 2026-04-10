@@ -14,7 +14,8 @@ export const socialMediaUrl = {
 export const contact = {
   email: "krisnadwisetyaadi@gmail.com",
   phone: "081313218350",
-  whatsapp: "https://wa.me/+6281313218350",
+  whatsapp:
+    "https://wa.me/+6281313218350?text=Hi%20Krisna%2C%20I%20came%20across%20your%20portfolio.%0AWould%20love%20to%20chat%20about%20a%20potential%20collaboration.",
 };
 
 export const siteUrl = "https://krisnadwisetyaadi.vercel.app";
