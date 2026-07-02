@@ -1,172 +1,155 @@
-import Link from "next/link";
-import { contact, socialMediaUrl } from "@/lib/constant";
+"use client";
 
-/**
- * Footer Component
- *
- * Consistent footer across all pages featuring:
- * - Contact information with proper semantic markup
- * - Social media links with accessibility labels
- * - Site navigation links
- * - Copyright notice with dynamic year
- * - Newsletter signup section
- * - Responsive design with mobile-first approach
- * - Full light/dark mode support with smooth transitions
- * - SEO-friendly structure with proper schema markup
- */
+import { useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { MagneticButton } from "@/components/magnetic-button";
+import { ScrambleText } from "@/components/scramble-text";
+import { socialMediaUrl } from "@/lib/constant";
+
+const CTA_WORDS = ["LETS", "BUILD", "SOMETHING."];
+
 export function Footer() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const dividerInView = useInView(dividerRef, { once: true, amount: 0.5 });
+  const prefersReduced = useReducedMotion();
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Krisna Dwi Setyaadi",
-            jobTitle: "Software Developer",
-            description:
-              "Full-stack developer specializing in modern web technologies",
-            url: typeof window !== "undefined" ? window.location.origin : "",
-            sameAs: [socialMediaUrl.linkedin, socialMediaUrl.github],
-            contactPoint: {
-              "@type": "ContactPoint",
-              telephone: "+62-813-1321-8350",
-              email: contact.email,
-              contactType: "professional",
-              availableLanguage: ["English", "Indonesian"],
-            },
-            address: {
-              "@type": "PostalAddress",
-              addressCountry: "ID",
-            },
-          }),
-        }}
-      />
+    <footer
+      id="site-footer"
+      ref={sectionRef}
+      className="relative bg-[var(--pnp-bg)] px-6 md:px-12 pt-24 pb-12 overflow-hidden"
+      itemScope
+      itemType="https://schema.org/WPFooter"
+      role="contentinfo"
+    >
+      {/* Center-outward divider */}
+      <div ref={dividerRef} className="relative mb-16 h-px overflow-hidden">
+        <motion.div
+          className="absolute inset-0 bg-[var(--pnp-muted)]"
+          initial={{ scaleX: 0 }}
+          animate={dividerInView ? { scaleX: 1 } : { scaleX: 0 }}
+          transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+          style={{ transformOrigin: "center" }}
+        />
+      </div>
 
-      <footer
-        className="relative z-0 bg-black dark:bg-background text-white px-6 md:px-12 py-16 md:py-24"
-        itemScope
-        itemType="https://schema.org/WPFooter"
-        role="contentinfo"
-        aria-label="Site footer with contact information and links"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-start flex-col md:justify-between mb-4 md:mb-16">
-            <div className="space-y-4">
-              <h2 className="text-2xl md:text-3xl leading-relaxed max-w-2xl">
-                Got an idea in mind?{" "}
-                <span className="text-gray-400">Let’s build it together.</span>
-                <br />
-                Great things start with{" "}
-                <span className="text-gray-400">simple conversations.</span>
-              </h2>
-            </div>
+      {/* Giant CTA */}
+      <div className="mb-16">
+        {CTA_WORDS.map((word, wi) => (
+          <CTAWord
+            key={word}
+            word={word}
+            index={wi}
+            inView={inView}
+            isLast={wi === CTA_WORDS.length - 1}
+            prefersReduced={!!prefersReduced}
+          />
+        ))}
+      </div>
 
-            <nav
-              className="flex items-center gap-8 text-sm"
-              aria-label="Social media links"
-              itemScope
-              itemType="https://schema.org/Person"
-            >
-              <a
-                href={socialMediaUrl.linkedin}
-                className="hover:text-gray-300 transition-colors"
-                title="LinkedIn Profile - Professional networking and career updates"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                itemProp="sameAs"
-              >
-                LinkedIn
-              </a>
+      {/* Social links row */}
+      <div className="flex items-center gap-6 mb-16">
+        <MagneticButton radius={60} strength={0.4}>
+          <a
+            href={socialMediaUrl.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[var(--pnp-fg)] text-sm tracking-widest uppercase border border-[var(--pnp-muted)] px-5 py-2.5 hover:border-[var(--pnp-fg)] transition-colors duration-200"
+            aria-label="Connect on LinkedIn"
+          >
+            <ScrambleText
+              text="LI→"
+              triggerOnMount={false}
+              className="font-mono"
+            />
+            <span>LinkedIn</span>
+          </a>
+        </MagneticButton>
 
-              <a
-                href={socialMediaUrl.github}
-                className="hover:text-gray-300 transition-colors"
-                aria-label="View Krisna Dwi Setyaadi's projects on GitHub"
-                title="GitHub Profile - Open source projects and code repositories"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                itemProp="sameAs"
-              >
-                GitHub
-              </a>
-            </nav>
-          </div>
+        <MagneticButton radius={60} strength={0.4}>
+          <a
+            href={socialMediaUrl.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[var(--pnp-fg)] text-sm tracking-widest uppercase border border-[var(--pnp-muted)] px-5 py-2.5 hover:border-[var(--pnp-fg)] transition-colors duration-200"
+            aria-label="View projects on GitHub"
+          >
+            <ScrambleText
+              text="GH→"
+              triggerOnMount={false}
+              className="font-mono"
+            />
+            <span>GitHub</span>
+          </a>
+        </MagneticButton>
+      </div>
 
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mb-16">
-            <Link
-              href={contact.whatsapp}
-              className="bg-white text-black hover:bg-gray-100 px-8 py-3"
-              aria-label="Contact Krisna Dwi Setyaadi via WhatsApp"
-              title="Get in touch via WhatsApp for project discussions"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Get in Touch
-            </Link>
+      {/* Meta row */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[var(--pnp-fg)]/30">
+        <p className="text-[11px] tracking-widest uppercase font-mono">
+          Developed by Krisna &middot; Jakarta &middot; 2026 &copy;
+        </p>
+        <p className="text-[11px] tracking-[0.3em] uppercase font-syne font-bold text-[var(--pnp-fg)]/20">
+          KRSN
+        </p>
+      </div>
+    </footer>
+  );
+}
 
-            <div
-              className="flex items-center gap-3"
-              role="status"
-              aria-label="Work availability status"
-            >
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="text-sm">Available For Work</span>
-            </div>
-          </div>
+/* ── Single CTA word with letter-wave on hover ── */
+function CTAWord({
+  word,
+  index,
+  inView,
+  isLast,
+  prefersReduced,
+}: {
+  word: string;
+  index: number;
+  inView: boolean;
+  isLast: boolean;
+  prefersReduced: boolean;
+}) {
+  const [hovered, setHovered] = useState(false);
 
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pt-8 border-t border-gray-800">
-            <address className="space-y-2 text-sm">
-              <p>
-                <a
-                  href="tel:+6281313218350"
-                  className="hover:text-gray-300 transition-colors"
-                  aria-label="Call Krisna Dwi Setyaadi"
-                  itemProp="telephone"
-                >
-                  (+62) 813-1321-8350
-                </a>
-              </p>
-              <p>
-                <a
-                  href={`mailto:${contact.email}`}
-                  className="hover:text-gray-300 transition-colors"
-                  aria-label="Email Krisna Dwi Setyaadi"
-                  itemProp="email"
-                >
-                  {contact.email}
-                </a>
-              </p>
-            </address>
-
-            <div className="space-y-2 text-sm">
-              <p>Developed</p>
-              <p>
-                by{" "}
-                <span
-                  itemProp="creator"
-                  itemScope
-                  itemType="https://schema.org/Person"
-                >
-                  <span itemProp="name">Krisna</span>
-                </span>
-              </p>
-            </div>
-
-            <div className="text-sm text-left md:text-right">
-              <p>All rights reserved,</p>
-              <p>
-                {" "}
-                <span itemScope itemType="https://schema.org/Organization">
-                  <span itemProp="name">KRSN</span>
-                </span>{" "}
-                ©2025
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </>
+  return (
+    <motion.div
+      initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: "100%" }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.8,
+        ease: [0.76, 0, 0.24, 1],
+        delay: index * 0.12,
+      }}
+      className="overflow-hidden leading-none"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="display-footer">
+        {word.split("").map((char, ci) => (
+          <motion.span
+            key={ci}
+            animate={hovered ? { y: -6 } : { y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 16,
+              delay: ci * 0.025,
+            }}
+            className={[
+              "inline-block",
+              isLast && ci === word.length - 1
+                ? "text-[var(--pnp-accent)] blink-cursor"
+                : "text-[var(--pnp-fg)]",
+            ].join(" ")}
+          >
+            {char}
+          </motion.span>
+        ))}
+      </div>
+    </motion.div>
   );
 }

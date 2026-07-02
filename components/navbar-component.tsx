@@ -1,284 +1,245 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Github, Linkedin, Grid3X3, Menu, X, Sun, Moon } from "lucide-react";
-// import { ThemeToggle } from "./theme-toggle";
-import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { socialMediaUrl } from "@/lib/constant";
-import { useTheme } from "next-themes";
 
-/**
- * Navigation Component with Dark Mode Support
- *
- * Enhanced navigation featuring:
- * - Responsive design with mobile hamburger menu
- * - Active route highlighting for better UX
- * - Integrated theme toggle with dropdown options
- * - Social media links with hover effects
- * - Accessibility features with proper ARIA labels
- * - Smooth transitions that work in both light and dark modes
- * - Backdrop blur effect for modern glass-morphism look
- */
+const NAV_LINKS = [
+  { href: "#work", label: "01 WORK" },
+  { href: "#about", label: "02 ABOUT" },
+  { href: "#experience", label: "03 EXPERIENCE" },
+];
+
 export default function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const { setTheme, theme } = useTheme();
+  const prefersReduced = useReducedMotion();
+  const [hidden, setHidden] = useState(false);
+  const [atTop, setAtTop] = useState(true);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState<string | null>(null);
+  const lastY = useRef(0);
 
-  const navItems = [
-    { href: "/", label: "Home" },
-    // { href: "/work", label: "Work" },
-    // { href: "/about", label: "About" },
-    // { href: "/contact", label: "Contact" },
-  ];
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setAtTop(y < 20);
+      if (y < 50) {
+        setHidden(false);
+        lastY.current = y;
+        return;
+      }
+      setHidden(y > lastY.current + 4);
+      lastY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    return pathname.startsWith(href);
+  const scrollToFooter = () => {
+    document
+      .getElementById("site-footer")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SiteNavigationElement",
-            name: "Main Navigation",
-            url: "https://krisnadwisetyaadi.vercel.app",
-            hasPart: navItems.map((item) => ({
-              "@type": "WebPage",
-              name: item.label,
-              url: `https://krisnadwisetyaadi.vercel.app/${item.href}`,
-            })),
-          }),
-        }}
-      />
+    <motion.header
+      aria-label="Main navigation"
+      style={{ willChange: "transform" }}
+      animate={prefersReduced ? {} : { y: hidden ? "-100%" : "0%" }}
+      transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
+      className={[
+        "fixed top-0 left-0 right-0 z-50 px-6 md:px-12",
+        "transition-colors duration-500",
+        atTop
+          ? "bg-transparent"
+          : "bg-[var(--pnp-bg)]/90 backdrop-blur-md border-b border-[var(--pnp-muted)]/30",
+      ].join(" ")}
+    >
+      <nav className="flex h-16 items-center justify-between max-w-7xl mx-auto">
+        {/* Logo — KRSN with per-letter spring hover */}
+        <Link href="/" aria-label="KRSN — Krisna Setyaadi Portfolio">
+          <LogoMark />
+        </Link>
 
-      <header
-        className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
-        itemScope
-        itemType="https://schema.org/WPHeader"
-      >
-        <nav
-          className="container flex h-16 items-center justify-between px-6 md:px-12"
-          role="navigation"
-          aria-label="Main navigation"
-          itemScope
-          itemType="https://schema.org/SiteNavigationElement"
+        {/* Desktop links */}
+        <ul className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map((item) => (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                className="relative text-xs text-[var(--pnp-fg)]/50 hover:text-[var(--pnp-fg)] transition-colors duration-200 tracking-[0.2em] uppercase"
+                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                onMouseEnter={() => setActiveLink(item.href)}
+                onMouseLeave={() => setActiveLink(null)}
+              >
+                {item.label}
+                <AnimatePresence>
+                  {activeLink === item.href && (
+                    <motion.span
+                      layoutId="nav-dot"
+                      initial={{ opacity: 0, scaleX: 0 }}
+                      animate={{ opacity: 1, scaleX: 1 }}
+                      exit={{ opacity: 0, scaleX: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-[var(--pnp-accent)]"
+                    />
+                  )}
+                </AnimatePresence>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Right: Available badge */}
+        <div className="hidden md:flex items-center gap-4">
+          <AvailableBadge onClick={scrollToFooter} />
+        </div>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden text-[var(--pnp-fg)] p-2"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200"
-            data-theme-ignore
-            itemProp="url"
-            aria-label="KRSN - Krisna Dwi Setyaadi Portfolio Home"
+          <span
+            className="block w-5 h-px bg-current mb-1.5 transition-transform duration-200"
+            style={{
+              transform: mobileOpen
+                ? "rotate(45deg) translate(0, 4px)"
+                : "none",
+            }}
+          />
+          <span
+            className="block w-5 h-px bg-current transition-opacity duration-200"
+            style={{ opacity: mobileOpen ? 0 : 1 }}
+          />
+          <span
+            className="block w-5 h-px bg-current mt-1.5 transition-transform duration-200"
+            style={{
+              transform: mobileOpen
+                ? "rotate(-45deg) translate(0, -4px)"
+                : "none",
+            }}
+          />
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-[var(--pnp-surface)] border-t border-[var(--pnp-muted)]/30 px-6 py-6 space-y-4"
           >
-            <span className="text-xl font-bold text-foreground" itemProp="name">
-              KRSN
-            </span>
-            <div
-              className="h-2.5 w-2.5 bg-blue-400 rounded-full ml-0.5 animate-pulse"
-              aria-hidden="true"
-            ></div>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <ul className="flex items-center gap-8" role="menubar">
-              {navItems.map((item) => (
-                <li key={item.href} role="none">
-                  <Link
-                    href={item.href}
-                    className={`text-sm transition-all duration-200 hover:text-primary relative ${
-                      isActive(item.href)
-                        ? "text-primary font-medium"
-                        : "text-foreground hover:text-primary"
-                    }`}
-                    role="menuitem"
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    itemProp="url"
-                  >
-                    <span itemProp="name">{item.label}</span>
-                    {/* Active indicator */}
-                    {isActive(item.href) && (
-                      <span
-                        className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Theme Toggle */}
-            <div data-theme-toggle>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="h-9 w-9"
-                aria-label={`Switch to ${
-                  theme === "dark" ? "light" : "dark"
-                } mode`}
-                title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            {NAV_LINKS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="block text-[var(--pnp-fg)] text-lg font-medium tracking-wide"
               >
-                <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              </Button>
-            </div>
-
-            {/* Social Links */}
-            <div
-              className="flex items-center gap-3"
-              itemScope
-              itemType="https://schema.org/Person"
-            >
-              <Link
+                {item.label}
+              </a>
+            ))}
+            <div className="pt-4 border-t border-[var(--pnp-muted)]/30 flex gap-6 text-sm text-[var(--pnp-fg)]/60">
+              <a
                 href={socialMediaUrl.linkedin}
-                className="text-primary hover:text-primary/80 transition-all duration-200 hover:scale-110"
-                aria-label="Connect with Krisna Dwi Setyaadi on LinkedIn"
-                title="LinkedIn Profile - Krisna Dwi Setyaadi"
                 target="_blank"
-                rel="noopener noreferrer nofollow"
-                itemProp="sameAs"
+                rel="noopener noreferrer"
               >
-                <Linkedin className="h-5 w-5" />
-              </Link>
-              <Link
+                LinkedIn
+              </a>
+              <a
                 href={socialMediaUrl.github}
-                className="text-foreground hover:text-primary transition-all duration-200 hover:scale-110"
-                aria-label="View Krisna Dwi Setyaadi's projects on GitHub"
-                title="GitHub Profile - Krisna Dwi Setyaadi"
                 target="_blank"
-                rel="noopener noreferrer nofollow"
-                itemProp="sameAs"
+                rel="noopener noreferrer"
               >
-                <Github className="h-5 w-5" />
-              </Link>
+                GitHub
+              </a>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+}
 
-            {/* Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-9 w-9 hover:bg-accent hover:text-accent-foreground lg:hidden"
-              aria-label="Open menu options"
-            >
-              <Grid3X3 className="h-4 w-4" />
-            </Button>
-          </div>
+/* ── Logo ── */
+function LogoMark() {
+  const letters = ["K", "R", "S", "N"];
+  const [hovered, setHovered] = useState(false);
 
-          {/* Mobile Navigation Controls */}
-          <div className="md:hidden flex items-center gap-4">
-            <div data-theme-toggle>
-              {" "}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="h-9 w-9"
-                aria-label={`Switch to ${
-                  theme === "dark" ? "light" : "dark"
-                } mode`}
-                title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              >
-                <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              </Button>
-            </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle mobile menu"
-              aria-expanded={isMenuOpen}
-              className="h-9 w-9"
-            >
-              {isMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
-          </div>
+  return (
+    <span
+      className="flex items-center gap-0.5 cursor-pointer select-none"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {letters.map((l, i) => (
+        <motion.span
+          key={i}
+          animate={hovered ? { y: -4 } : { y: 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 500,
+            damping: 20,
+            delay: i * 0.04,
+          }}
+          className="text-xl font-bold text-[var(--pnp-fg)] font-syne"
+          style={{ display: "inline-block" }}
+        >
+          {l}
+        </motion.span>
+      ))}
+      <motion.span
+        animate={hovered ? { width: 20, height: 20 } : { width: 8, height: 8 }}
+        transition={{ type: "spring", stiffness: 400, damping: 18 }}
+        className="ml-1 bg-[var(--pnp-accent)] rounded-full inline-block"
+      />
+    </span>
+  );
+}
 
-          {/* Mobile Menu Overlay */}
-          {isMenuOpen && (
-            <>
-              {/* Backdrop */}
-              <div
-                className="fixed inset-0 bg-background/80 backdrop-blur-sm md:hidden"
-                onClick={() => setIsMenuOpen(false)}
-                aria-hidden="true"
-              />
+/* ── Available badge ── */
+function AvailableBadge({ onClick }: { onClick: () => void }) {
+  const [expanded, setExpanded] = useState(false);
 
-              {/* Menu Content */}
-              <div className="absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border md:hidden shadow-theme-medium">
-                <div className="container px-6 py-6">
-                  <ul className="space-y-4" role="menu">
-                    {navItems.map((item) => (
-                      <li key={item.href} role="none">
-                        <Link
-                          href={item.href}
-                          className={`block text-lg transition-colors duration-200 hover:text-primary ${
-                            isActive(item.href)
-                              ? "text-primary font-medium"
-                              : "text-foreground"
-                          }`}
-                          role="menuitem"
-                          onClick={() => setIsMenuOpen(false)}
-                          aria-current={
-                            isActive(item.href) ? "page" : undefined
-                          }
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Mobile Social Links */}
-                  <div
-                    className="flex items-center gap-6 mt-8 pt-6 border-t border-border"
-                    itemScope
-                    itemType="https://schema.org/Person"
-                  >
-                    <a
-                      href={socialMediaUrl.linkedin}
-                      className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors duration-200"
-                      aria-label="Connect with Krisna Dwi Setyaadi on LinkedIn"
-                      title="LinkedIn Profile - Krisna Dwi Setyaadi"
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      itemProp="sameAs"
-                    >
-                      <Linkedin className="h-5 w-5" />
-                      <span>LinkedIn</span>
-                    </a>
-                    <a
-                      href={socialMediaUrl.github}
-                      className="flex items-center gap-3 text-foreground hover:text-primary transition-colors duration-200"
-                      aria-label="View Krisna Dwi Setyaadi's projects on GitHub"
-                      title="GitHub Profile - Krisna Dwi Setyaadi"
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      itemProp="sameAs"
-                    >
-                      <Github className="h-5 w-5" />
-                      <span>GitHub</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-        </nav>
-      </header>
-    </>
+  return (
+    <motion.button
+      onClick={onClick}
+      onMouseEnter={() => setExpanded(true)}
+      onMouseLeave={() => setExpanded(false)}
+      className="flex items-center gap-2 border border-[var(--pnp-muted)] rounded-full px-3 py-1.5 text-[10px] text-[var(--pnp-fg)]/70 hover:border-[var(--pnp-accent)]/50 hover:text-[var(--pnp-fg)] transition-colors duration-200 overflow-hidden tracking-[0.15em] uppercase"
+      aria-label="Available for work — click to contact"
+    >
+      <span className="pulse-dot" aria-hidden="true" />
+      <AnimatePresence initial={false} mode="wait">
+        {expanded ? (
+          <motion.span
+            key="full"
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: "auto" }}
+            exit={{ opacity: 0, width: 0 }}
+            transition={{ duration: 0.2 }}
+            className="whitespace-nowrap overflow-hidden"
+          >
+            Available for work
+          </motion.span>
+        ) : (
+          <motion.span
+            key="short"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            Available
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.button>
   );
 }

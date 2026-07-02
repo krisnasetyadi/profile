@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { ArrowDownToLine, Copy } from "lucide-react";
 import { CheckedIcon, FailedIcon } from "./check-icon";
 import { CVApi } from "@/services";
-import { toast } from "sonner";
+import { toastManager } from "@/lib/toast";
 import { useState } from "react";
 
 export function ButtonCvDownload() {
@@ -25,22 +25,56 @@ export function ButtonCvDownload() {
       loading: true,
       error: false,
     });
-    await CVApi.download()
-      .then(() => {
-        toast.success("Download successful", {
-          description: "The file has been downloaded successfully.",
-        });
+
+    try {
+      // Try API download first
+      await CVApi.download();
+      toastManager.showSuccess(
+        "Download successful",
+        "The file has been downloaded successfully.",
+      );
+      setIsDownload({
+        loading: false,
+        error: false,
+      });
+    } catch (apiError) {
+      console.warn("API download failed, trying fallback:", apiError);
+
+      try {
+        // Fallback to static file
+        const response = await fetch(
+          "/Krisna%20Dwi%20Setyaadi%20-%20Resume.pdf",
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "Krisna Dwi Setyaadi - Resume.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        toastManager.showSuccess(
+          "Download successful",
+          "CV downloaded from backup file.",
+        );
         setIsDownload({
           loading: false,
           error: false,
         });
-      })
-      .catch((error) => {
-        toast.error("Download Failed", {
-          description:
-            error?.originalMessage ||
-            "Something went wrong during the download.",
-        });
+      } catch (fallbackError) {
+        console.error("Fallback download also failed:", fallbackError);
+
+        toastManager.showError(
+          "Download Failed",
+          "Unable to download CV. Please try again later.",
+        );
         setIsDownload({
           loading: false,
           error: true,
@@ -52,7 +86,8 @@ export function ButtonCvDownload() {
             error: false,
           });
         }, 3000);
-      });
+      }
+    }
   };
 
   return (

@@ -114,9 +114,12 @@ export default class RequestHandler {
   download(params?: any, url = this.url) {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch(`${this.api}/${url}/download`, {
-          method: "GET",
-        });
+        const response = await fetch(
+          `${this.api.defaults.baseURL}/${url}/download`,
+          {
+            method: "GET",
+          },
+        );
 
         if (response.ok) {
           const link = document.createElement("a");
@@ -125,10 +128,18 @@ export default class RequestHandler {
           link.click();
           resolve(response);
         } else {
-          reject(response);
+          const error = new Error(
+            `Download failed: ${response.status} ${response.statusText}`,
+          );
+          (error as any).status = response.status;
+          (error as any).originalMessage =
+            `Server returned ${response.status}: ${response.statusText}`;
+          reject(error);
         }
       } catch (error) {
-        reject(error);
+        const err = error as Error;
+        (err as any).originalMessage = err.message || "Network error occurred";
+        reject(err);
       }
     });
   }

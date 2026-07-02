@@ -2,7 +2,6 @@ import "./globals.css";
 import type React from "react";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import ContentWrapper from "../components/wrapper/content";
 import NavbarComponent from "@/components/navbar-component";
 import ClientWrapper from "@/components/wrapper/client";
@@ -10,6 +9,10 @@ import { ThemeProvider } from "@/components/ui/next-theme-provider";
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
+import { GrainOverlay } from "@/components/grain-overlay";
+import { PageTransition } from "@/components/page-transition";
+import { LenisProvider } from "@/components/lenis-provider";
+import { CustomCursor } from "@/components/cursor";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://krisnadwisetyaadi.vercel.app"),
@@ -68,8 +71,6 @@ export const metadata: Metadata = {
     },
   },
 };
-const inter = Inter({ subsets: ["latin"] });
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -119,14 +120,18 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} bg-[#edf1f5]`}>
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="bg-background">
+          <LenisProvider />
+          <GrainOverlay />
+          <PageTransition />
+          <CustomCursor />
+          <div className="bg-[var(--pnp-bg)]">
             <Analytics />
             <Suspense fallback={<div>Loading...</div>}>
               <ClientWrapper>
