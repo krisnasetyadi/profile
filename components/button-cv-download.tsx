@@ -6,6 +6,7 @@ import { CheckedIcon, FailedIcon } from "./check-icon";
 import { CVApi } from "@/services";
 import { toast } from "sonner";
 import { useState } from "react";
+import { toastManager } from "@/lib/toast";
 
 export function ButtonCvDownload() {
   const [copied, setCopied] = useState(false);
@@ -35,12 +36,42 @@ export function ButtonCvDownload() {
           error: false,
         });
       })
-      .catch((error) => {
-        toast.error("Download Failed", {
-          description:
-            error?.originalMessage ||
-            "Something went wrong during the download.",
+      .catch(async (error) => {
+        try {
+        // Fallback to static file
+        const response = await fetch(
+          "/Krisna%20Dwi%20Setya%20Adi%20-%20Resume.pdf",
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "Krisna Dwi Setya Adi - Resume.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        toastManager.showSuccess(
+          "Download successful",
+          "CV downloaded from backup file.",
+        );
+        setIsDownload({
+          loading: false,
+          error: false,
         });
+      } catch (fallbackError) {
+        console.error("Fallback download also failed:", fallbackError);
+
+        toastManager.showError(
+          "Download Failed",
+          "Unable to download CV. Please try again later.",
+        );
         setIsDownload({
           loading: false,
           error: true,
@@ -52,6 +83,7 @@ export function ButtonCvDownload() {
             error: false,
           });
         }, 3000);
+      }
       });
   };
 
