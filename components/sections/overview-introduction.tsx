@@ -14,7 +14,7 @@ export function OverviewIntroduction() {
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-none tracking-tight">
             KRISNA
             <br />
-            SETYAADI
+            SETYA ADI
           </h1>
           <p
             className="sr-only"
