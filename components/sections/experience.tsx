@@ -1,4 +1,11 @@
+import dayjs from 'dayjs';
+
 export function ExperienceSection() {
+
+const startDateMoonlay = dayjs("2022-02-01");
+const currentDate = dayjs();
+
+const yearsOfService = currentDate.diff(startDateMoonlay, "year");
   return (
     <section
       id="experience"
@@ -23,7 +30,7 @@ export function ExperienceSection() {
                 dateTime="2022-02"
               >
                 <span itemProp="startDate">FEB 2022</span> —{" "}
-                <span>CURRENT</span> • <span>3+ Years</span>
+                <span>CURRENT</span> • <span>{yearsOfService}+ Years</span>
               </time>
               <h3 className="text-2xl md:text-3xl underline decoration-1 underline-offset-8 decoration-input">
                 <span itemProp="roleName">Software Developer</span>,
