@@ -11,7 +11,7 @@ export function OverviewIntroduction() {
     >
       <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
         <div className="space-y-8">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-none tracking-tight">
+          <h1 className="text-6xl md:text-8xl lg:text-[120px] font-bold leading-none tracking-tight">
             KRISNA
             <br />
             SETYA ADI
