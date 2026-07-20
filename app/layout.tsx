@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/ui/next-theme-provider";
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
+import LoadingSpinner from "@/components/spinner";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://krisnadwisetyaadi.com"),
@@ -130,7 +131,7 @@ export default function RootLayout({
         >
           <div className="bg-background">
             <Analytics />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<LoadingSpinner show />}>
               <ClientWrapper>
                 <NavbarComponent />
               </ClientWrapper>
