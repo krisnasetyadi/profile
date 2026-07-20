@@ -12,7 +12,7 @@ import { Toaster } from "sonner";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://krisnadwisetyaadi.vercel.app"),
+  metadataBase: new URL("https://krisnadwisetyaadi.com"),
   title: "Krisna Dwi Setyaadi - Software Developer",
   description:
     "Krisna Dwi Setyaadi is an experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies. Building scalable, user-centered applications since 2022.",
@@ -32,11 +32,11 @@ export const metadata: Metadata = {
     google: "lF3UvljuTHZt_rzUOz5qw4KoCui6NOR5KvPONJzyOaE",
   },
   alternates: {
-    canonical: "https://krisnadwisetyaadi.vercel.app",
+    canonical: "https://krisnadwisetyaadi.com",
   },
   openGraph: {
     type: "website",
-    url: "https://krisnadwisetyaadi.vercel.app",
+    url: "https://krisnadwisetyaadi.com",
     siteName: "Krisna Dwi Setyaadi",
     title: "Krisna Dwi Setyaadi - Software Developer",
     description:
@@ -85,9 +85,9 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Krisna Dwi Setyaadi",
-              alternateName: "Krisna Setyaadi",
-              url: "https://krisnadwisetyaadi.vercel.app",
-              image: "https://krisnadwisetyaadi.vercel.app/images/me2.jpg",
+              alternateName: ["Krisna Setyaadi", "Krisna Dwi Setya Adi"],
+              url: "https://krisnadwisetyaadi.com",
+              image: "https://krisnadwisetyaadi.com/images/me2.jpg",
               jobTitle: "Software Developer",
               worksFor: {
                 "@type": "Organization",
@@ -102,6 +102,7 @@ export default function RootLayout({
                 "https://github.com/krisnasetyadi",
                 "https://www.linkedin.com/in/krisnadwisetyaadi/",
                 "https://linkedin.com/in/krisnadwisetyaadi",
+                "https://teewanjournal.com/index.php/juragan/article/view/3575",
               ],
               knowsAbout: [
                 "React.js",

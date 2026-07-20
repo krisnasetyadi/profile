@@ -3,13 +3,14 @@ import { WorkSection } from "@/components/sections/work";
 import { AboutSection } from "@/components/sections/about";
 import { ExperienceSection } from "@/components/sections/experience";
 import { Metadata } from "next";
+import { siteUrl } from "@/lib/constant";
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Krisna Dwi Setyaadi - Software Developer";
 
   const description =
     "Krisna Dwi Setyaadi is an experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies. Building scalable, user-centered applications since 2022.";
-  const url = `https://krisnadwisetyaadi.vercel.app`;
+  const url = siteUrl;
 
   return {
     title,

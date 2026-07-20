@@ -28,6 +28,7 @@ export default function Navigation() {
 
   const navItems = [
     { href: "/", label: "Home" },
+    { href: "/blog", label: "Blog" },
     // { href: "/work", label: "Work" },
     // { href: "/about", label: "About" },
     // { href: "/contact", label: "Contact" },
@@ -47,11 +48,11 @@ export default function Navigation() {
             "@context": "https://schema.org",
             "@type": "SiteNavigationElement",
             name: "Main Navigation",
-            url: "https://krisnadwisetyaadi.vercel.app",
+            url: "https://krisnadwisetyaadi.com",
             hasPart: navItems.map((item) => ({
               "@type": "WebPage",
               name: item.label,
-              url: `https://krisnadwisetyaadi.vercel.app/${item.href}`,
+              url: `https://krisnadwisetyaadi.com/${item.href}`,
             })),
           }),
         }}

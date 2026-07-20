@@ -80,6 +80,14 @@ export function Footer() {
                 LinkedIn
               </a>
 
+              <Link
+                href="/blog"
+                className="hover:text-gray-300 transition-colors"
+                title="Read Krisna Dwi Setyaadi's blog"
+              >
+                Blog
+              </Link>
+
               <a
                 href={socialMediaUrl.github}
                 className="hover:text-gray-300 transition-colors"
