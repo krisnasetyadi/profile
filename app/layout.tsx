@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "Web Developer Indonesia",
   ],
   verification: {
-    google: "lF3UvljuTHZt_rzUOz5qw4KoCui6NOR5KvPONJzyOaE",
+    google: "8t5XX2gYH4KVZOKMZCaWP_ngZEQXhcdOk3CmpZrl5gk",
   },
   alternates: {
     canonical: "https://krisnadwisetyaadi.com",
