@@ -10,19 +10,19 @@ import {
 } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Blog | Krisna Dwi Setyaadi",
+  title: "Blog | Krisna Dwi Setya Adi",
   description:
-    "Writing on software development, research, and publications by Krisna Dwi Setyaadi.",
+    "Writing on software development, research, and publications by Krisna Dwi Setya Adi.",
   alternates: {
     canonical: `${siteUrl}/blog`,
   },
   openGraph: {
     type: "website",
     url: `${siteUrl}/blog`,
-    siteName: "Krisna Dwi Setyaadi",
-    title: "Blog | Krisna Dwi Setyaadi",
+    siteName: "Krisna Dwi Setya Adi",
+    title: "Blog | Krisna Dwi Setya Adi",
     description:
-      "Writing on software development, research, and publications by Krisna Dwi Setyaadi.",
+      "Writing on software development, research, and publications by Krisna Dwi Setya Adi.",
   },
 };
 

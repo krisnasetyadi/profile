@@ -20,7 +20,7 @@ export async function generateMetadata({
   const url = `${siteUrl}/blog/${post.slug}`;
 
   return {
-    title: `${post.title} | Krisna Dwi Setyaadi`,
+    title: `${post.title} | Krisna Dwi Setya Adi`,
     description: post.description,
     alternates: {
       canonical: url,
@@ -28,7 +28,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       url,
-      siteName: "Krisna Dwi Setyaadi",
+      siteName: "Krisna Dwi Setya Adi",
       title: post.title,
       description: post.description,
       publishedTime: post.date,
@@ -63,7 +63,7 @@ export default async function BlogPostPage({
               url,
               author: {
                 "@type": "Person",
-                name: "Krisna Dwi Setyaadi",
+                name: "Krisna Dwi Setya Adi",
                 url: siteUrl,
               },
             }),

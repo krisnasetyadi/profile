@@ -76,7 +76,7 @@ export default function Navigation() {
             className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200"
             data-theme-ignore
             itemProp="url"
-            aria-label="KRSN - Krisna Dwi Setyaadi Portfolio Home"
+            aria-label="KRSN - Krisna Dwi Setya Adi Portfolio Home"
           >
             <span className="text-xl font-bold text-foreground" itemProp="name">
               KRSN
@@ -142,8 +142,8 @@ export default function Navigation() {
               <Link
                 href={socialMediaUrl.linkedin}
                 className="text-primary hover:text-primary/80 transition-all duration-200 hover:scale-110"
-                aria-label="Connect with Krisna Dwi Setyaadi on LinkedIn"
-                title="LinkedIn Profile - Krisna Dwi Setyaadi"
+                aria-label="Connect with Krisna Dwi Setya Adi on LinkedIn"
+                title="LinkedIn Profile - Krisna Dwi Setya Adi"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 itemProp="sameAs"
@@ -153,8 +153,8 @@ export default function Navigation() {
               <Link
                 href={socialMediaUrl.github}
                 className="text-foreground hover:text-primary transition-all duration-200 hover:scale-110"
-                aria-label="View Krisna Dwi Setyaadi's projects on GitHub"
-                title="GitHub Profile - Krisna Dwi Setyaadi"
+                aria-label="View Krisna Dwi Setya Adi's projects on GitHub"
+                title="GitHub Profile - Krisna Dwi Setya Adi"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 itemProp="sameAs"
@@ -252,8 +252,8 @@ export default function Navigation() {
                     <a
                       href={socialMediaUrl.linkedin}
                       className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors duration-200"
-                      aria-label="Connect with Krisna Dwi Setyaadi on LinkedIn"
-                      title="LinkedIn Profile - Krisna Dwi Setyaadi"
+                      aria-label="Connect with Krisna Dwi Setya Adi on LinkedIn"
+                      title="LinkedIn Profile - Krisna Dwi Setya Adi"
                       target="_blank"
                       rel="noopener noreferrer nofollow"
                       itemProp="sameAs"
@@ -264,8 +264,8 @@ export default function Navigation() {
                     <a
                       href={socialMediaUrl.github}
                       className="flex items-center gap-3 text-foreground hover:text-primary transition-colors duration-200"
-                      aria-label="View Krisna Dwi Setyaadi's projects on GitHub"
-                      title="GitHub Profile - Krisna Dwi Setyaadi"
+                      aria-label="View Krisna Dwi Setya Adi's projects on GitHub"
+                      title="GitHub Profile - Krisna Dwi Setya Adi"
                       target="_blank"
                       rel="noopener noreferrer nofollow"
                       itemProp="sameAs"

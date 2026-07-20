@@ -13,10 +13,11 @@ import { Suspense } from "react";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://krisnadwisetyaadi.com"),
-  title: "Krisna Dwi Setyaadi - Software Developer",
+  title: "Krisna Dwi Setya Adi - Software Developer",
   description:
-    "Krisna Dwi Setyaadi is an experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies. Building scalable, user-centered applications since 2022.",
+    "Krisna Dwi Setya Adi is an experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies. Building scalable, user-centered applications since 2022.",
   keywords: [
+    "Krisna Dwi Setya Adi",
     "Krisna Dwi Setyaadi",
     "Krisna Setyaadi",
     "Software Developer Jakarta",
@@ -37,8 +38,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://krisnadwisetyaadi.com",
-    siteName: "Krisna Dwi Setyaadi",
-    title: "Krisna Dwi Setyaadi - Software Developer",
+    siteName: "Krisna Dwi Setya Adi",
+    title: "Krisna Dwi Setya Adi - Software Developer",
     description:
       "Experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies.",
     images: [
@@ -46,13 +47,13 @@ export const metadata: Metadata = {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Krisna Dwi Setyaadi - Software Developer",
+        alt: "Krisna Dwi Setya Adi - Software Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Krisna Dwi Setyaadi - Software Developer",
+    title: "Krisna Dwi Setya Adi - Software Developer",
     description:
       "Experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies.",
     images: ["/images/og-image.png"],
@@ -84,8 +85,8 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: "Krisna Dwi Setyaadi",
-              alternateName: ["Krisna Setyaadi", "Krisna Dwi Setya Adi"],
+              name: "Krisna Dwi Setya Adi",
+              alternateName: ["Krisna Dwi Setyaadi", "Krisna Setyaadi"],
               url: "https://krisnadwisetyaadi.com",
               image: "https://krisnadwisetyaadi.com/images/me2.jpg",
               jobTitle: "Software Developer",

@@ -27,7 +27,7 @@ export function AboutSection() {
         <div className="flex flex-col gap-8 md:flex-row md:justify-around">
           <Image
             src={cartoonImage || "/placeholder.svg"}
-            alt="Krisna Dwi Setyaadi cartoon illustration representing creative problem-solving approach"
+            alt="Krisna Dwi Setya Adi cartoon illustration representing creative problem-solving approach"
             width={400}
             height={400}
             className="rounded-lg object-cover"

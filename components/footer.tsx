@@ -23,7 +23,7 @@ export function Footer() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Person",
-            name: "Krisna Dwi Setyaadi",
+            name: "Krisna Dwi Setya Adi",
             jobTitle: "Software Developer",
             description:
               "Full-stack developer specializing in modern web technologies",
@@ -83,7 +83,7 @@ export function Footer() {
               <Link
                 href="/blog"
                 className="hover:text-gray-300 transition-colors"
-                title="Read Krisna Dwi Setyaadi's blog"
+                title="Read Krisna Dwi Setya Adi's blog"
               >
                 Blog
               </Link>
@@ -91,7 +91,7 @@ export function Footer() {
               <a
                 href={socialMediaUrl.github}
                 className="hover:text-gray-300 transition-colors"
-                aria-label="View Krisna Dwi Setyaadi's projects on GitHub"
+                aria-label="View Krisna Dwi Setya Adi's projects on GitHub"
                 title="GitHub Profile - Open source projects and code repositories"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
@@ -106,7 +106,7 @@ export function Footer() {
             <Link
               href={contact.whatsapp}
               className="bg-white text-black hover:bg-gray-100 px-8 py-3"
-              aria-label="Contact Krisna Dwi Setyaadi via WhatsApp"
+              aria-label="Contact Krisna Dwi Setya Adi via WhatsApp"
               title="Get in touch via WhatsApp for project discussions"
               target="_blank"
               rel="noopener noreferrer"
@@ -130,7 +130,7 @@ export function Footer() {
                 <a
                   href="tel:+6281313218350"
                   className="hover:text-gray-300 transition-colors"
-                  aria-label="Call Krisna Dwi Setyaadi"
+                  aria-label="Call Krisna Dwi Setya Adi"
                   itemProp="telephone"
                 >
                   (+62) 813-1321-8350
@@ -140,7 +140,7 @@ export function Footer() {
                 <a
                   href={`mailto:${contact.email}`}
                   className="hover:text-gray-300 transition-colors"
-                  aria-label="Email Krisna Dwi Setyaadi"
+                  aria-label="Email Krisna Dwi Setya Adi"
                   itemProp="email"
                 >
                   {contact.email}

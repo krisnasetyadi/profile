@@ -32,7 +32,7 @@ export function OverviewIntroduction() {
           <div className="relative">
             <Image
               src={myImage || "/placeholder.svg"}
-              alt="Krisna Dwi Setyaadi - Professional Software Developer headshot"
+              alt="Krisna Dwi Setya Adi - Professional Software Developer headshot"
               width={300}
               height={300}
               className="rounded-full object-cover"
