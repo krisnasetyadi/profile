@@ -3,18 +3,20 @@ import { WorkSection } from "@/components/sections/work";
 import { AboutSection } from "@/components/sections/about";
 import { ExperienceSection } from "@/components/sections/experience";
 import { Metadata } from "next";
+import { siteUrl } from "@/lib/constant";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Krisna Dwi Setyaadi - Software Developer";
+  const title = "Krisna Dwi Setya Adi - Software Developer";
 
   const description =
-    "Krisna Dwi Setyaadi is an experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies. Building scalable, user-centered applications since 2022.";
-  const url = `https://krisnadwisetyaadi.vercel.app`;
+    "Krisna Dwi Setya Adi is an experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies. Building scalable, user-centered applications since 2022.";
+  const url = siteUrl;
 
   return {
     title,
     description,
     keywords: [
+      "Krisna Dwi Setya Adi",
       "Krisna Dwi Setyaadi",
       "Krisna",
       "Krisna Setyaadi",
@@ -38,13 +40,13 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url,
       type: "website",
-      siteName: "Krisna Dwi Setyaadi",
+      siteName: "Krisna Dwi Setya Adi",
       images: [
         {
           url: "/images/og-image.png",
           width: 1200,
           height: 630,
-          alt: "Krisna Dwi Setyaadi - Software Developer",
+          alt: "Krisna Dwi Setya Adi - Software Developer",
         },
       ],
     },
@@ -57,7 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [
         {
           url: "/images/og-image.png",
-          alt: "Krisna Dwi Setyaadi - Software Developer",
+          alt: "Krisna Dwi Setya Adi - Software Developer",
         },
       ],
     },
@@ -71,7 +73,7 @@ export async function generateMetadata(): Promise<Metadata> {
     other: {
       "profile:section": "Personal Profile, Portfolio, Projects",
       "profile:tag":
-        "Krisna Dwi Setyaadi, Software Developer, React.js, Next.js",
+        "Krisna Dwi Setya Adi, Software Developer, React.js, Next.js",
     },
   };
 }

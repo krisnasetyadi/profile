@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { MagneticButton } from "@/components/magnetic-button";
 import { ScrambleText } from "@/components/scramble-text";
-import { socialMediaUrl } from "@/lib/constant";
+import { contact, socialMediaUrl } from "@/lib/constant";
 
 const CTA_WORDS = ["LETS", "BUILD", "SOMETHING."];
 
@@ -24,6 +24,33 @@ export function Footer() {
       itemType="https://schema.org/WPFooter"
       role="contentinfo"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Krisna Dwi Setya Adi",
+            jobTitle: "Software Developer",
+            description:
+              "Full-stack developer specializing in modern web technologies",
+            url: typeof window !== "undefined" ? window.location.origin : "",
+            sameAs: [socialMediaUrl.linkedin, socialMediaUrl.github],
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+62-813-1321-8350",
+              email: contact.email,
+              contactType: "professional",
+              availableLanguage: ["English", "Indonesian"],
+            },
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "ID",
+            },
+          }),
+        }}
+      />
+
       {/* Center-outward divider */}
       <div ref={dividerRef} className="relative mb-16 h-px overflow-hidden">
         <motion.div
@@ -61,7 +88,7 @@ export function Footer() {
           >
             <ScrambleText
               text="LI→"
-              triggerOnMount={false}
+              trigger={false}
               className="font-mono"
             />
             <span>LinkedIn</span>
@@ -78,7 +105,7 @@ export function Footer() {
           >
             <ScrambleText
               text="GH→"
-              triggerOnMount={false}
+              trigger={false}
               className="font-mono"
             />
             <span>GitHub</span>

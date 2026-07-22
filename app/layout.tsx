@@ -13,13 +13,15 @@ import { GrainOverlay } from "@/components/grain-overlay";
 import { PageTransition } from "@/components/page-transition";
 import { LenisProvider } from "@/components/lenis-provider";
 import { CustomCursor } from "@/components/cursor";
+import LoadingSpinner from "@/components/spinner";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://krisnadwisetyaadi.vercel.app"),
-  title: "Krisna Dwi Setyaadi - Software Developer",
+  metadataBase: new URL("https://krisnadwisetyaadi.com"),
+  title: "Krisna Dwi Setya Adi - Software Developer",
   description:
-    "Krisna Dwi Setyaadi is an experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies. Building scalable, user-centered applications since 2022.",
+    "Krisna Dwi Setya Adi is an experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies. Building scalable, user-centered applications since 2022.",
   keywords: [
+    "Krisna Dwi Setya Adi",
     "Krisna Dwi Setyaadi",
     "Krisna Setyaadi",
     "Software Developer Jakarta",
@@ -32,16 +34,16 @@ export const metadata: Metadata = {
     "Web Developer Indonesia",
   ],
   verification: {
-    google: "lF3UvljuTHZt_rzUOz5qw4KoCui6NOR5KvPONJzyOaE",
+    google: "8t5XX2gYH4KVZOKMZCaWP_ngZEQXhcdOk3CmpZrl5gk",
   },
   alternates: {
-    canonical: "https://krisnadwisetyaadi.vercel.app",
+    canonical: "https://krisnadwisetyaadi.com",
   },
   openGraph: {
     type: "website",
-    url: "https://krisnadwisetyaadi.vercel.app",
-    siteName: "Krisna Dwi Setyaadi",
-    title: "Krisna Dwi Setyaadi - Software Developer",
+    url: "https://krisnadwisetyaadi.com",
+    siteName: "Krisna Dwi Setya Adi",
+    title: "Krisna Dwi Setya Adi - Software Developer",
     description:
       "Experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies.",
     images: [
@@ -49,13 +51,13 @@ export const metadata: Metadata = {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Krisna Dwi Setyaadi - Software Developer",
+        alt: "Krisna Dwi Setya Adi - Software Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Krisna Dwi Setyaadi - Software Developer",
+    title: "Krisna Dwi Setya Adi - Software Developer",
     description:
       "Experienced software developer based in Jakarta, Indonesia, specializing in React.js, Next.js, and modern web technologies.",
     images: ["/images/og-image.png"],
@@ -85,10 +87,10 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: "Krisna Dwi Setyaadi",
-              alternateName: "Krisna Setyaadi",
-              url: "https://krisnadwisetyaadi.vercel.app",
-              image: "https://krisnadwisetyaadi.vercel.app/images/me2.jpg",
+              name: "Krisna Dwi Setya Adi",
+              alternateName: ["Krisna Dwi Setyaadi", "Krisna Setyaadi"],
+              url: "https://krisnadwisetyaadi.com",
+              image: "https://krisnadwisetyaadi.com/images/me2.jpg",
               jobTitle: "Software Developer",
               worksFor: {
                 "@type": "Organization",
@@ -103,6 +105,7 @@ export default function RootLayout({
                 "https://github.com/krisnasetyadi",
                 "https://www.linkedin.com/in/krisnadwisetyaadi/",
                 "https://linkedin.com/in/krisnadwisetyaadi",
+                "https://teewanjournal.com/index.php/juragan/article/view/3575",
               ],
               knowsAbout: [
                 "React.js",
@@ -133,7 +136,7 @@ export default function RootLayout({
           <CustomCursor />
           <div className="bg-[var(--pnp-bg)]">
             <Analytics />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<LoadingSpinner show />}>
               <ClientWrapper>
                 <NavbarComponent />
               </ClientWrapper>

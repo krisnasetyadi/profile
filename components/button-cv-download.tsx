@@ -4,8 +4,8 @@ import { Button } from "./ui/button";
 import { ArrowDownToLine, Copy } from "lucide-react";
 import { CheckedIcon, FailedIcon } from "./check-icon";
 import { CVApi } from "@/services";
-import { toastManager } from "@/lib/toast";
 import { useState } from "react";
+import { toastManager } from "@/lib/toast";
 
 export function ButtonCvDownload() {
   const [copied, setCopied] = useState(false);
@@ -43,7 +43,7 @@ export function ButtonCvDownload() {
       try {
         // Fallback to static file
         const response = await fetch(
-          "/Krisna%20Dwi%20Setyaadi%20-%20Resume.pdf",
+          "/Krisna%20Dwi%20Setya%20Adi%20-%20Resume.pdf",
         );
 
         if (!response.ok) {
@@ -54,7 +54,7 @@ export function ButtonCvDownload() {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "Krisna Dwi Setyaadi - Resume.pdf";
+        link.download = "Krisna Dwi Setya Adi - Resume.pdf";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

@@ -1,5 +1,6 @@
 "use client";
 
+import type { ElementType } from "react";
 import { useScrambleText } from "@/hooks/use-scramble-text";
 import { useMotionSafe } from "@/hooks/use-motion-safe";
 
@@ -7,7 +8,7 @@ interface ScrambleTextProps {
   text: string;
   trigger: boolean;
   className?: string;
-  tag?: keyof JSX.IntrinsicElements;
+  tag?: ElementType;
 }
 
 /**
@@ -25,7 +26,6 @@ export function ScrambleText({
   const shown = prefersReduced ? text : display;
 
   return (
-    // @ts-expect-error dynamic tag
     <Tag className={className} aria-label={text}>
       {shown}
     </Tag>

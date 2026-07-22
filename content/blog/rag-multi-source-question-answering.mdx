@@ -1,0 +1,29 @@
+---
+title: "Agnostic Multi-Source Retrieval-Augmented Generation for Documents and Database Question Answering"
+description: "A published research paper on a retrieval-augmented generation system that unifies documents, database tables, and discussion logs into a single searchable knowledge base."
+date: "2026-07-17"
+---
+
+When staff leave an organization, a lot of institutional knowledge leaves with them — scattered across specification documents, database records, and old discussion threads that nobody has time to search through. This was the problem I set out to address in a paper co-authored with Ivan Michael Siregar, published in *Jurnal Ragam Pengabdian* (SINTA 3): **"Agnostic Multi-Source Retrieval-Augmented Generation for Documents and Database Question Answering."**
+
+## The problem
+
+Most retrieval-augmented generation (RAG) systems are built around a single type of source — usually documents. In practice, an organization's knowledge is split across formal documentation, structured database tables, and informal discussion logs, and none of these sources talk to each other. When someone leaves, questions that used to have quick answers suddenly require digging through all three.
+
+## The approach
+
+We built a system that converts documents and database tables into a **unified representation through a single source parameter**, so the retrieval layer treats them agnostically regardless of where the information originally lived. Concretely:
+
+- A **FAISS vector index** powers similarity search across the unified representations.
+- **Gemini 2.5 Flash** generates the final answer from the retrieved context.
+- The evaluation combined **specification documents, an 8-table database, and 908 developer discussion entries** — a realistic mix of formal and informal knowledge.
+
+We tested the system against **25 Indonesian-language questions** spanning all three source types, measured with eight metrics rolled into three composite scores: knowledge transfer effectiveness, multi-source retrieval performance, and answer quality.
+
+## Results
+
+The full hybrid setup — combining all three source types — achieved the highest overall performance score of **0.373**, with **perfect precision and MRR** on retrieval. Compared against baselines (zero-shot LLMs and keyword search), the dense multi-source retrieval approach was clearly stronger, especially on cross-referencing tasks that required pulling context from more than one source type at once.
+
+The takeaway: combining formal documentation, structured data, and discussion logs in a single retrieval layer meaningfully improves how accessible an organization's knowledge stays, even after the people who created it move on.
+
+[Read the full paper on Jurnal Ragam Pengabdian](https://teewanjournal.com/index.php/juragan/article/view/3575)

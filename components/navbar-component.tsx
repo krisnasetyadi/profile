@@ -57,6 +57,23 @@ export default function Navigation() {
           : "bg-[var(--pnp-bg)]/90 backdrop-blur-md border-b border-[var(--pnp-muted)]",
       ].join(" ")}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SiteNavigationElement",
+            name: "Main Navigation",
+            url: "https://krisnadwisetyaadi.com",
+            hasPart: NAV_LINKS.map((item) => ({
+              "@type": "WebPage",
+              name: item.label,
+              url: `https://krisnadwisetyaadi.com/${item.href}`,
+            })),
+          }),
+        }}
+      />
+
       <nav className="flex h-16 items-center justify-between max-w-7xl mx-auto">
         {/* Logo — KRSN with per-letter spring hover */}
         <Link href="/" aria-label="KRSN — Krisna Setyaadi Portfolio">
