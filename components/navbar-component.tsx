@@ -8,9 +8,10 @@ import { Sun, Moon } from "lucide-react";
 import { socialMediaUrl } from "@/lib/constant";
 
 const NAV_LINKS = [
-  { href: "#work", label: "01 WORK" },
-  { href: "#about", label: "02 ABOUT" },
-  { href: "#experience", label: "03 EXPERIENCE" },
+  { href: "#work", label: "01 WORK", isRoute: false },
+  { href: "#about", label: "02 ABOUT", isRoute: false },
+  { href: "#experience", label: "03 EXPERIENCE", isRoute: false },
+  { href: "/blog", label: "04 BLOG", isRoute: true },
 ];
 
 export default function Navigation() {
@@ -68,7 +69,9 @@ export default function Navigation() {
             hasPart: NAV_LINKS.map((item) => ({
               "@type": "WebPage",
               name: item.label,
-              url: `https://krisnadwisetyaadi.com/${item.href}`,
+              url: item.isRoute
+                ? `https://krisnadwisetyaadi.com${item.href}`
+                : `https://krisnadwisetyaadi.com/${item.href}`,
             })),
           }),
         }}
@@ -82,31 +85,34 @@ export default function Navigation() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="relative text-xs text-[var(--pnp-fg)] opacity-[var(--pnp-op-secondary)] hover:opacity-100 transition-[opacity,color] duration-200 tracking-[0.2em] uppercase"
-                style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                onMouseEnter={() => setActiveLink(item.href)}
-                onMouseLeave={() => setActiveLink(null)}
-              >
-                {item.label}
-                <AnimatePresence>
-                  {activeLink === item.href && (
-                    <motion.span
-                      layoutId="nav-dot"
-                      initial={{ opacity: 0, scaleX: 0 }}
-                      animate={{ opacity: 1, scaleX: 1 }}
-                      exit={{ opacity: 0, scaleX: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute -bottom-1 left-0 right-0 h-px bg-[var(--pnp-accent)]"
-                    />
-                  )}
-                </AnimatePresence>
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map((item) => {
+            const NavTag = item.isRoute ? Link : "a";
+            return (
+              <li key={item.href}>
+                <NavTag
+                  href={item.href}
+                  className="relative text-xs text-[var(--pnp-fg)] opacity-[var(--pnp-op-secondary)] hover:opacity-100 transition-[opacity,color] duration-200 tracking-[0.2em] uppercase"
+                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  onMouseEnter={() => setActiveLink(item.href)}
+                  onMouseLeave={() => setActiveLink(null)}
+                >
+                  {item.label}
+                  <AnimatePresence>
+                    {activeLink === item.href && (
+                      <motion.span
+                        layoutId="nav-dot"
+                        initial={{ opacity: 0, scaleX: 0 }}
+                        animate={{ opacity: 1, scaleX: 1 }}
+                        exit={{ opacity: 0, scaleX: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute -bottom-1 left-0 right-0 h-px bg-[var(--pnp-accent)]"
+                      />
+                    )}
+                  </AnimatePresence>
+                </NavTag>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Right: theme toggle + available badge */}
@@ -154,16 +160,19 @@ export default function Navigation() {
             transition={{ duration: 0.2 }}
             className="md:hidden bg-[var(--pnp-surface)] border-t border-[var(--pnp-muted)] px-6 py-6 space-y-4"
           >
-            {NAV_LINKS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className="block text-[var(--pnp-fg)] text-lg font-medium tracking-wide"
-              >
-                {item.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((item) => {
+              const NavTag = item.isRoute ? Link : "a";
+              return (
+                <NavTag
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block text-[var(--pnp-fg)] text-lg font-medium tracking-wide"
+                >
+                  {item.label}
+                </NavTag>
+              );
+            })}
             <div className="pt-4 border-t border-[var(--pnp-muted)] flex items-center gap-6 text-sm text-[var(--pnp-fg)] opacity-[var(--pnp-op-secondary)]">
               <a
                 href={socialMediaUrl.linkedin}
@@ -209,8 +218,8 @@ function LogoMark() {
             damping: 20,
             delay: i * 0.04,
           }}
-          className="text-xl font-bold text-[var(--pnp-fg)] font-syne"
-          style={{ display: "inline-block" }}
+          className="text-xl text-[var(--pnp-fg)] font-syne"
+          style={{ display: "inline-block", fontWeight: 720 }}
         >
           {l}
         </motion.span>

@@ -166,7 +166,7 @@ export function OverviewIntroduction() {
             itemProp="name"
           >
             <span className="block overflow-hidden">
-              <LetterReveal word="KRISNA" delay={0.12} scramble />
+              <LetterReveal word="KRISNA DWI" delay={0.12} scramble />
             </span>
             <span className="block overflow-hidden">
               <LetterReveal word="SETYA ADI" delay={0.42} />
