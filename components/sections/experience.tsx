@@ -1,27 +1,32 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useMotionSafe } from "@/hooks/use-motion-safe";
 
-const TECH_TAGS = [
-  "React",
-  "Next.js",
-  "Node.js",
-  "TypeScript",
-  "REST API",
-  "AI Agents",
-  "Figma",
-  "GitHub Copilot",
-];
+const TECH_TAGS = ["React", "Angular", "TypeScript", "Next.js", "C#", "REST API"];
 
 const IMPACTS = [
-  "Integrated AI agents into development workflows, leveraging GitHub Copilot and custom automation for efficient task completion and code quality.",
-  "Built user-centered web applications with React.js and Next.js, prioritizing maintainable architecture over raw performance optimization.",
-  "Developed secure RESTful APIs and database integrations, focusing on reliability and developer experience rather than micro-optimizations.",
+  "Contributed to 7 client projects, delivering 19 frontend applications built with React and Angular.",
+  "Designed and implemented a shared frontend boilerplate that streamlined development workflows and improved UI consistency across projects.",
+  "Delivered high-quality frontend UI despite backend constraints, keeping project delivery on track.",
+  "Participated in frontend-focused code reviews on ongoing projects across multiple repositories.",
+  "Onboarded and mentored intern batches, guiding them through building frontend projects.",
+];
+
+const PRIOR_RESPONSIBILITIES = [
+  "Led 46 employees — 3 team leads, 4 inline supervisors, 2 maintenance operators, and 37 production operators.",
+  "Reported directly to the deputy head of department / head of division.",
+  "Reduced production time while improving product quality.",
+  "Prepared and managed safety training and operation training for new equipment.",
+  "Maintained production quality to minimize defects.",
+  "Trained operators on machine operation and quality control procedures.",
+  "Handled salary distribution for team members.",
 ];
 
 export function ExperienceSection() {
   const { safe } = useMotionSafe();
+  const [showPrior, setShowPrior] = useState(false);
 
   return (
     <section
@@ -127,6 +132,29 @@ export function ExperienceSection() {
                   Now · 4+ Yrs
                 </span>
               </div>
+
+              {/* Before Tech — collapsible trigger */}
+              <button
+                type="button"
+                onClick={() => setShowPrior((v) => !v)}
+                className="mt-6"
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 11,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "var(--pnp-fg)",
+                  opacity: showPrior ? 1 : "var(--pnp-op-label)",
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  cursor: "pointer",
+                  transition: "opacity 0.2s",
+                }}
+                aria-expanded={showPrior}
+              >
+                {showPrior ? "← hide" : "→"} Before tech: production supervisor
+              </button>
             </div>
           </motion.div>
 
@@ -200,12 +228,11 @@ export function ExperienceSection() {
                   marginBottom: 32,
                 }}
               >
-                Building dynamic web applications using React.js, Next.js, and
-                Node.js with AI assistance for each development task. Focus on
-                clean, maintainable code and user-centered solutions rather than
-                performance optimization. Collaborate closely with AI agents and
-                product owners to deliver reliable applications that prioritize
-                developer experience and business goals.
+                Developing and maintaining frontend applications with React,
+                TypeScript, and Next.js — from bug fixes to new features
+                across ongoing client projects. Collaborate closely with
+                Product Owners, UI/UX designers, and backend engineers on
+                REST API integration, with occasional backend work in C#.
               </p>
 
               {/* Impact bullets */}
@@ -260,6 +287,112 @@ export function ExperienceSection() {
             </div>
           </motion.div>
         </div>
+
+        {/* ── Before Tech — collapsible panel ── */}
+        <AnimatePresence initial={false}>
+          {showPrior && (
+            <motion.div
+              key="prior-experience"
+              initial={safe({ height: 0, opacity: 0 })}
+              animate={safe({ height: "auto", opacity: 1 })}
+              exit={safe({ height: 0, opacity: 0 })}
+              transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+              style={{ overflow: "hidden" }}
+            >
+              <div
+                style={{
+                  marginTop: "clamp(32px, 4vw, 48px)",
+                  paddingTop: "clamp(24px, 3vw, 32px)",
+                  borderTop: "1px solid var(--pnp-muted)",
+                }}
+                itemScope
+                itemType="https://schema.org/OrganizationRole"
+              >
+                <p
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 11,
+                    letterSpacing: "0.3em",
+                    textTransform: "uppercase",
+                    color: "var(--pnp-fg)",
+                    opacity: "var(--pnp-op-label)",
+                    marginBottom: 24,
+                  }}
+                >
+                  Before Tech
+                </p>
+
+                <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-4">
+                  <h3
+                    style={{
+                      fontFamily: "'Geist', sans-serif",
+                      fontSize: "clamp(18px, 2vw, 24px)",
+                      fontWeight: 700,
+                      color: "var(--pnp-fg)",
+                      opacity: "var(--pnp-op-body)",
+                    }}
+                    itemProp="roleName"
+                  >
+                    Production Supervisor ·{" "}
+                    <span itemProp="worksFor">PT Kahatex</span>
+                  </h3>
+                  <span
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 11,
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                      color: "var(--pnp-fg)",
+                      opacity: "var(--pnp-op-label)",
+                      flexShrink: 0,
+                    }}
+                  >
+                    May 2019 — Feb 2022
+                  </span>
+                </div>
+
+                <p
+                  style={{
+                    fontFamily: "'Geist', sans-serif",
+                    fontSize: "clamp(13px, 1.2vw, 15px)",
+                    lineHeight: 1.75,
+                    color: "var(--pnp-fg)",
+                    opacity: "var(--pnp-op-secondary)",
+                    marginBottom: 20,
+                    maxWidth: 720,
+                  }}
+                  itemProp="description"
+                >
+                  PT Kahatex is a garment manufacturer with an
+                  international-scale market. Supervised production
+                  operations and led a large floor team before transitioning
+                  into software development.
+                </p>
+
+                <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-2">
+                  {PRIOR_RESPONSIBILITIES.map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2"
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: 11,
+                        lineHeight: 1.6,
+                        color: "var(--pnp-fg)",
+                        opacity: "var(--pnp-op-label)",
+                      }}
+                    >
+                      <span style={{ flexShrink: 0 }} aria-hidden="true">
+                        ·
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
