@@ -42,7 +42,7 @@ export function ExperienceSection() {
             letterSpacing: "0.3em",
             textTransform: "uppercase",
             color: "var(--pnp-fg)",
-            opacity: 0.35,
+            opacity: "var(--pnp-op-label)",
             marginBottom: "clamp(48px, 6vw, 96px)",
           }}
         >
@@ -105,7 +105,7 @@ export function ExperienceSection() {
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   color: "var(--pnp-fg)",
-                  opacity: 0.4,
+                  opacity: "var(--pnp-op-label)",
                 }}
                 itemProp="roleName"
               >
@@ -163,7 +163,7 @@ export function ExperienceSection() {
             <div
               style={{
                 background: "var(--pnp-surface)",
-                border: "1px solid rgba(255,255,255,0.06)",
+                border: "1px solid var(--pnp-muted)",
                 padding: "clamp(24px, 3vw, 40px)",
               }}
             >
@@ -196,7 +196,7 @@ export function ExperienceSection() {
                   fontSize: "clamp(14px, 1.3vw, 16px)",
                   lineHeight: 1.8,
                   color: "var(--pnp-fg)",
-                  opacity: 0.55,
+                  opacity: "var(--pnp-op-secondary)",
                   marginBottom: 32,
                 }}
               >
@@ -211,7 +211,7 @@ export function ExperienceSection() {
               {/* Impact bullets */}
               <div
                 style={{
-                  borderTop: "1px solid rgba(255,255,255,0.06)",
+                  borderTop: "1px solid var(--pnp-muted)",
                   paddingTop: 24,
                 }}
               >
@@ -240,7 +240,7 @@ export function ExperienceSection() {
                         fontSize: 12,
                         lineHeight: 1.7,
                         color: "var(--pnp-fg)",
-                        opacity: 0.45,
+                        opacity: "var(--pnp-op-secondary)",
                       }}
                     >
                       <span

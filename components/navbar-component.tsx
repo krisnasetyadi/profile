@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useTheme } from "next-themes";
+import { Sun, Moon } from "lucide-react";
 import { socialMediaUrl } from "@/lib/constant";
 
 const NAV_LINKS = [
@@ -52,7 +54,7 @@ export default function Navigation() {
         "transition-colors duration-500",
         atTop
           ? "bg-transparent"
-          : "bg-[var(--pnp-bg)]/90 backdrop-blur-md border-b border-[var(--pnp-muted)]/30",
+          : "bg-[var(--pnp-bg)]/90 backdrop-blur-md border-b border-[var(--pnp-muted)]",
       ].join(" ")}
     >
       <nav className="flex h-16 items-center justify-between max-w-7xl mx-auto">
@@ -67,7 +69,7 @@ export default function Navigation() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="relative text-xs text-[var(--pnp-fg)]/50 hover:text-[var(--pnp-fg)] transition-colors duration-200 tracking-[0.2em] uppercase"
+                className="relative text-xs text-[var(--pnp-fg)] opacity-[var(--pnp-op-secondary)] hover:opacity-100 transition-[opacity,color] duration-200 tracking-[0.2em] uppercase"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
                 onMouseEnter={() => setActiveLink(item.href)}
                 onMouseLeave={() => setActiveLink(null)}
@@ -90,8 +92,9 @@ export default function Navigation() {
           ))}
         </ul>
 
-        {/* Right: Available badge */}
+        {/* Right: theme toggle + available badge */}
         <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
           <AvailableBadge onClick={scrollToFooter} />
         </div>
 
@@ -132,7 +135,7 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-[var(--pnp-surface)] border-t border-[var(--pnp-muted)]/30 px-6 py-6 space-y-4"
+            className="md:hidden bg-[var(--pnp-surface)] border-t border-[var(--pnp-muted)] px-6 py-6 space-y-4"
           >
             {NAV_LINKS.map((item) => (
               <a
@@ -144,7 +147,7 @@ export default function Navigation() {
                 {item.label}
               </a>
             ))}
-            <div className="pt-4 border-t border-[var(--pnp-muted)]/30 flex gap-6 text-sm text-[var(--pnp-fg)]/60">
+            <div className="pt-4 border-t border-[var(--pnp-muted)] flex items-center gap-6 text-sm text-[var(--pnp-fg)] opacity-[var(--pnp-op-secondary)]">
               <a
                 href={socialMediaUrl.linkedin}
                 target="_blank"
@@ -159,6 +162,7 @@ export default function Navigation() {
               >
                 GitHub
               </a>
+              <ThemeToggle />
             </div>
           </motion.div>
         )}
@@ -203,6 +207,27 @@ function LogoMark() {
   );
 }
 
+/* ── Theme toggle ── */
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  const isDark = mounted && resolvedTheme === "dark";
+
+  return (
+    <motion.button
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      whileTap={{ scale: 0.9 }}
+      className="flex items-center justify-center w-8 h-8 rounded-full border border-[var(--pnp-muted)] text-[var(--pnp-fg)] opacity-[var(--pnp-op-body)] hover:border-[var(--pnp-accent)] hover:opacity-100 transition-[opacity,border-color] duration-200"
+      aria-label={mounted ? `Switch to ${isDark ? "light" : "dark"} mode` : "Toggle theme"}
+    >
+      {mounted && (isDark ? <Sun size={14} /> : <Moon size={14} />)}
+    </motion.button>
+  );
+}
+
 /* ── Available badge ── */
 function AvailableBadge({ onClick }: { onClick: () => void }) {
   const [expanded, setExpanded] = useState(false);
@@ -212,7 +237,7 @@ function AvailableBadge({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
-      className="flex items-center gap-2 border border-[var(--pnp-muted)] rounded-full px-3 py-1.5 text-[10px] text-[var(--pnp-fg)]/70 hover:border-[var(--pnp-accent)]/50 hover:text-[var(--pnp-fg)] transition-colors duration-200 overflow-hidden tracking-[0.15em] uppercase"
+      className="flex items-center gap-2 border border-[var(--pnp-muted)] rounded-full px-3 py-1.5 text-[10px] text-[var(--pnp-fg)] opacity-[var(--pnp-op-body)] hover:border-[var(--pnp-accent)] hover:opacity-100 transition-[opacity,border-color] duration-200 overflow-hidden tracking-[0.15em] uppercase"
       aria-label="Available for work — click to contact"
     >
       <span className="pulse-dot" aria-hidden="true" />

@@ -89,7 +89,7 @@ function ProjectRow({
             fontWeight: 700,
             letterSpacing: "0.1em",
             color: "var(--pnp-fg)",
-            opacity: 0.12,
+            opacity: "var(--pnp-op-faint)",
             minWidth: 28,
             flexShrink: 0,
           }}
@@ -122,7 +122,7 @@ function ProjectRow({
             letterSpacing: "0.1em",
             textTransform: "uppercase",
             color: "var(--pnp-fg)",
-            opacity: isOpen ? 0.7 : 0.35,
+            opacity: isOpen ? "var(--pnp-op-body)" : "var(--pnp-op-label)",
             transition: "opacity 0.2s",
           }}
         >
@@ -138,7 +138,7 @@ function ProjectRow({
             width: 24,
             height: 24,
             position: "relative",
-            opacity: 0.5,
+            opacity: "var(--pnp-op-secondary)",
             transition: "opacity 0.2s",
           }}
           className="group-hover:opacity-100"
@@ -199,7 +199,7 @@ function ProjectRow({
                   height: "clamp(160px, 25vw, 380px)",
                   borderRadius: 4,
                   overflow: "hidden",
-                  border: "1px solid rgba(255,255,255,0.06)",
+                  border: "1px solid var(--pnp-muted)",
                 }}
               >
                 <Image
@@ -228,7 +228,7 @@ function ProjectRow({
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   color: "var(--pnp-fg)",
-                  opacity: 0.5,
+                  opacity: "var(--pnp-op-secondary)",
                   textDecoration: "none",
                   transition: "opacity 0.2s",
                   whiteSpace: "nowrap",
@@ -294,7 +294,7 @@ export function WorkSection() {
               letterSpacing: "0.3em",
               textTransform: "uppercase",
               color: "var(--pnp-fg)",
-              opacity: 0.35,
+              opacity: "var(--pnp-op-label)",
             }}
           >
             01 — Work

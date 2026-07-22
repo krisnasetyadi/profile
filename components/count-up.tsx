@@ -112,7 +112,7 @@ function StatItem({ value, label, numeric, typewriter }: StatItemProps) {
           letterSpacing: "0.18em",
           textTransform: "uppercase",
           color: "var(--pnp-fg)",
-          opacity: 0.4,
+          opacity: "var(--pnp-op-label)",
           marginTop: 8,
         }}
       >

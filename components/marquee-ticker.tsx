@@ -63,7 +63,7 @@ export function MarqueeTicker({
             fontWeight: 700,
             letterSpacing: "0.15em",
             color: "var(--pnp-fg)",
-            opacity: 0.4,
+            opacity: "var(--pnp-op-label)",
           }}
         >
           {ITEMS.map((item) => (
@@ -81,13 +81,13 @@ export function MarqueeTicker({
                 fontWeight: 700,
                 letterSpacing: "0.15em",
                 color: "var(--pnp-fg)",
-                opacity: 0.38,
+                opacity: "var(--pnp-op-label)",
                 marginRight: "3rem",
                 flexShrink: 0,
               }}
             >
               {item}
-              <span style={{ marginLeft: "3rem", opacity: 0.3 }}>·</span>
+              <span style={{ marginLeft: "3rem", opacity: "var(--pnp-op-faint)" }}>·</span>
             </span>
           ))}
         </div>

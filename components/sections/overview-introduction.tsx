@@ -7,6 +7,7 @@ import { AmbientCursorBg } from "@/components/ambient-cursor-bg";
 import { ButtonCvDownload } from "@/components/button-cv-download";
 import { useScrambleText } from "@/hooks/use-scramble-text";
 import { useMotionSafe } from "@/hooks/use-motion-safe";
+import Image from "next/image";
 
 // Per-letter animated reveal with optional idle scramble
 function LetterReveal({
@@ -78,7 +79,7 @@ function WordReveal({ text }: { text: string }) {
     <p
       ref={ref}
       className="text-lg md:text-xl leading-relaxed"
-      style={{ color: "var(--pnp-fg)", opacity: 0.75, maxWidth: 540 }}
+      style={{ color: "var(--pnp-fg)", opacity: "var(--pnp-op-body)", maxWidth: 540 }}
     >
       {text.split(" ").map((word, i) => {
         const isAccent = ACCENT_WORDS.includes(word);
@@ -150,26 +151,45 @@ export function OverviewIntroduction() {
             letterSpacing: "0.25em",
             textTransform: "uppercase",
             color: "var(--pnp-fg)",
-            opacity: 0.32,
+            opacity: "var(--pnp-op-label)",
           }}
         >
           <span>Software Developer</span>
           <span>Jakarta, Indonesia — Est. 2022</span>
         </motion.div>
 
-        {/* Giant name */}
-        <h1
-          className="display uppercase select-none"
-          style={{ color: "var(--pnp-fg)", marginBottom: 0 }}
-          itemProp="name"
-        >
-          <span className="block overflow-hidden">
-            <LetterReveal word="KRISNA" delay={0.12} scramble />
-          </span>
-          <span className="block overflow-hidden">
-            <LetterReveal word="SETYA ADI" delay={0.42} />
-          </span>
-        </h1>
+        {/* Giant name + photo */}
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+          <h1
+            className="display uppercase select-none"
+            style={{ color: "var(--pnp-fg)", marginBottom: 0 }}
+            itemProp="name"
+          >
+            <span className="block overflow-hidden">
+              <LetterReveal word="KRISNA" delay={0.12} scramble />
+            </span>
+            <span className="block overflow-hidden">
+              <LetterReveal word="SETYA ADI" delay={0.42} />
+            </span>
+          </h1>
+
+          <motion.div
+            className="relative self-center lg:self-auto flex-shrink-0 rounded-full overflow-hidden"
+            style={{ width: 220, height: 220 }}
+            initial={safe({ opacity: 0, scale: 0.9 })}
+            animate={safe({ opacity: 1, scale: 1 })}
+            transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1], delay: 0.6 }}
+          >
+            <Image
+              src="/images/me2.jpg"
+              alt="Krisna Dwi Setya Adi - Professional Software Developer headshot"
+              fill
+              className="object-cover"
+              priority
+              sizes="220px"
+            />
+          </motion.div>
+        </div>
 
         {/* Divider */}
         <motion.div
@@ -217,14 +237,14 @@ export function OverviewIntroduction() {
             textTransform: "uppercase",
             fontFamily: "'JetBrains Mono', monospace",
             color: "var(--pnp-fg)",
-            opacity: 0.28,
+            opacity: "var(--pnp-op-label)",
           }}
         >
           scroll
         </span>
         <motion.div
           className="w-px bg-[var(--pnp-fg)]"
-          style={{ opacity: 0.2 }}
+          style={{ opacity: "var(--pnp-op-label)" }}
           animate={{ height: [12, 28, 12] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         />

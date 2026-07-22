@@ -87,11 +87,11 @@ export function Footer() {
       </div>
 
       {/* Meta row */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[var(--pnp-fg)]/30">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[var(--pnp-fg)] opacity-[var(--pnp-op-label)]">
         <p className="text-[11px] tracking-widest uppercase font-mono">
           Developed by Krisna &middot; Jakarta &middot; 2026 &copy;
         </p>
-        <p className="text-[11px] tracking-[0.3em] uppercase font-syne font-bold text-[var(--pnp-fg)]/20">
+        <p className="text-[11px] tracking-[0.3em] uppercase font-syne font-bold opacity-80">
           KRSN
         </p>
       </div>

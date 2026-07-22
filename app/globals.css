@@ -215,18 +215,44 @@
    DESIGN TOKENS — Precision in Motion
    ============================================================ */
 :root {
-  --pnp-bg: #0a0a0a;
-  --pnp-fg: #f0ede8;
+  --pnp-bg: #f5f2ed;
+  --pnp-fg: #111111;
   --pnp-accent: #4d9fff;
-  --pnp-muted: #3a3a3a;
-  --pnp-surface: #141414;
+  --pnp-muted: #c9c2b3;
+  --pnp-surface: #ffffff;
+
+  /* ambient cursor glow tint — warm halo, blends with the cream bg */
+  --pnp-ambient-rgb: 190 150 90;
+
+  /* opacity tiers for secondary text — tuned per-theme so translucent
+     text keeps roughly the same *contrast*, not the same raw alpha.
+     Light-on-dark reads fine at low alpha; dark-on-light needs more. */
+  --pnp-op-faint: 0.25; /* decorative watermark numerals */
+  --pnp-op-label: 0.55; /* faint uppercase labels / meta text */
+  --pnp-op-secondary: 0.65; /* nav links, captions */
+  --pnp-op-body: 0.82; /* body copy that isn't full-strength fg */
 
   /* cursor position — updated via JS */
   --cursor-x: 50%;
   --cursor-y: 50%;
 }
 
-/* Dark is the default — the body carries it directly */
+/* Light is the default — dark mode is opt-in via the .dark class (next-themes) */
+.dark {
+  --pnp-bg: #0a0a0a;
+  --pnp-fg: #f0ede8;
+  --pnp-accent: #4d9fff;
+  --pnp-muted: #3a3a3a;
+  --pnp-surface: #141414;
+
+  --pnp-ambient-rgb: 77 159 255;
+
+  --pnp-op-faint: 0.12;
+  --pnp-op-label: 0.32;
+  --pnp-op-secondary: 0.5;
+  --pnp-op-body: 0.75;
+}
+
 body {
   background-color: var(--pnp-bg);
   color: var(--pnp-fg);

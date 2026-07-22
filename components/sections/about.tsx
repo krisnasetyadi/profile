@@ -129,7 +129,7 @@ export function AboutSection() {
             letterSpacing: "0.3em",
             textTransform: "uppercase",
             color: "var(--pnp-fg)",
-            opacity: 0.35,
+            opacity: "var(--pnp-op-label)",
             marginBottom: "clamp(40px, 5vw, 72px)",
           }}
         >
@@ -207,7 +207,7 @@ export function AboutSection() {
                 fontSize: "clamp(15px, 1.4vw, 18px)",
                 lineHeight: 1.85,
                 color: "var(--pnp-fg)",
-                opacity: 0.55,
+                opacity: "var(--pnp-op-secondary)",
                 maxWidth: 520,
               }}
             >

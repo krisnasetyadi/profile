@@ -88,7 +88,7 @@ export function AmbientCursorBg({
         width: size,
         height: size,
         borderRadius: "50%",
-        background: `radial-gradient(circle, rgba(77,159,255,${opacity}) 0%, transparent 70%)`,
+        background: `radial-gradient(circle, rgb(var(--pnp-ambient-rgb) / ${opacity}) 0%, transparent 70%)`,
         pointerEvents: "none",
         zIndex: 0,
       }}
