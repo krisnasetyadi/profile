@@ -79,15 +79,12 @@ function StatItem({ value, label, numeric, typewriter }: StatItemProps) {
       <div
         style={{
           fontFamily: "Syne, sans-serif",
-          fontSize: "clamp(22px, 5vw, 72px)",
+          fontSize: "clamp(12px, 3.5vw, 72px)",
           fontWeight: 800,
           lineHeight: 1,
           color: "var(--pnp-fg)",
           letterSpacing: "-0.02em",
           display: "inline-block",
-          minWidth: "3ch",
-          maxWidth: "100%",
-          overflowWrap: "break-word",
         }}
         aria-label={value}
       >
@@ -133,7 +130,7 @@ export function CountUp() {
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "clamp(12px, 4vw, 64px)",
+        gap: "clamp(4px, 4vw, 64px)",
         padding: "clamp(24px, 4vw, 56px) 0",
         borderTop: "1px solid var(--pnp-muted)",
         borderBottom: "1px solid var(--pnp-muted)",

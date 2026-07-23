@@ -35,15 +35,20 @@ function LetterReveal({
   const display = scramble && !prefersReduced ? scrambled : word;
 
   return (
-    <span aria-label={word} style={{ display: "inline-block" }}>
+    <span
+      aria-label={word}
+      style={{
+        display: "inline-block",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        maxWidth: "100%",
+        verticalAlign: "bottom",
+      }}
+    >
       {display.split("").map((char, i) => (
         <motion.span
           key={i}
-          style={{
-            display: "inline-block",
-            width: char === " " ? "0.32em" : "0.72em",
-            textAlign: "center",
-          }}
+          style={{ display: "inline-block" }}
           initial={safe({ opacity: 0, y: "105%" })}
           animate={safe({ opacity: 1, y: "0%" })}
           transition={{
