@@ -4,7 +4,6 @@ import { Button } from "./ui/button";
 import { ArrowDownToLine, Copy } from "lucide-react";
 import { CheckedIcon, FailedIcon } from "./check-icon";
 import { CVApi } from "@/services";
-import { toast } from "sonner";
 import { useState } from "react";
 import { toastManager } from "@/lib/toast";
 
@@ -26,18 +25,22 @@ export function ButtonCvDownload() {
       loading: true,
       error: false,
     });
-    await CVApi.download()
-      .then(() => {
-        toast.success("Download successful", {
-          description: "The file has been downloaded successfully.",
-        });
-        setIsDownload({
-          loading: false,
-          error: false,
-        });
-      })
-      .catch(async (error) => {
-        try {
+
+    try {
+      // Try API download first
+      await CVApi.download();
+      toastManager.showSuccess(
+        "Download successful",
+        "The file has been downloaded successfully.",
+      );
+      setIsDownload({
+        loading: false,
+        error: false,
+      });
+    } catch (apiError) {
+      console.warn("API download failed, trying fallback:", apiError);
+
+      try {
         // Fallback to static file
         const response = await fetch(
           "/Krisna%20Dwi%20Setya%20Adi%20-%20Resume.pdf",
@@ -84,7 +87,7 @@ export function ButtonCvDownload() {
           });
         }, 3000);
       }
-      });
+    }
   };
 
   return (

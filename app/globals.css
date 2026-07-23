@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -193,3 +194,246 @@
     transform: translateY(-10px);
   }
 }
+
+/* ============================================================
+   BLOB PHOTO KEYFRAMES
+   ============================================================ */
+@keyframes blob-breathe {
+  0%, 100% {
+    clip-path: polygon(50% 0%, 85% 10%, 100% 40%, 90% 75%, 60% 100%, 30% 95%, 5% 70%, 0% 35%, 20% 8%);
+  }
+  50% {
+    clip-path: polygon(45% 0%, 90% 15%, 98% 50%, 80% 85%, 55% 100%, 20% 92%, 2% 60%, 10% 25%, 30% 4%);
+  }
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   DESIGN TOKENS — Precision in Motion
+   ============================================================ */
+:root {
+  --pnp-bg: #f5f2ed;
+  --pnp-fg: #111111;
+  --pnp-accent: #4d9fff;
+  --pnp-muted: #c9c2b3;
+  --pnp-surface: #ffffff;
+
+  /* ambient cursor glow tint — warm halo, blends with the cream bg */
+  --pnp-ambient-rgb: 190 150 90;
+
+  /* opacity tiers for secondary text — tuned per-theme so translucent
+     text keeps roughly the same *contrast*, not the same raw alpha.
+     Light-on-dark reads fine at low alpha; dark-on-light needs more. */
+  --pnp-op-faint: 0.25; /* decorative watermark numerals */
+  --pnp-op-label: 0.55; /* faint uppercase labels / meta text */
+  --pnp-op-secondary: 0.65; /* nav links, captions */
+  --pnp-op-body: 0.82; /* body copy that isn't full-strength fg */
+
+  /* cursor position — updated via JS */
+  --cursor-x: 50%;
+  --cursor-y: 50%;
+}
+
+/* Light is the default — dark mode is opt-in via the .dark class (next-themes) */
+.dark {
+  --pnp-bg: #0a0a0a;
+  --pnp-fg: #f0ede8;
+  --pnp-accent: #4d9fff;
+  --pnp-muted: #3a3a3a;
+  --pnp-surface: #141414;
+
+  --pnp-ambient-rgb: 77 159 255;
+
+  --pnp-op-faint: 0.12;
+  --pnp-op-label: 0.32;
+  --pnp-op-secondary: 0.5;
+  --pnp-op-body: 0.75;
+}
+
+body {
+  background-color: var(--pnp-bg);
+  color: var(--pnp-fg);
+  font-family: "Geist", sans-serif;
+}
+
+.font-syne { font-family: "Syne", sans-serif; }
+.font-mono-code { font-family: "JetBrains Mono", monospace; }
+.font-geist { font-family: "Geist", sans-serif; }
+
+/* Hide native cursor on non-touch devices so our custom one takes over */
+@media (pointer: fine) {
+  html, body, * {
+    cursor: none !important;
+  }
+}
+
+::selection {
+  background-color: var(--pnp-accent);
+  color: #ffffff;
+}
+
+/* ============================================================
+   GRAIN OVERLAY
+   The SVG feTurbulence noise is painted as a data-URI background.
+   position: fixed so it tiles over everything without layout cost.
+   ============================================================ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ============================================================
+   TYPOGRAPHY SCALE
+   ============================================================ */
+
+/* Display — hero / giant statement headings */
+.display {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(36px, 5vw, 80px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+}
+
+/* Sub-display — medium-level section headers */
+.display-sm {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(18px, 2.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+/* Footer CTA large text */
+.display-footer {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(28px, 5.5vw, 80px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+}
+
+/* Body — long-form prose */
+.body-lg {
+  font-family: "Geist", sans-serif;
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+.body-md {
+  font-family: "Geist", sans-serif;
+  font-size: clamp(14px, 1.3vw, 17px);
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+/* Label — mono uppercase labels / section numbers / meta */
+.label-mono {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   CLIP-REVEAL UTILITY
+   Wrap text in an overflow-hidden parent, apply this class to
+   the inner span — then animate translateY(100% → 0).
+   ============================================================ */
+.clip-reveal {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.clip-reveal-inner {
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+/* ============================================================
+   DRAW-IN LINE (scaleX: 0 → 1, transform-origin: left)
+   ============================================================ */
+.draw-line {
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+/* ============================================================
+   BLINKING TERMINAL CURSOR
+   ============================================================ */
+.blink-cursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  color: var(--pnp-accent);
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+@keyframes marquee-right {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-left {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+}
+.marquee-track--right {
+  animation: marquee-right 20s linear infinite;
+}
+.marquee-track--left {
+  animation: marquee-left 20s linear infinite;
+}
+.marquee-track:hover {
+  animation-direction: reverse;
+}
+
+/* ============================================================
+   AVAILABILITY PULSE DOT
+   ============================================================ */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+.pulse-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
