@@ -74,17 +74,16 @@ function StatItem({ value, label, numeric, typewriter }: StatItemProps) {
       ref={ref}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ textAlign: "center", userSelect: "none" }}
+      style={{ textAlign: "center", userSelect: "none", minWidth: 0 }}
     >
       <div
         style={{
           fontFamily: "Syne, sans-serif",
-          fontSize: "clamp(36px, 5vw, 72px)",
+          fontSize: "clamp(12px, 3.5vw, 72px)",
           fontWeight: 800,
           lineHeight: 1,
           color: "var(--pnp-fg)",
           letterSpacing: "-0.02em",
-          minWidth: "3ch",
           display: "inline-block",
         }}
         aria-label={value}
@@ -129,10 +128,10 @@ export function CountUp() {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "space-around",
-        gap: "clamp(24px, 4vw, 64px)",
-        padding: "clamp(32px, 4vw, 56px) 0",
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: "clamp(4px, 4vw, 64px)",
+        padding: "clamp(24px, 4vw, 56px) 0",
         borderTop: "1px solid var(--pnp-muted)",
         borderBottom: "1px solid var(--pnp-muted)",
       }}
