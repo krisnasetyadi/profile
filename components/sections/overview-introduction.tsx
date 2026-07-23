@@ -39,7 +39,11 @@ function LetterReveal({
       {display.split("").map((char, i) => (
         <motion.span
           key={i}
-          style={{ display: "inline-block" }}
+          style={{
+            display: "inline-block",
+            width: char === " " ? "0.32em" : "0.72em",
+            textAlign: "center",
+          }}
           initial={safe({ opacity: 0, y: "105%" })}
           animate={safe({ opacity: 1, y: "0%" })}
           transition={{

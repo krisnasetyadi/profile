@@ -303,6 +303,14 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* Smaller minimum on narrow phones so long names (e.g. "KRISNA DWI")
+   fit on one line and don't wrap/reflow mid-scramble. */
+@media (max-width: 420px) {
+  .display {
+    font-size: clamp(26px, 8.5vw, 80px);
+  }
+}
+
 /* Sub-display — medium-level section headers */
 .display-sm {
   font-family: "Syne", sans-serif;
