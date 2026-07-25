@@ -1,13 +1,31 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CVApi } from "@/services";
 import { toastManager } from "@/lib/toast";
 
+interface CvRecord {
+  id: number;
+  name: string;
+  is_default: string;
+}
+
 export function CvUploadForm() {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [defaultCvId, setDefaultCvId] = useState<number | null>(null);
+
+  useEffect(() => {
+    CVApi.get<{ Data: CvRecord[] }>()
+      .then((response) => {
+        const defaultCv = response.Data?.find((cv) => cv.is_default === "Y");
+        if (defaultCv) setDefaultCvId(defaultCv.id);
+      })
+      .catch(() => {
+        // no existing CV yet, the next upload will create the first one
+      });
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +39,11 @@ export function CvUploadForm() {
     try {
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("is_default", "Y");
+      if (defaultCvId) {
+        formData.append("id", String(defaultCvId));
+      }
+
       await CVApi.updateCV(formData);
       toastManager.showSuccess(
         "CV updated",
