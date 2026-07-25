@@ -8,7 +8,7 @@ class CV extends RequestHandler {
   updateCV(body?: any) {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch(`${this.api}/${ENDPOINT.CV}`, {
+        const response = await fetch(`${this.api.defaults.baseURL}/${ENDPOINT.CV}`, {
           method: "PUT",
           body: body,
         });
