@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Lock } from "lucide-react";
+import { Lock, Clock, FileText, ArrowUpRight } from "lucide-react";
 import { TiltCard } from "@/components/tilt-card";
 import { useMotionSafe } from "@/hooks/use-motion-safe";
-import type { Project } from "@/lib/projects";
+import { projectSlug, type Project } from "@/lib/projects";
 
 export function WorkCatalogGrid({ projects }: { projects: Project[] }) {
   return (
@@ -25,6 +26,8 @@ export function WorkCatalogGrid({ projects }: { projects: Project[] }) {
 function CatalogCard({ project, delay }: { project: Project; delay: number }) {
   const { safe } = useMotionSafe();
   const isConfidential = !!project.confidential;
+  const hasImage = !!project.image;
+  const hasUrl = !!project.url;
 
   const thumbnail = isConfidential ? (
     <div
@@ -74,7 +77,7 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
         Under NDA
       </span>
     </div>
-  ) : (
+  ) : hasImage ? (
     <TiltCard className="block w-full" maxTilt={8} perspective={1000}>
       <div
         style={{
@@ -95,6 +98,54 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
         />
       </div>
     </TiltCard>
+  ) : (
+    <div
+      style={{
+        position: "relative",
+        aspectRatio: "4 / 3",
+        borderRadius: 8,
+        overflow: "hidden",
+        border: "1px solid var(--pnp-muted)",
+        background: "var(--pnp-surface)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 10,
+      }}
+    >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.5,
+          backgroundImage:
+            "repeating-linear-gradient(135deg, var(--pnp-muted) 0, var(--pnp-muted) 1px, transparent 1px, transparent 14px)",
+        }}
+      />
+      <Clock
+        size={20}
+        style={{
+          color: "var(--pnp-fg)",
+          opacity: "var(--pnp-op-secondary)",
+          position: "relative",
+        }}
+      />
+      <span
+        style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: 11,
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+          color: "var(--pnp-fg)",
+          opacity: "var(--pnp-op-secondary)",
+          position: "relative",
+        }}
+      >
+        In Progress
+      </span>
+    </div>
   );
 
   const caption = (
@@ -187,33 +238,68 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
     transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] as const, delay },
   };
 
-  if (isConfidential) {
-    return (
-      <motion.div
-        aria-label={`${project.name} — details confidential under NDA`}
-        style={{ display: "block" }}
-        {...motionProps}
+  const pillStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: 10,
+    letterSpacing: "0.15em",
+    textTransform: "uppercase" as const,
+    color: "var(--pnp-fg)",
+    opacity: "var(--pnp-op-secondary)",
+    border: "1px solid var(--pnp-muted)",
+    borderRadius: 9999,
+    padding: "8px 14px",
+    textDecoration: "none",
+    transition: "opacity 0.2s, border-color 0.2s",
+    whiteSpace: "nowrap" as const,
+    cursor: "none",
+  };
+
+  const actions = (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 8,
+        marginTop: 12,
+      }}
+    >
+      <Link
+        href={`/work/${projectSlug(project)}`}
+        aria-label={`View detail for ${project.name}`}
+        data-cursor="view"
+        style={pillStyle}
+        className="hover:opacity-100"
       >
-        {thumbnail}
-        {caption}
-        {note}
-      </motion.div>
-    );
-  }
+        <FileText size={13} aria-hidden="true" />
+        View Detail
+      </Link>
+
+      {hasUrl && (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Visit ${project.name} — opens in new tab`}
+          data-cursor="view"
+          style={pillStyle}
+          className="hover:opacity-100"
+        >
+          <ArrowUpRight size={13} aria-hidden="true" />
+          Visit Site
+        </a>
+      )}
+    </div>
+  );
 
   return (
-    <motion.a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`View ${project.name} — opens in new tab`}
-      data-cursor="view"
-      style={{ textDecoration: "none", display: "block", cursor: "none" }}
-      {...motionProps}
-    >
+    <motion.div style={{ display: "block" }} {...motionProps}>
       {thumbnail}
       {caption}
       {note}
-    </motion.a>
+      {actions}
+    </motion.div>
   );
 }

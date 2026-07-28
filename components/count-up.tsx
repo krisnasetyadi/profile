@@ -137,7 +137,7 @@ export function CountUp() {
       }}
     >
       <StatItem value="4+" label="Years" numeric={4} />
-      <StatItem value="10+" label="Projects" numeric={10} />
+      <StatItem value="20+" label="Apps Shipped" numeric={20} />
       <StatItem value="Jakarta" label="Based In" typewriter />
     </div>
   );
