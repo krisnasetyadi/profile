@@ -212,9 +212,12 @@ export function AboutSection() {
               }}
             >
               Based in <HighlightedPhrase>Jakarta</HighlightedPhrase>,
-              Indonesia. With a focus on performance, usability, and clean
-              architecture — delivering intuitive, scalable solutions tailored
-              to each project&apos;s unique goals.
+              Indonesia. Frontend-focused —{" "}
+              <HighlightedPhrase>React, Next.js, TypeScript</HighlightedPhrase>{" "}
+              — and branching into full-stack with C#/.NET, with a focus on
+              performance, usability, and clean architecture — delivering
+              intuitive, scalable solutions tailored to each
+              project&apos;s unique goals.
             </motion.p>
           </div>
         </div>

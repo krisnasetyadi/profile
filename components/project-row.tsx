@@ -2,10 +2,11 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Lock } from "lucide-react";
+import Link from "next/link";
+import { Lock, Clock, FileText, ArrowUpRight } from "lucide-react";
 import { AnimatedRowBorder } from "@/components/animated-row-border";
 import { useMotionSafe } from "@/hooks/use-motion-safe";
-import type { Project } from "@/lib/projects";
+import { projectSlug, type Project } from "@/lib/projects";
 
 export function ProjectRow({
   project,
@@ -18,6 +19,7 @@ export function ProjectRow({
 }) {
   const { safe } = useMotionSafe();
   const isConfidential = !!project.confidential;
+  const hasImage = !!project.image;
 
   return (
     <div>
@@ -173,7 +175,7 @@ export function ProjectRow({
                   borderRadius: 4,
                   overflow: "hidden",
                   border: "1px solid var(--pnp-muted)",
-                  ...(isConfidential
+                  ...(!hasImage
                     ? {
                         display: "flex",
                         flexDirection: "column" as const,
@@ -207,7 +209,7 @@ export function ProjectRow({
                       Under NDA
                     </span>
                   </>
-                ) : (
+                ) : hasImage ? (
                   <Image
                     src={project.image!}
                     alt={project.alt}
@@ -215,72 +217,100 @@ export function ProjectRow({
                     className="object-contain"
                     sizes="(max-width: 768px) 100vw, 80vw"
                   />
+                ) : (
+                  <>
+                    <Clock
+                      size={20}
+                      style={{
+                        color: "var(--pnp-fg)",
+                        opacity: "var(--pnp-op-secondary)",
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: 11,
+                        letterSpacing: "0.2em",
+                        textTransform: "uppercase",
+                        color: "var(--pnp-fg)",
+                        opacity: "var(--pnp-op-secondary)",
+                      }}
+                    >
+                      In Progress
+                    </span>
+                  </>
                 )}
               </div>
 
-              {isConfidential ? (
-                <span
+              <div
+                style={{
+                  flexShrink: 0,
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  gap: 8,
+                }}
+              >
+                <Link
+                  href={`/work/${projectSlug(project)}`}
+                  aria-label={`View detail for ${project.name}`}
+                  data-cursor="view"
                   style={{
-                    flexShrink: 0,
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
                     gap: 6,
                     fontFamily: "'JetBrains Mono', monospace",
                     fontSize: 10,
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.15em",
                     textTransform: "uppercase",
                     color: "var(--pnp-fg)",
-                    opacity: "var(--pnp-op-label)",
+                    opacity: "var(--pnp-op-secondary)",
+                    border: "1px solid var(--pnp-muted)",
+                    borderRadius: 9999,
+                    padding: "8px 14px",
+                    textDecoration: "none",
+                    transition: "opacity 0.2s, border-color 0.2s",
                     whiteSpace: "nowrap",
+                    cursor: "none",
                   }}
+                  className="hover:opacity-100"
                 >
-                  Details private
-                </span>
-              ) : (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View ${project.name} — opens in new tab`}
-                data-cursor="view"
-                style={{
-                  flexShrink: 0,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 6,
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 10,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "var(--pnp-fg)",
-                  opacity: "var(--pnp-op-secondary)",
-                  textDecoration: "none",
-                  transition: "opacity 0.2s",
-                  whiteSpace: "nowrap",
-                  cursor: "none",
-                }}
-                className="hover:opacity-100"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M5 15L15 5M15 5H7M15 5V13"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                View
-              </a>
-              )}
+                  <FileText size={13} aria-hidden="true" />
+                  View Detail
+                </Link>
+
+                {project.url && (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit ${project.name} — opens in new tab`}
+                    data-cursor="view"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 10,
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                      color: "var(--pnp-fg)",
+                      opacity: "var(--pnp-op-secondary)",
+                      border: "1px solid var(--pnp-muted)",
+                      borderRadius: 9999,
+                      padding: "8px 14px",
+                      textDecoration: "none",
+                      transition: "opacity 0.2s, border-color 0.2s",
+                      whiteSpace: "nowrap",
+                      cursor: "none",
+                    }}
+                    className="hover:opacity-100"
+                  >
+                    <ArrowUpRight size={13} aria-hidden="true" />
+                    Visit Site
+                  </a>
+                )}
+              </div>
             </div>
           </motion.div>
         )}

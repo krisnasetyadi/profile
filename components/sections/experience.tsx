@@ -4,14 +4,15 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMotionSafe } from "@/hooks/use-motion-safe";
 
-const TECH_TAGS = ["React", "Angular", "TypeScript", "Next.js", "C#", "REST API"];
+const TECH_TAGS = ["React", "Angular", "TypeScript", "Next.js", "TanStack", "Zustand", "C# / .NET"];
 
 const IMPACTS = [
-  "Contributed to 7 client projects, delivering 19 frontend applications built with React and Angular.",
-  "Designed and implemented a shared frontend boilerplate that streamlined development workflows and improved UI consistency across projects.",
-  "Delivered high-quality frontend UI despite backend constraints, keeping project delivery on track.",
-  "Participated in frontend-focused code reviews on ongoing projects across multiple repositories.",
-  "Onboarded and mentored intern batches, guiding them through building frontend projects.",
+  "Contributed to 3 client projects and 2 internal products — 20+ production applications built with React, Angular, and TypeScript.",
+  "Lead frontend code reviews across the team.",
+  "Designed and built a shared React boilerplate (Vite, TanStack Router, Shadcn UI, Zustand, custom DataTable) that became the source of truth across projects.",
+  "Resolved a critical bug in a spreadsheet-like dynamic form feature — stable in production for almost 2 years since, zero bug reports.",
+  "Mentored 3 intern batches (~4 people each), guiding them through building frontend projects.",
+  "Supported delivery of a client Next.js training program (2 batches, 3 days each), covering sessions in the lead trainer's absence and helping participants troubleshoot hands-on exercises.",
 ];
 
 const PRIOR_RESPONSIBILITIES = [
@@ -232,7 +233,8 @@ export function ExperienceSection() {
                 TypeScript, and Next.js — from bug fixes to new features
                 across ongoing client projects. Collaborate closely with
                 Product Owners, UI/UX designers, and backend engineers on
-                REST API integration, with occasional backend work in C#.
+                REST API integration, now branching into backend work with
+                C# and .NET.
               </p>
 
               {/* Impact bullets */}
