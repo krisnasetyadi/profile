@@ -1,10 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { MagneticButton } from "@/components/magnetic-button";
 import { ScrambleText } from "@/components/scramble-text";
 import { contact, socialMediaUrl } from "@/lib/constant";
+import { whatsAppIcon } from "@/public/icons";
 
 const CTA_WORDS = ["LETS", "BUILD", "SOMETHING."];
 
@@ -109,6 +111,19 @@ export function Footer() {
               className="font-mono"
             />
             <span>GitHub</span>
+          </a>
+        </MagneticButton>
+
+        <MagneticButton radius={60} strength={0.4}>
+          <a
+            href={contact.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[var(--pnp-fg)] text-sm tracking-widest uppercase border border-[var(--pnp-muted)] px-5 py-2.5 hover:border-[var(--pnp-fg)] transition-colors duration-200"
+            aria-label="Chat on WhatsApp"
+          >
+            <Image src={whatsAppIcon} alt="" width={14} height={14} aria-hidden="true" />
+            <span>WhatsApp</span>
           </a>
         </MagneticButton>
       </div>
