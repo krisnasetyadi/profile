@@ -160,16 +160,15 @@ export function ProjectRow({
             style={{ overflow: "hidden" }}
           >
             <div
+              className="flex flex-col sm:flex-row sm:items-end"
               style={{
                 paddingBottom: "clamp(24px, 3vw, 40px)",
-                display: "flex",
-                alignItems: "flex-end",
                 gap: "clamp(16px, 3vw, 40px)",
               }}
             >
               <div
+                className="w-full sm:flex-1"
                 style={{
-                  flex: 1,
                   position: "relative",
                   height: "clamp(160px, 25vw, 380px)",
                   borderRadius: 4,
