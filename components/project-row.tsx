@@ -167,9 +167,8 @@ export function ProjectRow({
               }}
             >
               <div
-                className="w-full sm:w-auto"
+                className="w-full sm:flex-1"
                 style={{
-                  flex: 1,
                   position: "relative",
                   height: "clamp(160px, 25vw, 380px)",
                   borderRadius: 4,
