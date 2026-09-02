@@ -2,7 +2,7 @@ import type { StaticImageData } from "next/image";
 import AngularGridImage from "../public/images/work/angular-grid.png";
 import LawFirmImage from "../public/images/work/law-firm.png";
 import Cashnomy from "../public/images/work/cashnomy.png";
-import Vovelia from "../public/images/work/vovelia-preview.png";
+import Evowria from "../public/images/work/eworia-preview.png";
 import DocuLensImage from "../public/images/work/doculens.png";
 import TopRentMediaImage from "../public/images/work/top-rent-media.png";
 
@@ -36,12 +36,12 @@ function withIndex(projects: ProjectData[]): Project[] {
 
 const PROJECTS_DATA: ProjectData[] = [
   {
-    name: "VOVELIA",
+    name: "EVOWRIA",
     category: "Digital Invitation",
     year: "2026",
-    url: "https://vovelia.vercel.app/",
-    image: Vovelia,
-    alt: "Vovelia — Digital Wedding Invitation Platform",
+    url: "https://www.evowria.com/",
+    image: Evowria,
+    alt: "Evowria — Digital Wedding Invitation Platform",
     description:
       "A digital invitation platform — create and share event invitations online, with RSVP and guest details in one link, no printed cards needed.",
     featured: true,
