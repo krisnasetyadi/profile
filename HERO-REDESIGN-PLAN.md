@@ -209,7 +209,7 @@ hooks/use-scramble-text.ts  ✅ (created)
 - Replace 2-col image grid with a stacked list
 - Each project row:
   ```
-  01   VOVELIA ----------------   Digital Invitation   2024   →
+  01   Evowria ----------------   Digital Invitation   2024   →
   02   CASHNOMY ---------------   Finance App          2024   →
   03   ANGULAR GRID -----------   Dev Tool             2023   →
   04   LAW FIRM ---------------   Corporate Site       2023   →
