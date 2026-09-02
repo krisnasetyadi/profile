@@ -2,7 +2,7 @@ import type { StaticImageData } from "next/image";
 import AngularGridImage from "../public/images/work/angular-grid.png";
 import LawFirmImage from "../public/images/work/law-firm.png";
 import Cashnomy from "../public/images/work/cashnomy.png";
-import Evowria from "../public/images/work/eworia-preview.png";
+import Evowria from "../public/images/work/evowria-preview.png";
 import DocuLensImage from "../public/images/work/doculens.png";
 import TopRentMediaImage from "../public/images/work/top-rent-media.png";
 
