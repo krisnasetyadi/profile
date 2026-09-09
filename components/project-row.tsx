@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +8,78 @@ import { Lock, Clock, FileText, ArrowUpRight } from "lucide-react";
 import { AnimatedRowBorder } from "@/components/animated-row-border";
 import { useMotionSafe } from "@/hooks/use-motion-safe";
 import { projectSlug, type Project } from "@/lib/projects";
+
+const specActionStyle: CSSProperties = {
+  flex: 1,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 6,
+  fontFamily: "'JetBrains Mono', monospace",
+  fontSize: 10,
+  letterSpacing: "0.15em",
+  textTransform: "uppercase",
+  color: "var(--pnp-fg)",
+  opacity: "var(--pnp-op-secondary)",
+  padding: "12px 8px",
+  textDecoration: "none",
+  transition: "opacity 0.2s",
+  whiteSpace: "nowrap",
+  cursor: "none",
+};
+
+function SpecRow({
+  label,
+  grow,
+  children,
+}: {
+  label: string;
+  grow?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      style={{
+        padding: "12px 16px",
+        borderBottom: "1px solid var(--pnp-muted)",
+        flex: grow ? 1 : undefined,
+      }}
+    >
+      <span
+        style={{
+          display: "block",
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: 9,
+          fontWeight: 500,
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+          color: "var(--pnp-fg)",
+          opacity: "var(--pnp-op-label)",
+          marginBottom: 6,
+        }}
+      >
+        {label}
+      </span>
+      {children}
+    </div>
+  );
+}
+
+function SpecValue({ children }: { children: ReactNode }) {
+  return (
+    <span
+      style={{
+        display: "block",
+        fontFamily: "Syne, sans-serif",
+        fontSize: 14,
+        fontWeight: 700,
+        color: "var(--pnp-fg)",
+      }}
+    >
+      {children}
+    </span>
+  );
+}
 
 export function ProjectRow({
   project,
@@ -160,10 +233,10 @@ export function ProjectRow({
             style={{ overflow: "hidden" }}
           >
             <div
-              className="flex flex-col sm:flex-row sm:items-end"
+              className="flex flex-col sm:flex-row sm:items-stretch"
               style={{
                 paddingBottom: "clamp(24px, 3vw, 40px)",
-                gap: "clamp(16px, 3vw, 40px)",
+                gap: "clamp(16px, 3vw, 32px)",
               }}
             >
               <div
@@ -241,74 +314,111 @@ export function ProjectRow({
                 )}
               </div>
 
+              {/* Info panel — spec-sheet card: labeled rows separated by dividers */}
               <div
+                className="w-full sm:w-auto"
                 style={{
                   flexShrink: 0,
                   display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                  gap: 8,
+                  flexDirection: "column",
+                  minHeight: "clamp(160px, 25vw, 380px)",
+                  width: "clamp(240px, 28vw, 340px)",
+                  border: "1px solid var(--pnp-muted)",
+                  borderRadius: 4,
+                  overflow: "hidden",
                 }}
               >
-                <Link
-                  href={`/work/${projectSlug(project)}`}
-                  aria-label={`View detail for ${project.name}`}
-                  data-cursor="view"
+                {project.role && (
+                  <SpecRow label="Role">
+                    <SpecValue>{project.role}</SpecValue>
+                  </SpecRow>
+                )}
+
+                {project.description && (
+                  <SpecRow label="About" grow>
+                    <p
+                      style={{
+                        fontFamily: "Syne, sans-serif",
+                        fontSize: 13,
+                        lineHeight: 1.55,
+                        color: "var(--pnp-fg)",
+                        opacity: "var(--pnp-op-body)",
+                        margin: 0,
+                      }}
+                    >
+                      {project.description}
+                    </p>
+
+                    {project.tags && project.tags.length > 0 && (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexWrap: "wrap",
+                          gap: 6,
+                          marginTop: 12,
+                        }}
+                      >
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            style={{
+                              fontFamily: "'JetBrains Mono', monospace",
+                              fontSize: 9,
+                              letterSpacing: "0.1em",
+                              textTransform: "uppercase",
+                              color: "var(--pnp-fg)",
+                              opacity: "var(--pnp-op-secondary)",
+                              border: "1px solid var(--pnp-muted)",
+                              borderRadius: 9999,
+                              padding: "3px 10px",
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </SpecRow>
+                )}
+
+                {/* Footer actions — split evenly, divided by a vertical rule */}
+                <div
                   style={{
                     display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: 10,
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    color: "var(--pnp-fg)",
-                    opacity: "var(--pnp-op-secondary)",
-                    border: "1px solid var(--pnp-muted)",
-                    borderRadius: 9999,
-                    padding: "8px 14px",
-                    textDecoration: "none",
-                    transition: "opacity 0.2s, border-color 0.2s",
-                    whiteSpace: "nowrap",
-                    cursor: "none",
+                    borderTop: "1px solid var(--pnp-muted)",
+                    marginTop: "auto",
                   }}
-                  className="hover:opacity-100"
                 >
-                  <FileText size={13} aria-hidden="true" />
-                  View Detail
-                </Link>
-
-                {project.url && (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Visit ${project.name} — opens in new tab`}
+                  <Link
+                    href={`/work/${projectSlug(project)}`}
+                    aria-label={`View detail for ${project.name}`}
                     data-cursor="view"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: 10,
-                      letterSpacing: "0.15em",
-                      textTransform: "uppercase",
-                      color: "var(--pnp-fg)",
-                      opacity: "var(--pnp-op-secondary)",
-                      border: "1px solid var(--pnp-muted)",
-                      borderRadius: 9999,
-                      padding: "8px 14px",
-                      textDecoration: "none",
-                      transition: "opacity 0.2s, border-color 0.2s",
-                      whiteSpace: "nowrap",
-                      cursor: "none",
-                    }}
+                    style={specActionStyle}
                     className="hover:opacity-100"
                   >
-                    <ArrowUpRight size={13} aria-hidden="true" />
-                    Visit Site
-                  </a>
-                )}
+                    <FileText size={12} aria-hidden="true" />
+                    Detail
+                  </Link>
+
+                  {project.url && (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visit ${project.name} — opens in new tab`}
+                      data-cursor="view"
+                      style={{
+                        ...specActionStyle,
+                        borderLeft: "1px solid var(--pnp-muted)",
+                      }}
+                      className="hover:opacity-100"
+                    >
+                      <ArrowUpRight size={12} aria-hidden="true" />
+                      Visit
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>
