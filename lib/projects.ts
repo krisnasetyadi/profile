@@ -19,6 +19,10 @@ export type Project = {
   alt: string;
   /** Short problem → solution blurb, 1-2 sentences. Shown in the expanded row/card. */
   description?: string;
+  /** e.g. "UI Design · Frontend Dev". Shown in the expanded row/card. */
+  role?: string;
+  /** Short skill/discipline tags, e.g. ["Web Design", "Branding"]. Shown in the expanded row/card. */
+  tags?: string[];
   featured: boolean;
   /** Under NDA: no screenshot, no public link, name/description may be generic. */
   confidential?: boolean;
@@ -44,6 +48,8 @@ const PROJECTS_DATA: ProjectData[] = [
     alt: "Evowria — Digital Wedding Invitation Platform",
     description:
       "A digital invitation platform — create and share event invitations online, with RSVP and guest details in one link, no printed cards needed.",
+    role: "UI Design · Full-Stack Dev",
+    tags: ["Web Design", "Branding", "Motion"],
     featured: true,
   },
   {
@@ -55,6 +61,8 @@ const PROJECTS_DATA: ProjectData[] = [
     alt: "DocuLens — Retrieval-Augmented Generation document Q&A system",
     description:
       "A Retrieval-Augmented Generation (RAG) system for document Q&A — hybrid search across PDFs, database records, and chat logs to surface answers fast.",
+    role: "Full-Stack Dev",
+    tags: ["RAG", "Search", "AI Assistant"],
     featured: true,
     inProgress: true,
     note: "Personal RAG project, shortlisted for an internal innovation showcase at Moonlay. Live beta — still under active development.",
@@ -68,6 +76,8 @@ const PROJECTS_DATA: ProjectData[] = [
     alt: "Angular Grid — Spreadsheet App",
     description:
       "A spreadsheet-style data grid built in Angular — sortable, filterable, editable rows for working with large tabular datasets.",
+    role: "Frontend Dev",
+    tags: ["Angular", "Dev Tool", "Data Grid"],
     featured: true,
   },
   {
@@ -79,6 +89,8 @@ const PROJECTS_DATA: ProjectData[] = [
     alt: "Law Firm — Corporate Website",
     description:
       "A corporate website for a law firm — practice area overviews, team profiles, and a contact/inquiry flow.",
+    role: "UI Design · Frontend Dev",
+    tags: ["Web Design", "Corporate Site"],
     featured: true,
   },
 
@@ -91,6 +103,8 @@ const PROJECTS_DATA: ProjectData[] = [
     alt: "Top Rent Media — Electronics Rental Platform",
     description:
       "A premium electronics rental platform — product catalog with categories, a customer-facing storefront with blog and FAQ, and an admin panel for managing listings, orders, and content.",
+    role: "Full-Stack Dev",
+    tags: ["Web App", "Admin Panel", "E-Commerce"],
     featured: true,
     note: "Full-stack build with a customer storefront and admin dashboard, backed by Supabase and Drizzle.",
   },
@@ -103,6 +117,8 @@ const PROJECTS_DATA: ProjectData[] = [
     alt: "Cashnomy — Personal Finance Dashboard",
     description:
       "A personal finance app for budgeting, wallet tracking, savings plans, and bill-splitting — with support for arisan (rotating savings groups) and debt tracking.",
+    role: "Product Design · Full-Stack Dev",
+    tags: ["Web App", "Fintech", "Dashboard"],
     featured: true,
   },
 ];
