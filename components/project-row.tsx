@@ -316,13 +316,10 @@ export function ProjectRow({
 
               {/* Info panel — spec-sheet card: labeled rows separated by dividers */}
               <div
-                className="w-full sm:w-auto"
+                className="w-full sm:w-[clamp(240px,28vw,340px)] sm:min-h-[clamp(160px,25vw,380px)] sm:flex-shrink-0"
                 style={{
-                  flexShrink: 0,
                   display: "flex",
                   flexDirection: "column",
-                  minHeight: "clamp(160px, 25vw, 380px)",
-                  width: "clamp(240px, 28vw, 340px)",
                   border: "1px solid var(--pnp-muted)",
                   borderRadius: 4,
                   overflow: "hidden",
