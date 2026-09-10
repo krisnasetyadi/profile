@@ -108,7 +108,7 @@ export function ButtonCvDownload() {
         <Button
           variant="ghost"
           onClick={handleDownloadCV}
-          className="flex justify-start md:justify-normal items-center gap-2 text-sm p-0 hover:bg-background"
+          className="flex justify-start md:justify-normal items-center gap-2 text-sm p-0 hover:bg-transparent dark:hover:bg-transparent"
           disabled={isDownload.loading}
         >
           <span className="hover:underline hover:underline-offset-4">
