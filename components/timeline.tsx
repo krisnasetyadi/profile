@@ -53,7 +53,7 @@ export function Timeline({ children }: TimelineProps) {
           top: 0,
           bottom: 0,
           width: 2,
-          backgroundColor: "var(--pnp-accent)",
+          backgroundColor: "var(--brand)",
           transformOrigin: "top",
           transform: "scaleY(0)",
           transition: "transform 0.4s ease-out",

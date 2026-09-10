@@ -80,7 +80,7 @@ export default function Navigation() {
         "transition-colors duration-500",
         atTop
           ? "bg-transparent"
-          : "bg-[var(--pnp-bg)]/90 backdrop-blur-md border-b border-[var(--pnp-muted)]",
+          : "bg-[var(--background)]/90 backdrop-blur-md border-b border-[var(--border)]",
       ].join(" ")}
     >
       <script
@@ -113,7 +113,7 @@ export default function Navigation() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="relative text-xs text-[var(--pnp-fg)] opacity-[var(--pnp-op-secondary)] hover:opacity-100 transition-[opacity,color] duration-200 tracking-[0.2em] uppercase"
+                  className="relative text-xs text-[var(--foreground)] opacity-[var(--opacity-secondary)] hover:opacity-100 transition-[opacity,color] duration-200 tracking-[0.2em] uppercase"
                   style={{ fontFamily: "'JetBrains Mono', monospace" }}
                   onMouseEnter={() => setActiveLink(item.href)}
                   onMouseLeave={() => setActiveLink(null)}
@@ -127,7 +127,7 @@ export default function Navigation() {
                         animate={{ opacity: 1, scaleX: 1 }}
                         exit={{ opacity: 0, scaleX: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute -bottom-1 left-0 right-0 h-px bg-[var(--pnp-accent)]"
+                        className="absolute -bottom-1 left-0 right-0 h-px bg-[var(--brand)]"
                       />
                     )}
                   </AnimatePresence>
@@ -146,7 +146,7 @@ export default function Navigation() {
         {/* Mobile hamburger */}
         <button
           type="button"
-          className="relative md:hidden flex h-11 w-11 shrink-0 items-center justify-center text-[var(--pnp-fg)]"
+          className="relative md:hidden flex h-11 w-11 shrink-0 items-center justify-center text-[var(--foreground)]"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
@@ -187,7 +187,7 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-[var(--pnp-surface)] border-t border-[var(--pnp-muted)] px-6 py-6 space-y-4"
+            className="md:hidden bg-[var(--card)] border-t border-[var(--border)] px-6 py-6 space-y-4"
           >
             {NAV_LINKS.map((item) => {
               return (
@@ -195,13 +195,13 @@ export default function Navigation() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block text-[var(--pnp-fg)] text-lg font-medium tracking-wide"
+                  className="block text-[var(--foreground)] text-lg font-medium tracking-wide"
                 >
                   {item.label}
                 </Link>
               );
             })}
-            <div className="pt-4 border-t border-[var(--pnp-muted)] flex items-center gap-6 text-sm text-[var(--pnp-fg)] opacity-[var(--pnp-op-secondary)]">
+            <div className="pt-4 border-t border-[var(--border)] flex items-center gap-6 text-sm text-[var(--foreground)] opacity-[var(--opacity-secondary)]">
               <a
                 href={socialMediaUrl.linkedin}
                 target="_blank"
@@ -246,7 +246,7 @@ function LogoMark() {
             damping: 20,
             delay: i * 0.04,
           }}
-          className="text-xl text-[var(--pnp-fg)] font-syne"
+          className="text-xl text-[var(--foreground)] font-syne"
           style={{ display: "inline-block", fontWeight: 720 }}
         >
           {l}
@@ -255,7 +255,7 @@ function LogoMark() {
       <motion.span
         animate={hovered ? { width: 20, height: 20 } : { width: 8, height: 8 }}
         transition={{ type: "spring", stiffness: 400, damping: 18 }}
-        className="ml-1 bg-[var(--pnp-accent)] rounded-full inline-block"
+        className="ml-1 bg-[var(--brand)] rounded-full inline-block"
       />
     </span>
   );
@@ -274,7 +274,7 @@ function ThemeToggle() {
     <motion.button
       onClick={() => setTheme(isDark ? "light" : "dark")}
       whileTap={{ scale: 0.9 }}
-      className="flex items-center justify-center w-8 h-8 rounded-full border border-[var(--pnp-muted)] text-[var(--pnp-fg)] opacity-[var(--pnp-op-body)] hover:border-[var(--pnp-accent)] hover:opacity-100 transition-[opacity,border-color] duration-200"
+      className="flex items-center justify-center w-8 h-8 rounded-full border border-[var(--border)] text-[var(--foreground)] opacity-[var(--opacity-body)] hover:border-[var(--brand)] hover:opacity-100 transition-[opacity,border-color] duration-200"
       aria-label={mounted ? `Switch to ${isDark ? "light" : "dark"} mode` : "Toggle theme"}
     >
       {mounted && (isDark ? <Sun size={14} /> : <Moon size={14} />)}
@@ -291,7 +291,7 @@ function AvailableBadge({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
-      className="flex items-center gap-2 border border-[var(--pnp-muted)] rounded-full px-3 py-1.5 text-[10px] text-[var(--pnp-fg)] opacity-[var(--pnp-op-body)] hover:border-[var(--pnp-accent)] hover:opacity-100 transition-[opacity,border-color] duration-200 overflow-hidden tracking-[0.15em] uppercase"
+      className="flex items-center gap-2 border border-[var(--border)] rounded-full px-3 py-1.5 text-[10px] text-[var(--foreground)] opacity-[var(--opacity-body)] hover:border-[var(--brand)] hover:opacity-100 transition-[opacity,border-color] duration-200 overflow-hidden tracking-[0.15em] uppercase"
       aria-label="Available for work — click to contact"
     >
       <span className="pulse-dot" aria-hidden="true" />

@@ -33,8 +33,8 @@ export function WorkSection() {
               fontWeight: 500,
               letterSpacing: "0.3em",
               textTransform: "uppercase",
-              color: "var(--pnp-fg)",
-              opacity: "var(--pnp-op-label)",
+              color: "var(--foreground)",
+              opacity: "var(--opacity-label)",
             }}
           >
             01 — Work
@@ -43,7 +43,7 @@ export function WorkSection() {
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "10px",
-              color: "var(--pnp-accent)",
+              color: "var(--brand)",
               opacity: 0.5,
               letterSpacing: "0.15em",
             }}
@@ -64,8 +64,8 @@ export function WorkSection() {
                 fontSize: 12,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                color: "var(--pnp-fg)",
-                opacity: "var(--pnp-op-secondary)",
+                color: "var(--foreground)",
+                opacity: "var(--opacity-secondary)",
                 textDecoration: "none",
                 transition: "opacity 0.2s",
               }}

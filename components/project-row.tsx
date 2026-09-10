@@ -19,8 +19,8 @@ const specActionStyle: CSSProperties = {
   fontSize: 10,
   letterSpacing: "0.15em",
   textTransform: "uppercase",
-  color: "var(--pnp-fg)",
-  opacity: "var(--pnp-op-secondary)",
+  color: "var(--foreground)",
+  opacity: "var(--opacity-secondary)",
   padding: "12px 8px",
   textDecoration: "none",
   transition: "opacity 0.2s",
@@ -41,7 +41,7 @@ function SpecRow({
     <div
       style={{
         padding: "12px 16px",
-        borderBottom: "1px solid var(--pnp-muted)",
+        borderBottom: "1px solid var(--border)",
         flex: grow ? 1 : undefined,
       }}
     >
@@ -53,8 +53,8 @@ function SpecRow({
           fontWeight: 500,
           letterSpacing: "0.2em",
           textTransform: "uppercase",
-          color: "var(--pnp-fg)",
-          opacity: "var(--pnp-op-label)",
+          color: "var(--foreground)",
+          opacity: "var(--opacity-label)",
           marginBottom: 6,
         }}
       >
@@ -73,7 +73,7 @@ function SpecValue({ children }: { children: ReactNode }) {
         fontFamily: "Syne, sans-serif",
         fontSize: 14,
         fontWeight: 700,
-        color: "var(--pnp-fg)",
+        color: "var(--foreground)",
       }}
     >
       {children}
@@ -122,8 +122,8 @@ export function ProjectRow({
             fontSize: "clamp(11px, 1vw, 14px)",
             fontWeight: 700,
             letterSpacing: "0.1em",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-faint)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-faint)",
             minWidth: 28,
             flexShrink: 0,
           }}
@@ -139,7 +139,7 @@ export function ProjectRow({
             fontWeight: 800,
             lineHeight: 1,
             letterSpacing: "-0.02em",
-            color: isOpen ? "var(--pnp-accent)" : "var(--pnp-fg)",
+            color: isOpen ? "var(--brand)" : "var(--foreground)",
             transition: "color 0.2s",
             flex: 1,
           }}
@@ -155,15 +155,15 @@ export function ProjectRow({
             fontSize: "clamp(11px, 1vw, 13px)",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: "var(--pnp-fg)",
-            opacity: isOpen ? "var(--pnp-op-body)" : "var(--pnp-op-label)",
+            color: "var(--foreground)",
+            opacity: isOpen ? "var(--opacity-body)" : "var(--opacity-label)",
             transition: "opacity 0.2s",
           }}
         >
           {isConfidential ? (
             <span
               style={{
-                border: "1px solid var(--pnp-muted)",
+                border: "1px solid var(--border)",
                 borderRadius: 9999,
                 padding: "2px 10px",
               }}
@@ -186,7 +186,7 @@ export function ProjectRow({
             width: 24,
             height: 24,
             position: "relative",
-            opacity: "var(--pnp-op-secondary)",
+            opacity: "var(--opacity-secondary)",
             transition: "opacity 0.2s",
           }}
           className="group-hover:opacity-100"
@@ -198,7 +198,7 @@ export function ProjectRow({
               left: 0,
               width: "100%",
               height: 1.5,
-              background: "var(--pnp-fg)",
+              background: "var(--foreground)",
               transform: "translateY(-50%)",
             }}
           />
@@ -211,7 +211,7 @@ export function ProjectRow({
               left: "50%",
               width: 1.5,
               height: "100%",
-              background: "var(--pnp-fg)",
+              background: "var(--foreground)",
               transform: "translateX(-50%)",
               transformOrigin: "center",
               display: "block",
@@ -246,7 +246,7 @@ export function ProjectRow({
                   height: "clamp(160px, 25vw, 380px)",
                   borderRadius: 4,
                   overflow: "hidden",
-                  border: "1px solid var(--pnp-muted)",
+                  border: "1px solid var(--border)",
                   ...(!hasImage
                     ? {
                         display: "flex",
@@ -254,7 +254,7 @@ export function ProjectRow({
                         alignItems: "center",
                         justifyContent: "center",
                         gap: 8,
-                        background: "var(--pnp-surface)",
+                        background: "var(--card)",
                       }
                     : {}),
                 }}
@@ -264,8 +264,8 @@ export function ProjectRow({
                     <Lock
                       size={20}
                       style={{
-                        color: "var(--pnp-fg)",
-                        opacity: "var(--pnp-op-secondary)",
+                        color: "var(--foreground)",
+                        opacity: "var(--opacity-secondary)",
                       }}
                     />
                     <span
@@ -274,8 +274,8 @@ export function ProjectRow({
                         fontSize: 11,
                         letterSpacing: "0.2em",
                         textTransform: "uppercase",
-                        color: "var(--pnp-fg)",
-                        opacity: "var(--pnp-op-secondary)",
+                        color: "var(--foreground)",
+                        opacity: "var(--opacity-secondary)",
                       }}
                     >
                       Under NDA
@@ -294,8 +294,8 @@ export function ProjectRow({
                     <Clock
                       size={20}
                       style={{
-                        color: "var(--pnp-fg)",
-                        opacity: "var(--pnp-op-secondary)",
+                        color: "var(--foreground)",
+                        opacity: "var(--opacity-secondary)",
                       }}
                     />
                     <span
@@ -304,8 +304,8 @@ export function ProjectRow({
                         fontSize: 11,
                         letterSpacing: "0.2em",
                         textTransform: "uppercase",
-                        color: "var(--pnp-fg)",
-                        opacity: "var(--pnp-op-secondary)",
+                        color: "var(--foreground)",
+                        opacity: "var(--opacity-secondary)",
                       }}
                     >
                       In Progress
@@ -320,7 +320,7 @@ export function ProjectRow({
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  border: "1px solid var(--pnp-muted)",
+                  border: "1px solid var(--border)",
                   borderRadius: 4,
                   overflow: "hidden",
                 }}
@@ -338,8 +338,8 @@ export function ProjectRow({
                         fontFamily: "Syne, sans-serif",
                         fontSize: 13,
                         lineHeight: 1.55,
-                        color: "var(--pnp-fg)",
-                        opacity: "var(--pnp-op-body)",
+                        color: "var(--foreground)",
+                        opacity: "var(--opacity-body)",
                         margin: 0,
                       }}
                     >
@@ -363,9 +363,9 @@ export function ProjectRow({
                               fontSize: 9,
                               letterSpacing: "0.1em",
                               textTransform: "uppercase",
-                              color: "var(--pnp-fg)",
-                              opacity: "var(--pnp-op-secondary)",
-                              border: "1px solid var(--pnp-muted)",
+                              color: "var(--foreground)",
+                              opacity: "var(--opacity-secondary)",
+                              border: "1px solid var(--border)",
                               borderRadius: 9999,
                               padding: "3px 10px",
                               whiteSpace: "nowrap",
@@ -383,7 +383,7 @@ export function ProjectRow({
                 <div
                   style={{
                     display: "flex",
-                    borderTop: "1px solid var(--pnp-muted)",
+                    borderTop: "1px solid var(--border)",
                     marginTop: "auto",
                   }}
                 >
@@ -407,7 +407,7 @@ export function ProjectRow({
                       data-cursor="view"
                       style={{
                         ...specActionStyle,
-                        borderLeft: "1px solid var(--pnp-muted)",
+                        borderLeft: "1px solid var(--border)",
                       }}
                       className="hover:opacity-100"
                     >

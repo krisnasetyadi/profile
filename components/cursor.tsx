@@ -110,7 +110,7 @@ export function CustomCursor() {
           width: 8,
           height: 8,
           borderRadius: "50%",
-          backgroundColor: "var(--pnp-accent)",
+          backgroundColor: "var(--brand)",
           pointerEvents: "none",
           zIndex: 99999,
           opacity: visible && !dotHidden ? 1 : 0,
@@ -131,8 +131,8 @@ export function CustomCursor() {
             width: ringSize,
             height: ringSize,
             borderRadius: "50%",
-            border: ringFilled ? "none" : "1.5px solid var(--pnp-accent)",
-            backgroundColor: ringFilled ? "var(--pnp-accent)" : "transparent",
+            border: ringFilled ? "none" : "1.5px solid var(--brand)",
+            backgroundColor: ringFilled ? "var(--brand)" : "transparent",
             pointerEvents: "none",
             zIndex: 99998,
             opacity: visible ? (isCrosshair ? 0.6 : 0.5) : 0,
@@ -152,7 +152,7 @@ export function CustomCursor() {
             top: 0,
             left: 0,
             transform: `translate(${raw.x}px, ${raw.y}px) translate(12px, -50%)`,
-            color: "var(--pnp-accent)",
+            color: "var(--brand)",
             fontSize: 12,
             fontWeight: 700,
             letterSpacing: "0.1em",
@@ -192,7 +192,7 @@ export function CustomCursor() {
               left: 0,
               right: 0,
               height: 1,
-              backgroundColor: "var(--pnp-accent)",
+              backgroundColor: "var(--brand)",
             }}
           />
           <div
@@ -202,7 +202,7 @@ export function CustomCursor() {
               top: 0,
               bottom: 0,
               width: 1,
-              backgroundColor: "var(--pnp-accent)",
+              backgroundColor: "var(--brand)",
             }}
           />
         </div>

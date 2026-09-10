@@ -36,8 +36,8 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
         aspectRatio: "4 / 3",
         borderRadius: 8,
         overflow: "hidden",
-        border: "1px solid var(--pnp-muted)",
-        background: "var(--pnp-surface)",
+        border: "1px solid var(--border)",
+        background: "var(--card)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -52,14 +52,14 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
           inset: 0,
           opacity: 0.5,
           backgroundImage:
-            "repeating-linear-gradient(135deg, var(--pnp-muted) 0, var(--pnp-muted) 1px, transparent 1px, transparent 14px)",
+            "repeating-linear-gradient(135deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 14px)",
         }}
       />
       <Lock
         size={20}
         style={{
-          color: "var(--pnp-fg)",
-          opacity: "var(--pnp-op-secondary)",
+          color: "var(--foreground)",
+          opacity: "var(--opacity-secondary)",
           position: "relative",
         }}
       />
@@ -69,8 +69,8 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
           fontSize: 11,
           letterSpacing: "0.2em",
           textTransform: "uppercase",
-          color: "var(--pnp-fg)",
-          opacity: "var(--pnp-op-secondary)",
+          color: "var(--foreground)",
+          opacity: "var(--opacity-secondary)",
           position: "relative",
         }}
       >
@@ -85,8 +85,8 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
           aspectRatio: "4 / 3",
           borderRadius: 8,
           overflow: "hidden",
-          border: "1px solid var(--pnp-muted)",
-          background: "var(--pnp-surface)",
+          border: "1px solid var(--border)",
+          background: "var(--card)",
         }}
       >
         <Image
@@ -105,8 +105,8 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
         aspectRatio: "4 / 3",
         borderRadius: 8,
         overflow: "hidden",
-        border: "1px solid var(--pnp-muted)",
-        background: "var(--pnp-surface)",
+        border: "1px solid var(--border)",
+        background: "var(--card)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -121,14 +121,14 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
           inset: 0,
           opacity: 0.5,
           backgroundImage:
-            "repeating-linear-gradient(135deg, var(--pnp-muted) 0, var(--pnp-muted) 1px, transparent 1px, transparent 14px)",
+            "repeating-linear-gradient(135deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 14px)",
         }}
       />
       <Clock
         size={20}
         style={{
-          color: "var(--pnp-fg)",
-          opacity: "var(--pnp-op-secondary)",
+          color: "var(--foreground)",
+          opacity: "var(--opacity-secondary)",
           position: "relative",
         }}
       />
@@ -138,8 +138,8 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
           fontSize: 11,
           letterSpacing: "0.2em",
           textTransform: "uppercase",
-          color: "var(--pnp-fg)",
-          opacity: "var(--pnp-op-secondary)",
+          color: "var(--foreground)",
+          opacity: "var(--opacity-secondary)",
           position: "relative",
         }}
       >
@@ -158,8 +158,8 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
             fontSize: 12,
             fontWeight: 700,
             letterSpacing: "0.1em",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-faint)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-faint)",
           }}
         >
           {project.index}
@@ -170,7 +170,7 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
             fontSize: "clamp(18px, 2.2vw, 28px)",
             fontWeight: 800,
             letterSpacing: "-0.02em",
-            color: "var(--pnp-fg)",
+            color: "var(--foreground)",
           }}
         >
           {project.name}
@@ -184,11 +184,11 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
             fontSize: 10,
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-label)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-label)",
             flexShrink: 0,
             whiteSpace: "nowrap",
-            border: "1px solid var(--pnp-muted)",
+            border: "1px solid var(--border)",
             borderRadius: 9999,
             padding: "3px 10px",
           }}
@@ -202,8 +202,8 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
             fontSize: 11,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-label)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-label)",
             flexShrink: 0,
             whiteSpace: "nowrap",
           }}
@@ -220,8 +220,8 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
         fontFamily: "'Geist', sans-serif",
         fontSize: 13,
         lineHeight: 1.6,
-        color: "var(--pnp-fg)",
-        opacity: "var(--pnp-op-secondary)",
+        color: "var(--foreground)",
+        opacity: "var(--opacity-secondary)",
         marginTop: 6,
       }}
     >
@@ -246,9 +246,9 @@ function CatalogCard({ project, delay }: { project: Project; delay: number }) {
     fontSize: 10,
     letterSpacing: "0.15em",
     textTransform: "uppercase" as const,
-    color: "var(--pnp-fg)",
-    opacity: "var(--pnp-op-secondary)",
-    border: "1px solid var(--pnp-muted)",
+    color: "var(--foreground)",
+    opacity: "var(--opacity-secondary)",
+    border: "1px solid var(--border)",
     borderRadius: 9999,
     padding: "8px 14px",
     textDecoration: "none",

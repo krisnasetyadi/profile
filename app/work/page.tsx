@@ -38,8 +38,8 @@ export default function WorkIndexPage() {
               fontWeight: 500,
               letterSpacing: "0.3em",
               textTransform: "uppercase",
-              color: "var(--pnp-fg)",
-              opacity: "var(--pnp-op-label)",
+              color: "var(--foreground)",
+              opacity: "var(--opacity-label)",
             }}
           >
             All Work
@@ -48,7 +48,7 @@ export default function WorkIndexPage() {
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "10px",
-              color: "var(--pnp-accent)",
+              color: "var(--brand)",
               opacity: 0.5,
               letterSpacing: "0.15em",
             }}
@@ -64,7 +64,7 @@ export default function WorkIndexPage() {
             fontWeight: 800,
             lineHeight: 1.05,
             letterSpacing: "-0.02em",
-            color: "var(--pnp-fg)",
+            color: "var(--foreground)",
             marginBottom: "clamp(48px, 6vw, 80px)",
           }}
         >

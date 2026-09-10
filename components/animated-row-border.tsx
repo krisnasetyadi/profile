@@ -35,7 +35,7 @@ export function AnimatedRowBorder() {
       ref={ref}
       style={{
         height: 1,
-        backgroundColor: "var(--pnp-muted)",
+        backgroundColor: "var(--border)",
         transformOrigin: "left",
         transform: visible ? "scaleX(1)" : "scaleX(0)",
         transition: visible

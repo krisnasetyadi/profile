@@ -144,7 +144,7 @@ export default function RootLayout({
           <GrainOverlay />
           <PageTransition />
           <CustomCursor />
-          <div className="bg-[var(--pnp-bg)]">
+          <div className="bg-[var(--background)]">
             <Analytics />
             <Suspense fallback={<LoadingSpinner show />}>
               <ClientWrapper>

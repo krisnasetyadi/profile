@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -88,7 +88,7 @@ function WordReveal({ text }: { text: string }) {
     <p
       ref={ref}
       className="text-lg md:text-xl leading-relaxed"
-      style={{ color: "var(--pnp-fg)", opacity: "var(--pnp-op-body)", maxWidth: 540 }}
+      style={{ color: "var(--foreground)", opacity: "var(--opacity-body)", maxWidth: 540 }}
     >
       {text.split(" ").map((word, i) => {
         const isAccent = ACCENT_WORDS.includes(word);
@@ -99,7 +99,7 @@ function WordReveal({ text }: { text: string }) {
               display: "inline-block",
               overflow: "hidden",
               marginRight: "0.3em",
-              color: isAccent ? "var(--pnp-accent)" : "inherit",
+              color: isAccent ? "var(--brand)" : "inherit",
             }}
             initial={safe({ opacity: 0, y: "100%" })}
             animate={visible ? safe({ opacity: 1, y: "0%" }) : {}}
@@ -119,6 +119,15 @@ function WordReveal({ text }: { text: string }) {
 
 export function OverviewIntroduction() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -146,7 +155,7 @@ export function OverviewIntroduction() {
 
       <motion.div
         className="relative z-10 flex flex-col"
-        style={{ opacity: contentOpacity, y: contentY }}
+        style={{ opacity: isMobile ? 1 : contentOpacity, y: isMobile ? 0 : contentY }}
       >
         {/* Top label row */}
         <motion.div
@@ -159,8 +168,8 @@ export function OverviewIntroduction() {
             fontSize: 11,
             letterSpacing: "0.25em",
             textTransform: "uppercase",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-label)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-label)",
           }}
         >
           <span>Software Developer</span>
@@ -171,7 +180,7 @@ export function OverviewIntroduction() {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
           <h1
             className="display uppercase select-none"
-            style={{ color: "var(--pnp-fg)", marginBottom: 0 }}
+            style={{ color: "var(--foreground)", marginBottom: 0 }}
             itemProp="name"
           >
             <span className="block overflow-hidden">
@@ -203,7 +212,7 @@ export function OverviewIntroduction() {
         {/* Divider */}
         <motion.div
           className="w-full h-px mt-8"
-          style={{ background: "var(--pnp-muted)", transformOrigin: "left" }}
+          style={{ background: "var(--border)", transformOrigin: "left" }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1], delay: 1.0 }}
@@ -245,15 +254,15 @@ export function OverviewIntroduction() {
             letterSpacing: "0.22em",
             textTransform: "uppercase",
             fontFamily: "'JetBrains Mono', monospace",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-label)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-label)",
           }}
         >
           scroll
         </span>
         <motion.div
-          className="w-px bg-[var(--pnp-fg)]"
-          style={{ opacity: "var(--pnp-op-label)" }}
+          className="w-px bg-[var(--foreground)]"
+          style={{ opacity: "var(--opacity-label)" }}
           animate={{ height: [12, 28, 12] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         />

@@ -47,8 +47,8 @@ export function ExperienceSection() {
             fontSize: 11,
             letterSpacing: "0.3em",
             textTransform: "uppercase",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-label)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-label)",
             marginBottom: "clamp(48px, 6vw, 96px)",
           }}
         >
@@ -62,7 +62,7 @@ export function ExperienceSection() {
             className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px]"
             style={{
               background:
-                "linear-gradient(180deg, var(--pnp-accent) 0%, transparent 100%)",
+                "linear-gradient(180deg, var(--brand) 0%, transparent 100%)",
             }}
           />
 
@@ -81,7 +81,7 @@ export function ExperienceSection() {
                   fontSize: 11,
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "var(--pnp-accent)",
+                  color: "var(--brand)",
                   opacity: 0.8,
                   display: "block",
                   marginBottom: 12,
@@ -95,7 +95,7 @@ export function ExperienceSection() {
                   fontFamily: "Syne, sans-serif",
                   fontSize: "clamp(28px, 4vw, 56px)",
                   fontWeight: 800,
-                  color: "var(--pnp-fg)",
+                  color: "var(--foreground)",
                   lineHeight: 1.0,
                   marginBottom: 8,
                 }}
@@ -110,8 +110,8 @@ export function ExperienceSection() {
                   fontSize: 11,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  color: "var(--pnp-fg)",
-                  opacity: "var(--pnp-op-label)",
+                  color: "var(--foreground)",
+                  opacity: "var(--opacity-label)",
                 }}
                 itemProp="roleName"
               >
@@ -144,8 +144,8 @@ export function ExperienceSection() {
                   fontSize: 11,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  color: "var(--pnp-fg)",
-                  opacity: showPrior ? 1 : "var(--pnp-op-label)",
+                  color: "var(--foreground)",
+                  opacity: showPrior ? 1 : "var(--opacity-label)",
                   background: "none",
                   border: "none",
                   padding: 0,
@@ -175,7 +175,7 @@ export function ExperienceSection() {
                 width: 16,
                 height: 16,
                 borderRadius: "50%",
-                backgroundColor: "var(--pnp-accent)",
+                backgroundColor: "var(--brand)",
                 boxShadow: "0 0 0 8px rgba(77,159,255,0.15)",
               }}
             />
@@ -191,8 +191,8 @@ export function ExperienceSection() {
           >
             <div
               style={{
-                background: "var(--pnp-surface)",
-                border: "1px solid var(--pnp-muted)",
+                background: "var(--card)",
+                border: "1px solid var(--border)",
                 padding: "clamp(24px, 3vw, 40px)",
               }}
             >
@@ -209,7 +209,7 @@ export function ExperienceSection() {
                       borderRadius: 9999,
                       background: "rgba(77,159,255,0.08)",
                       border: "1px solid rgba(77,159,255,0.2)",
-                      color: "var(--pnp-accent)",
+                      color: "var(--brand)",
                     }}
                   >
                     {tag}
@@ -224,8 +224,8 @@ export function ExperienceSection() {
                   fontFamily: "'Geist', sans-serif",
                   fontSize: "clamp(14px, 1.3vw, 16px)",
                   lineHeight: 1.8,
-                  color: "var(--pnp-fg)",
-                  opacity: "var(--pnp-op-secondary)",
+                  color: "var(--foreground)",
+                  opacity: "var(--opacity-secondary)",
                   marginBottom: 32,
                 }}
               >
@@ -240,7 +240,7 @@ export function ExperienceSection() {
               {/* Impact bullets */}
               <div
                 style={{
-                  borderTop: "1px solid var(--pnp-muted)",
+                  borderTop: "1px solid var(--border)",
                   paddingTop: 24,
                 }}
               >
@@ -250,7 +250,7 @@ export function ExperienceSection() {
                     fontSize: 10,
                     letterSpacing: "0.25em",
                     textTransform: "uppercase",
-                    color: "var(--pnp-accent)",
+                    color: "var(--brand)",
                     marginBottom: 16,
                     display: "flex",
                     alignItems: "center",
@@ -268,13 +268,13 @@ export function ExperienceSection() {
                         fontFamily: "'JetBrains Mono', monospace",
                         fontSize: 12,
                         lineHeight: 1.7,
-                        color: "var(--pnp-fg)",
-                        opacity: "var(--pnp-op-secondary)",
+                        color: "var(--foreground)",
+                        opacity: "var(--opacity-secondary)",
                       }}
                     >
                       <span
                         style={{
-                          color: "var(--pnp-accent)",
+                          color: "var(--brand)",
                           opacity: 0.5,
                           flexShrink: 0,
                         }}
@@ -305,7 +305,7 @@ export function ExperienceSection() {
                 style={{
                   marginTop: "clamp(32px, 4vw, 48px)",
                   paddingTop: "clamp(24px, 3vw, 32px)",
-                  borderTop: "1px solid var(--pnp-muted)",
+                  borderTop: "1px solid var(--border)",
                 }}
                 itemScope
                 itemType="https://schema.org/OrganizationRole"
@@ -316,8 +316,8 @@ export function ExperienceSection() {
                     fontSize: 11,
                     letterSpacing: "0.3em",
                     textTransform: "uppercase",
-                    color: "var(--pnp-fg)",
-                    opacity: "var(--pnp-op-label)",
+                    color: "var(--foreground)",
+                    opacity: "var(--opacity-label)",
                     marginBottom: 24,
                   }}
                 >
@@ -330,8 +330,8 @@ export function ExperienceSection() {
                       fontFamily: "'Geist', sans-serif",
                       fontSize: "clamp(18px, 2vw, 24px)",
                       fontWeight: 700,
-                      color: "var(--pnp-fg)",
-                      opacity: "var(--pnp-op-body)",
+                      color: "var(--foreground)",
+                      opacity: "var(--opacity-body)",
                     }}
                     itemProp="roleName"
                   >
@@ -344,8 +344,8 @@ export function ExperienceSection() {
                       fontSize: 11,
                       letterSpacing: "0.15em",
                       textTransform: "uppercase",
-                      color: "var(--pnp-fg)",
-                      opacity: "var(--pnp-op-label)",
+                      color: "var(--foreground)",
+                      opacity: "var(--opacity-label)",
                       flexShrink: 0,
                     }}
                   >
@@ -358,8 +358,8 @@ export function ExperienceSection() {
                     fontFamily: "'Geist', sans-serif",
                     fontSize: "clamp(13px, 1.2vw, 15px)",
                     lineHeight: 1.75,
-                    color: "var(--pnp-fg)",
-                    opacity: "var(--pnp-op-secondary)",
+                    color: "var(--foreground)",
+                    opacity: "var(--opacity-secondary)",
                     marginBottom: 20,
                     maxWidth: 720,
                   }}
@@ -380,8 +380,8 @@ export function ExperienceSection() {
                         fontFamily: "'JetBrains Mono', monospace",
                         fontSize: 11,
                         lineHeight: 1.6,
-                        color: "var(--pnp-fg)",
-                        opacity: "var(--pnp-op-label)",
+                        color: "var(--foreground)",
+                        opacity: "var(--opacity-label)",
                       }}
                     >
                       <span style={{ flexShrink: 0 }} aria-hidden="true">
