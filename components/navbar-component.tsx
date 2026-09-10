@@ -8,10 +8,10 @@ import { Sun, Moon } from "lucide-react";
 import { socialMediaUrl } from "@/lib/constant";
 
 const NAV_LINKS = [
-  { href: "#work", label: "01 WORK", isRoute: false },
-  { href: "#about", label: "02 ABOUT", isRoute: false },
-  { href: "#experience", label: "03 EXPERIENCE", isRoute: false },
-  { href: "/blog", label: "04 BLOG", isRoute: true },
+  { href: "/#work", label: "01 WORK" },
+  { href: "/#about", label: "02 ABOUT" },
+  { href: "/#experience", label: "03 EXPERIENCE" },
+  { href: "/blog", label: "04 BLOG" },
 ];
 
 export default function Navigation() {
@@ -21,6 +21,30 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(null);
   const lastY = useRef(0);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        !headerRef.current?.contains(event.target)
+      ) {
+        setMobileOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+
+    document.addEventListener("pointerdown", onPointerDown, true);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown, true);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [mobileOpen]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -46,9 +70,10 @@ export default function Navigation() {
 
   return (
     <motion.header
+      ref={headerRef}
       aria-label="Main navigation"
       style={{ willChange: "transform" }}
-      animate={prefersReduced ? {} : { y: hidden ? "-100%" : "0%" }}
+      animate={prefersReduced ? {} : { y: hidden && !mobileOpen ? "-100%" : "0%" }}
       transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
       className={[
         "fixed top-0 left-0 right-0 z-50 px-6 md:px-12",
@@ -69,9 +94,7 @@ export default function Navigation() {
             hasPart: NAV_LINKS.map((item) => ({
               "@type": "WebPage",
               name: item.label,
-              url: item.isRoute
-                ? `https://krisnadwisetyaadi.com${item.href}`
-                : `https://krisnadwisetyaadi.com/${item.href}`,
+              url: `https://krisnadwisetyaadi.com${item.href}`,
             })),
           }),
         }}
@@ -86,10 +109,9 @@ export default function Navigation() {
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((item) => {
-            const NavTag = item.isRoute ? Link : "a";
             return (
               <li key={item.href}>
-                <NavTag
+                <Link
                   href={item.href}
                   className="relative text-xs text-[var(--pnp-fg)] opacity-[var(--pnp-op-secondary)] hover:opacity-100 transition-[opacity,color] duration-200 tracking-[0.2em] uppercase"
                   style={{ fontFamily: "'JetBrains Mono', monospace" }}
@@ -109,7 +131,7 @@ export default function Navigation() {
                       />
                     )}
                   </AnimatePresence>
-                </NavTag>
+                </Link>
               </li>
             );
           })}
@@ -123,28 +145,34 @@ export default function Navigation() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden text-[var(--pnp-fg)] p-2"
+          type="button"
+          className="relative md:hidden flex h-11 w-11 shrink-0 items-center justify-center text-[var(--pnp-fg)]"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
         >
           <span
-            className="block w-5 h-px bg-current mb-1.5 transition-transform duration-200"
+            aria-hidden="true"
+            className="absolute w-5 h-px bg-current transition-transform duration-200"
             style={{
               transform: mobileOpen
-                ? "rotate(45deg) translate(0, 4px)"
-                : "none",
+                ? "rotate(45deg)"
+                : "translateY(-7px)",
             }}
           />
           <span
-            className="block w-5 h-px bg-current transition-opacity duration-200"
+            aria-hidden="true"
+            className="absolute w-5 h-px bg-current transition-opacity duration-200"
             style={{ opacity: mobileOpen ? 0 : 1 }}
           />
           <span
-            className="block w-5 h-px bg-current mt-1.5 transition-transform duration-200"
+            aria-hidden="true"
+            className="absolute w-5 h-px bg-current transition-transform duration-200"
             style={{
               transform: mobileOpen
-                ? "rotate(-45deg) translate(0, -4px)"
-                : "none",
+                ? "rotate(-45deg)"
+                : "translateY(7px)",
             }}
           />
         </button>
@@ -154,6 +182,7 @@ export default function Navigation() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -161,16 +190,15 @@ export default function Navigation() {
             className="md:hidden bg-[var(--pnp-surface)] border-t border-[var(--pnp-muted)] px-6 py-6 space-y-4"
           >
             {NAV_LINKS.map((item) => {
-              const NavTag = item.isRoute ? Link : "a";
               return (
-                <NavTag
+                <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
                   className="block text-[var(--pnp-fg)] text-lg font-medium tracking-wide"
                 >
                   {item.label}
-                </NavTag>
+                </Link>
               );
             })}
             <div className="pt-4 border-t border-[var(--pnp-muted)] flex items-center gap-6 text-sm text-[var(--pnp-fg)] opacity-[var(--pnp-op-secondary)]">

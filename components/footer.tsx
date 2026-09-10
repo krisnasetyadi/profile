@@ -79,8 +79,8 @@ export function Footer() {
       </div>
 
       {/* Social links row */}
-      <div className="flex items-center gap-6 mb-16">
-        <MagneticButton radius={60} strength={0.4}>
+      <div className="flex flex-wrap items-center gap-3 sm:gap-6 mb-16">
+        <MagneticButton radius={60} strength={0.4} className="shrink-0">
           <a
             href={socialMediaUrl.linkedin}
             target="_blank"
@@ -97,7 +97,7 @@ export function Footer() {
           </a>
         </MagneticButton>
 
-        <MagneticButton radius={60} strength={0.4}>
+        <MagneticButton radius={60} strength={0.4} className="shrink-0">
           <a
             href={socialMediaUrl.github}
             target="_blank"
@@ -114,7 +114,7 @@ export function Footer() {
           </a>
         </MagneticButton>
 
-        <MagneticButton radius={60} strength={0.4}>
+        <MagneticButton radius={60} strength={0.4} className="shrink-0">
           <a
             href={contact.whatsapp}
             target="_blank"
@@ -122,7 +122,7 @@ export function Footer() {
             className="inline-flex items-center gap-2 text-[var(--pnp-fg)] text-sm tracking-widest uppercase border border-[var(--pnp-muted)] px-5 py-2.5 hover:border-[var(--pnp-fg)] transition-colors duration-200"
             aria-label="Chat on WhatsApp"
           >
-            <Image src={whatsAppIcon} alt="" width={14} height={14} aria-hidden="true" />
+            <Image src={whatsAppIcon} alt="" width={14} height={14} className="shrink-0 dark:invert" aria-hidden="true" />
             <span>WhatsApp</span>
           </a>
         </MagneticButton>
