@@ -6,7 +6,7 @@ import { useMotionSafe } from "@/hooks/use-motion-safe";
 
 /**
  * PageTransition — cinematic curtain lift on first load.
- * Full-viewport #0a0a0a overlay slides up with Awwwards easing.
+ * Full-viewport theme background overlay slides up with Awwwards easing.
  * Reduced-motion: fades out instead of sliding.
  */
 export function PageTransition() {
@@ -39,7 +39,7 @@ export function PageTransition() {
         <motion.div
           key="curtain"
           aria-hidden="true"
-          className="fixed inset-0 z-[9999] bg-[#0a0a0a] pointer-events-none"
+          className="fixed inset-0 z-[9999] bg-[var(--background)] pointer-events-none"
           initial={prefersReduced ? { opacity: 1 } : { y: "0%" }}
           exit={exitVariant}
         />

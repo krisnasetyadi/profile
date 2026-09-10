@@ -82,7 +82,7 @@ function StatItem({ value, label, numeric, typewriter }: StatItemProps) {
           fontSize: "clamp(12px, 3.5vw, 72px)",
           fontWeight: 800,
           lineHeight: 1,
-          color: "var(--pnp-fg)",
+          color: "var(--foreground)",
           letterSpacing: "-0.02em",
           display: "inline-block",
         }}
@@ -95,7 +95,7 @@ function StatItem({ value, label, numeric, typewriter }: StatItemProps) {
               display: "inline-block",
               width: 2,
               height: "0.85em",
-              backgroundColor: "var(--pnp-accent)",
+              backgroundColor: "var(--brand)",
               marginLeft: 3,
               verticalAlign: "middle",
               animation: "blink 1s step-end 3",
@@ -110,8 +110,8 @@ function StatItem({ value, label, numeric, typewriter }: StatItemProps) {
           fontSize: "clamp(10px, 1vw, 12px)",
           letterSpacing: "0.18em",
           textTransform: "uppercase",
-          color: "var(--pnp-fg)",
-          opacity: "var(--pnp-op-label)",
+          color: "var(--foreground)",
+          opacity: "var(--opacity-label)",
           marginTop: 8,
         }}
       >
@@ -132,8 +132,8 @@ export function CountUp() {
         gridTemplateColumns: "repeat(3, 1fr)",
         gap: "clamp(4px, 4vw, 64px)",
         padding: "clamp(24px, 4vw, 56px) 0",
-        borderTop: "1px solid var(--pnp-muted)",
-        borderBottom: "1px solid var(--pnp-muted)",
+        borderTop: "1px solid var(--border)",
+        borderBottom: "1px solid var(--border)",
       }}
     >
       <StatItem value="4+" label="Years" numeric={4} />

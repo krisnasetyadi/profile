@@ -45,8 +45,8 @@ export function MarqueeTicker({
       style={{
         overflow: "hidden",
         width: "100%",
-        borderTop: "1px solid var(--pnp-muted)",
-        borderBottom: "1px solid var(--pnp-muted)",
+        borderTop: "1px solid var(--border)",
+        borderBottom: "1px solid var(--border)",
         padding: "14px 0",
       }}
       aria-hidden="true"
@@ -62,8 +62,8 @@ export function MarqueeTicker({
             fontSize: 12,
             fontWeight: 700,
             letterSpacing: "0.15em",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-label)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-label)",
           }}
         >
           {ITEMS.map((item) => (
@@ -80,14 +80,14 @@ export function MarqueeTicker({
                 fontSize: "clamp(11px, 1vw, 13px)",
                 fontWeight: 700,
                 letterSpacing: "0.15em",
-                color: "var(--pnp-fg)",
-                opacity: "var(--pnp-op-label)",
+                color: "var(--foreground)",
+                opacity: "var(--opacity-label)",
                 marginRight: "3rem",
                 flexShrink: 0,
               }}
             >
               {item}
-              <span style={{ marginLeft: "3rem", opacity: "var(--pnp-op-faint)" }}>·</span>
+              <span style={{ marginLeft: "3rem", opacity: "var(--opacity-faint)" }}>·</span>
             </span>
           ))}
         </div>

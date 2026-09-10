@@ -30,7 +30,7 @@ function HighlightedPhrase({ children }: { children: React.ReactNode }) {
       ref={ref}
       style={{
         backgroundImage:
-          "linear-gradient(var(--pnp-accent), var(--pnp-accent))",
+          "linear-gradient(var(--brand), var(--brand))",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "0 100%",
         backgroundSize: visible ? "100% 2px" : "0% 2px",
@@ -75,7 +75,7 @@ function GiantStatement() {
             lineHeight: 1.05,
             letterSpacing: "-0.03em",
             color:
-              i === words.length - 1 ? "var(--pnp-accent)" : "var(--pnp-fg)",
+              i === words.length - 1 ? "var(--brand)" : "var(--foreground)",
           }}
         >
           {word}
@@ -128,8 +128,8 @@ export function AboutSection() {
             fontWeight: 500,
             letterSpacing: "0.3em",
             textTransform: "uppercase",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-label)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-label)",
             marginBottom: "clamp(40px, 5vw, 72px)",
           }}
         >
@@ -152,7 +152,7 @@ export function AboutSection() {
                   overflow: "hidden",
                   width: "clamp(240px, 28vw, 360px)",
                   aspectRatio: "1 / 1",
-                  border: "1px solid var(--pnp-muted)",
+                  border: "1px solid var(--border)",
                   position: "relative",
                 }}
               >
@@ -183,7 +183,7 @@ export function AboutSection() {
                 fontFamily: "'Geist', sans-serif",
                 fontSize: "clamp(16px, 1.5vw, 20px)",
                 lineHeight: 1.85,
-                color: "var(--pnp-fg)",
+                color: "var(--foreground)",
                 opacity: 0.9,
               }}
             >
@@ -206,8 +206,8 @@ export function AboutSection() {
                 fontFamily: "'Geist', sans-serif",
                 fontSize: "clamp(15px, 1.4vw, 18px)",
                 lineHeight: 1.85,
-                color: "var(--pnp-fg)",
-                opacity: "var(--pnp-op-secondary)",
+                color: "var(--foreground)",
+                opacity: "var(--opacity-secondary)",
                 maxWidth: 520,
               }}
             >

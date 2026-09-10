@@ -21,7 +21,7 @@ export function Footer() {
     <footer
       id="site-footer"
       ref={sectionRef}
-      className="relative bg-[var(--pnp-bg)] px-6 md:px-12 pt-24 pb-12 overflow-hidden"
+      className="relative bg-[var(--background)] px-6 md:px-12 pt-24 pb-12 overflow-hidden"
       itemScope
       itemType="https://schema.org/WPFooter"
       role="contentinfo"
@@ -56,7 +56,7 @@ export function Footer() {
       {/* Center-outward divider */}
       <div ref={dividerRef} className="relative mb-16 h-px overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-[var(--pnp-muted)]"
+          className="absolute inset-0 bg-[var(--border)]"
           initial={{ scaleX: 0 }}
           animate={dividerInView ? { scaleX: 1 } : { scaleX: 0 }}
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
@@ -85,7 +85,7 @@ export function Footer() {
             href={socialMediaUrl.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[var(--pnp-fg)] text-sm tracking-widest uppercase border border-[var(--pnp-muted)] px-5 py-2.5 hover:border-[var(--pnp-fg)] transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-[var(--foreground)] text-sm tracking-widest uppercase border border-[var(--border)] px-5 py-2.5 hover:border-[var(--foreground)] transition-colors duration-200"
             aria-label="Connect on LinkedIn"
           >
             <ScrambleText
@@ -102,7 +102,7 @@ export function Footer() {
             href={socialMediaUrl.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[var(--pnp-fg)] text-sm tracking-widest uppercase border border-[var(--pnp-muted)] px-5 py-2.5 hover:border-[var(--pnp-fg)] transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-[var(--foreground)] text-sm tracking-widest uppercase border border-[var(--border)] px-5 py-2.5 hover:border-[var(--foreground)] transition-colors duration-200"
             aria-label="View projects on GitHub"
           >
             <ScrambleText
@@ -119,7 +119,7 @@ export function Footer() {
             href={contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[var(--pnp-fg)] text-sm tracking-widest uppercase border border-[var(--pnp-muted)] px-5 py-2.5 hover:border-[var(--pnp-fg)] transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-[var(--foreground)] text-sm tracking-widest uppercase border border-[var(--border)] px-5 py-2.5 hover:border-[var(--foreground)] transition-colors duration-200"
             aria-label="Chat on WhatsApp"
           >
             <Image src={whatsAppIcon} alt="" width={14} height={14} className="shrink-0 dark:invert" aria-hidden="true" />
@@ -129,7 +129,7 @@ export function Footer() {
       </div>
 
       {/* Meta row */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[var(--pnp-fg)] opacity-[var(--pnp-op-label)]">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[var(--foreground)] opacity-[var(--opacity-label)]">
         <p className="text-[11px] tracking-widest uppercase font-mono">
           Developed by Krisna &middot; Jakarta &middot; 2026 &copy;
         </p>
@@ -184,8 +184,8 @@ function CTAWord({
             className={[
               "inline-block",
               isLast && ci === word.length - 1
-                ? "text-[var(--pnp-accent)] blink-cursor"
-                : "text-[var(--pnp-fg)]",
+                ? "text-[var(--brand)] blink-cursor"
+                : "text-[var(--foreground)]",
             ].join(" ")}
           >
             {char}

@@ -75,8 +75,8 @@ export default async function WorkDetailPage({
             fontSize: 11,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-secondary)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-secondary)",
             textDecoration: "none",
             marginBottom: "clamp(32px, 4vw, 56px)",
           }}
@@ -93,15 +93,15 @@ export default async function WorkDetailPage({
             fontSize: 11,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "var(--pnp-fg)",
-            opacity: "var(--pnp-op-label)",
+            color: "var(--foreground)",
+            opacity: "var(--opacity-label)",
             marginBottom: 16,
           }}
         >
           {isConfidential ? (
             <span
               style={{
-                border: "1px solid var(--pnp-muted)",
+                border: "1px solid var(--border)",
                 borderRadius: 9999,
                 padding: "2px 10px",
               }}
@@ -117,10 +117,10 @@ export default async function WorkDetailPage({
           {project.inProgress && (
             <span
               style={{
-                border: "1px solid var(--pnp-muted)",
+                border: "1px solid var(--border)",
                 borderRadius: 9999,
                 padding: "2px 10px",
-                color: "var(--pnp-accent)",
+                color: "var(--brand)",
               }}
             >
               In Progress
@@ -136,7 +136,7 @@ export default async function WorkDetailPage({
             fontWeight: 800,
             lineHeight: 1,
             letterSpacing: "-0.02em",
-            color: "var(--pnp-fg)",
+            color: "var(--foreground)",
             marginBottom: "clamp(32px, 4vw, 56px)",
           }}
         >
@@ -153,8 +153,8 @@ export default async function WorkDetailPage({
                   aspectRatio: "4 / 3",
                   borderRadius: 8,
                   overflow: "hidden",
-                  border: "1px solid var(--pnp-muted)",
-                  background: "var(--pnp-surface)",
+                  border: "1px solid var(--border)",
+                  background: "var(--card)",
                 }}
               >
                 <Image
@@ -174,8 +174,8 @@ export default async function WorkDetailPage({
                 aspectRatio: "4 / 3",
                 borderRadius: 8,
                 overflow: "hidden",
-                border: "1px solid var(--pnp-muted)",
-                background: "var(--pnp-surface)",
+                border: "1px solid var(--border)",
+                background: "var(--card)",
                 display: "flex",
                 flexDirection: "column" as const,
                 alignItems: "center",
@@ -187,7 +187,7 @@ export default async function WorkDetailPage({
                 <>
                   <Lock
                     size={24}
-                    style={{ color: "var(--pnp-fg)", opacity: "var(--pnp-op-secondary)" }}
+                    style={{ color: "var(--foreground)", opacity: "var(--opacity-secondary)" }}
                   />
                   <span
                     style={{
@@ -195,8 +195,8 @@ export default async function WorkDetailPage({
                       fontSize: 11,
                       letterSpacing: "0.2em",
                       textTransform: "uppercase",
-                      color: "var(--pnp-fg)",
-                      opacity: "var(--pnp-op-secondary)",
+                      color: "var(--foreground)",
+                      opacity: "var(--opacity-secondary)",
                     }}
                   >
                     Under NDA
@@ -206,7 +206,7 @@ export default async function WorkDetailPage({
                 <>
                   <Clock
                     size={24}
-                    style={{ color: "var(--pnp-fg)", opacity: "var(--pnp-op-secondary)" }}
+                    style={{ color: "var(--foreground)", opacity: "var(--opacity-secondary)" }}
                   />
                   <span
                     style={{
@@ -214,8 +214,8 @@ export default async function WorkDetailPage({
                       fontSize: 11,
                       letterSpacing: "0.2em",
                       textTransform: "uppercase",
-                      color: "var(--pnp-fg)",
-                      opacity: "var(--pnp-op-secondary)",
+                      color: "var(--foreground)",
+                      opacity: "var(--opacity-secondary)",
                     }}
                   >
                     In Progress
@@ -233,8 +233,8 @@ export default async function WorkDetailPage({
               fontFamily: "'Geist', sans-serif",
               fontSize: "clamp(16px, 1.6vw, 20px)",
               lineHeight: 1.8,
-              color: "var(--pnp-fg)",
-              opacity: "var(--pnp-op-body)",
+              color: "var(--foreground)",
+              opacity: "var(--opacity-body)",
               maxWidth: 720,
               marginBottom: project.note ? 16 : "clamp(32px, 4vw, 56px)",
             }}
@@ -249,8 +249,8 @@ export default async function WorkDetailPage({
               fontFamily: "'Geist', sans-serif",
               fontSize: "clamp(14px, 1.3vw, 16px)",
               lineHeight: 1.75,
-              color: "var(--pnp-fg)",
-              opacity: "var(--pnp-op-secondary)",
+              color: "var(--foreground)",
+              opacity: "var(--opacity-secondary)",
               maxWidth: 720,
               marginBottom: "clamp(32px, 4vw, 56px)",
             }}
@@ -274,8 +274,8 @@ export default async function WorkDetailPage({
               fontSize: 12,
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: "var(--pnp-fg)",
-              border: "1px solid var(--pnp-muted)",
+              color: "var(--foreground)",
+              border: "1px solid var(--border)",
               padding: "12px 20px",
               textDecoration: "none",
               transition: "border-color 0.2s, opacity 0.2s",
